@@ -1,3 +1,4 @@
+import type { FormEvent } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { useAppForm } from '@/hooks/demo.form'
@@ -40,6 +41,12 @@ function AddressForm() {
     },
   })
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    e.stopPropagation()
+    form.handleSubmit()
+  }
+
   return (
     <div
       className="flex items-center justify-center min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-white"
@@ -49,14 +56,7 @@ function AddressForm() {
       }}
     >
       <div className="w-full max-w-2xl p-8 rounded-xl backdrop-blur-md bg-black/50 shadow-xl border-8 border-black/10">
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            e.stopPropagation()
-            form.handleSubmit()
-          }}
-          className="space-y-6"
-        >
+        <form onSubmit={handleSubmit} className="space-y-6">
           <form.AppField name="fullName">
             {(field) => <field.TextField label="Full Name" />}
           </form.AppField>

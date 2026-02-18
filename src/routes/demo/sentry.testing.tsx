@@ -12,24 +12,26 @@ import { createServerFn } from '@tanstack/react-start'
 import * as Sentry from '@sentry/tanstackstart-react'
 import { useState, useEffect } from 'react'
 
+function SentryErrorFallback({ error }: { error: Error }) {
+  useEffect(() => {
+    Sentry.captureException(error)
+  }, [error])
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-[#181423]">
+      <div className="text-center p-8">
+        <SentryLogo />
+        <h1 className="text-2xl font-bold text-white mt-4 mb-2">
+          Something went wrong
+        </h1>
+        <p className="text-[#A49FB5]">{error.message}</p>
+      </div>
+    </div>
+  )
+}
+
 export const Route = createFileRoute('/demo/sentry/testing')({
   component: RouteComponent,
-  errorComponent: ({ error }) => {
-    useEffect(() => {
-      Sentry.captureException(error)
-    }, [error])
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-[#181423]">
-        <div className="text-center p-8">
-          <SentryLogo />
-          <h1 className="text-2xl font-bold text-white mt-4 mb-2">
-            Something went wrong
-          </h1>
-          <p className="text-[#A49FB5]">{error.message}</p>
-        </div>
-      </div>
-    )
-  },
+  errorComponent: SentryErrorFallback,
 })
 
 // Sentry Logo Component
@@ -280,21 +282,166 @@ function ProgressBar({ loading }: { loading: boolean }) {
   )
 }
 
+type DemoState = {
+  isLoading: Record<string, boolean>
+  results: Record<string, { type: 'success' | 'error'; spanOp: string }>
+  disabled: boolean
+}
+
+function SentryNotConfiguredWarning() {
+  return (
+    <div className="mb-8 flex items-center gap-3 bg-[#E5A000]/10 border border-[#E5A000]/30 rounded-xl px-6 py-4">
+      <svg
+        className="w-6 h-6 text-[#E5A000] flex-shrink-0"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <title>Warning</title>
+        <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+      </svg>
+      <div>
+        <p className="text-[#E5A000] font-medium">Sentry is not initialized</p>
+        <p className="text-[#A49FB5] text-sm mt-1">
+          Set the{' '}
+          <code className="bg-[#1C1825] px-1.5 py-0.5 rounded text-[#B3A1FF]">
+            VITE_SENTRY_DSN
+          </code>{' '}
+          environment variable to enable error tracking and performance
+          monitoring.
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function ClientSidePanel({
+  isLoading,
+  results,
+  disabled,
+  onError,
+  onTrace,
+}: DemoState & { onError: () => void; onTrace: () => void }) {
+  return (
+    <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-3 h-3 rounded-full bg-[#00F261]" />
+        <h2 className="text-xl font-semibold">Client-Side Testing</h2>
+      </div>
+      <div className="space-y-4">
+        <div>
+          <SentryButton
+            variant="error"
+            onClick={onError}
+            loading={isLoading.clientError}
+            disabled={disabled}
+          >
+            Trigger Client Error
+          </SentryButton>
+          {isLoading.clientError && (
+            <ProgressBar loading={isLoading.clientError} />
+          )}
+          {results.clientError && !isLoading.clientError && (
+            <ResultBadge
+              type={results.clientError.type}
+              spanOp={results.clientError.spanOp}
+              onCopy={() => {}}
+            />
+          )}
+        </div>
+        <div>
+          <SentryButton
+            variant="primary"
+            onClick={onTrace}
+            loading={isLoading.clientTrace}
+            disabled={disabled}
+          >
+            Test Client Trace
+          </SentryButton>
+          {isLoading.clientTrace && (
+            <ProgressBar loading={isLoading.clientTrace} />
+          )}
+          {results.clientTrace && !isLoading.clientTrace && (
+            <ResultBadge
+              type={results.clientTrace.type}
+              spanOp={results.clientTrace.spanOp}
+              onCopy={() => {}}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function ServerSidePanel({
+  isLoading,
+  results,
+  disabled,
+  onError,
+  onTrace,
+}: DemoState & { onError: () => void; onTrace: () => void }) {
+  return (
+    <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
+      <div className="flex items-center gap-3 mb-6">
+        <div className="w-3 h-3 rounded-full bg-[#7553FF]" />
+        <h2 className="text-xl font-semibold">Server-Side Testing</h2>
+      </div>
+      <div className="space-y-4">
+        <div>
+          <SentryButton
+            variant="error"
+            onClick={onError}
+            loading={isLoading.serverError}
+            disabled={disabled}
+          >
+            Trigger Server Error
+          </SentryButton>
+          {isLoading.serverError && (
+            <ProgressBar loading={isLoading.serverError} />
+          )}
+          {results.serverError && !isLoading.serverError && (
+            <ResultBadge
+              type={results.serverError.type}
+              spanOp={results.serverError.spanOp}
+              onCopy={() => {}}
+            />
+          )}
+        </div>
+        <div>
+          <SentryButton
+            variant="primary"
+            onClick={onTrace}
+            loading={isLoading.serverTrace}
+            disabled={disabled}
+          >
+            Test Server Trace
+          </SentryButton>
+          {isLoading.serverTrace && (
+            <ProgressBar loading={isLoading.serverTrace} />
+          )}
+          {results.serverTrace && !isLoading.serverTrace && (
+            <ResultBadge
+              type={results.serverTrace.type}
+              spanOp={results.serverTrace.spanOp}
+              onCopy={() => {}}
+            />
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function RouteComponent() {
   const [isLoading, setIsLoading] = useState<Record<string, boolean>>({})
   const [results, setResults] = useState<
     Record<string, { type: 'success' | 'error'; spanOp: string }>
   >({})
-  const [sentryConfigured, setSentryConfigured] = useState<boolean | null>(null)
-
-  useEffect(() => {
-    // Check if Sentry DSN environment variable is set
-    const hasDsn = !!import.meta.env.VITE_SENTRY_DSN
-    setSentryConfigured(hasDsn)
-  }, [])
-
-  // Don't show warning until we've checked on the client
-  const showWarning = sentryConfigured === false
+  const sentryConfigured = !!import.meta.env.VITE_SENTRY_DSN
 
   const handleClientError = async () => {
     setIsLoading((prev) => ({ ...prev, clientError: true }))
@@ -377,6 +524,8 @@ function RouteComponent() {
     }
   }
 
+  const disabled = sentryConfigured === false
+
   return (
     <div
       className="min-h-screen text-white"
@@ -418,36 +567,7 @@ function RouteComponent() {
           </p>
         </div>
 
-        {/* Sentry Not Initialized Warning */}
-        {showWarning && (
-          <div className="mb-8 flex items-center gap-3 bg-[#E5A000]/10 border border-[#E5A000]/30 rounded-xl px-6 py-4">
-            <svg
-              className="w-6 h-6 text-[#E5A000] flex-shrink-0"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <title>Warning</title>
-              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>
-            <div>
-              <p className="text-[#E5A000] font-medium">
-                Sentry is not initialized
-              </p>
-              <p className="text-[#A49FB5] text-sm mt-1">
-                Set the{' '}
-                <code className="bg-[#1C1825] px-1.5 py-0.5 rounded text-[#B3A1FF]">
-                  VITE_SENTRY_DSN
-                </code>{' '}
-                environment variable to enable error tracking and performance
-                monitoring.
-              </p>
-            </div>
-          </div>
-        )}
+        {!sentryConfigured && <SentryNotConfiguredWarning />}
 
         {/* Features Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
@@ -491,109 +611,20 @@ function RouteComponent() {
 
         {/* Testing Panels */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Client-Side Panel */}
-          <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-[#00F261]" />
-              <h2 className="text-xl font-semibold">Client-Side Testing</h2>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <SentryButton
-                  variant="error"
-                  onClick={handleClientError}
-                  loading={isLoading.clientError}
-                  disabled={sentryConfigured === false}
-                >
-                  Trigger Client Error
-                </SentryButton>
-                {isLoading.clientError && (
-                  <ProgressBar loading={isLoading.clientError} />
-                )}
-                {results.clientError && !isLoading.clientError && (
-                  <ResultBadge
-                    type={results.clientError.type}
-                    spanOp={results.clientError.spanOp}
-                    onCopy={() => {}}
-                  />
-                )}
-              </div>
-
-              <div>
-                <SentryButton
-                  variant="primary"
-                  onClick={handleClientTrace}
-                  loading={isLoading.clientTrace}
-                  disabled={sentryConfigured === false}
-                >
-                  Test Client Trace
-                </SentryButton>
-                {isLoading.clientTrace && (
-                  <ProgressBar loading={isLoading.clientTrace} />
-                )}
-                {results.clientTrace && !isLoading.clientTrace && (
-                  <ResultBadge
-                    type={results.clientTrace.type}
-                    spanOp={results.clientTrace.spanOp}
-                    onCopy={() => {}}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-
-          {/* Server-Side Panel */}
-          <div className="bg-[#1C1825] rounded-2xl p-8 border border-[#2D2640]">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-3 h-3 rounded-full bg-[#7553FF]" />
-              <h2 className="text-xl font-semibold">Server-Side Testing</h2>
-            </div>
-
-            <div className="space-y-4">
-              <div>
-                <SentryButton
-                  variant="error"
-                  onClick={handleServerError}
-                  loading={isLoading.serverError}
-                  disabled={sentryConfigured === false}
-                >
-                  Trigger Server Error
-                </SentryButton>
-                {isLoading.serverError && (
-                  <ProgressBar loading={isLoading.serverError} />
-                )}
-                {results.serverError && !isLoading.serverError && (
-                  <ResultBadge
-                    type={results.serverError.type}
-                    spanOp={results.serverError.spanOp}
-                    onCopy={() => {}}
-                  />
-                )}
-              </div>
-
-              <div>
-                <SentryButton
-                  variant="primary"
-                  onClick={handleServerTrace}
-                  loading={isLoading.serverTrace}
-                  disabled={sentryConfigured === false}
-                >
-                  Test Server Trace
-                </SentryButton>
-                {isLoading.serverTrace && (
-                  <ProgressBar loading={isLoading.serverTrace} />
-                )}
-                {results.serverTrace && !isLoading.serverTrace && (
-                  <ResultBadge
-                    type={results.serverTrace.type}
-                    spanOp={results.serverTrace.spanOp}
-                    onCopy={() => {}}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
+          <ClientSidePanel
+            isLoading={isLoading}
+            results={results}
+            disabled={disabled}
+            onError={handleClientError}
+            onTrace={handleClientTrace}
+          />
+          <ServerSidePanel
+            isLoading={isLoading}
+            results={results}
+            disabled={disabled}
+            onError={handleServerError}
+            onTrace={handleServerTrace}
+          />
         </div>
 
         {/* Footer Note */}
