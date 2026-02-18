@@ -2,6 +2,7 @@
   "name": "@zidsa/spark",
   "private": true,
   "type": "module",
+  "packageManager": "bun@1.3.9",
   "scripts": {
     "dev": "bun --env-file .env.local --preload ./instrument.server.mjs ./node_modules/.bin/vite dev --port 3000",
     "build": "vite build && cp instrument.server.mjs .output/server",
