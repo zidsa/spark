@@ -1,0 +1,9 @@
+{
+  "ignore": {
+    "files": [
+      "eslint.config.js",
+      "instrument.server.mjs",
+      "vite.config.ts"
+    ]
+  }
+}
