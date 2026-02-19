@@ -1,9 +1,10 @@
 import { useTranslation } from 'react-i18next';
 
-import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
-import Typography from '@mui/material/Typography';
+
+import { AppAlert } from '@zidsa/zidmui/components/app-alert';
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 import { PageContainer } from '~/global/components/page-container';
 
@@ -28,16 +29,16 @@ export const ExampleListPage = () => {
     <PageContainer title={t('pages:example.title')} subtitle={t('pages:example.description')}>
       {/* Form Section */}
       <Box sx={{ mb: 4 }}>
-        <Typography variant="h6" gutterBottom>
+        <AppTypography variant="h6" gutterBottom>
           Create New
-        </Typography>
+        </AppTypography>
         <ExampleForm onSubmit={handleFormSubmit} />
       </Box>
 
       {/* Data Display Section */}
-      <Typography variant="h6" gutterBottom>
+      <AppTypography variant="h6" gutterBottom>
         Items
-      </Typography>
+      </AppTypography>
 
       {isLoading && (
         <Box sx={{ display: 'flex', justifyContent: 'center', p: 4 }}>
@@ -45,7 +46,7 @@ export const ExampleListPage = () => {
         </Box>
       )}
 
-      {error && <Alert severity="error">Failed to load items</Alert>}
+      {error && <AppAlert severity="error" title="Failed to load items" />}
 
       {items && (
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>

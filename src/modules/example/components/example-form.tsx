@@ -3,8 +3,9 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+
+import { AppButton } from '@zidsa/zidmui/components/app-button';
+import { AppInputBase } from '@zidsa/zidmui/components/app-input-base';
 
 import type { CreateExampleFormData } from '~/modules/example/schemas/example.schema';
 import { createExampleSchema } from '~/modules/example/schemas/example.schema';
@@ -41,7 +42,7 @@ export const ExampleForm = ({ onSubmit }: ExampleFormProps) => {
         name="title"
         control={control}
         render={({ field }) => (
-          <TextField
+          <AppInputBase
             {...field}
             label={t('common:navigation.example') + ' Title'}
             error={!!errors.title}
@@ -54,7 +55,7 @@ export const ExampleForm = ({ onSubmit }: ExampleFormProps) => {
         name="description"
         control={control}
         render={({ field }) => (
-          <TextField
+          <AppInputBase
             {...field}
             label="Description"
             multiline
@@ -69,7 +70,7 @@ export const ExampleForm = ({ onSubmit }: ExampleFormProps) => {
         name="email"
         control={control}
         render={({ field }) => (
-          <TextField
+          <AppInputBase
             {...field}
             label="Email"
             type="email"
@@ -79,9 +80,9 @@ export const ExampleForm = ({ onSubmit }: ExampleFormProps) => {
           />
         )}
       />
-      <Button type="submit" variant="contained" sx={{ alignSelf: 'flex-start' }}>
+      <AppButton type="submit" variant="contained" sx={{ alignSelf: 'flex-start' }}>
         {t('common:actions.getStarted')}
-      </Button>
+      </AppButton>
     </Box>
   );
 };

@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
+
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 //
 //
@@ -18,14 +19,14 @@ export const PageContainer = ({ title, subtitle, children, actions }: PageContai
     <Box sx={{ p: 3, maxWidth: 1200, mx: 'auto' }}>
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
         <Box>
-          <Typography variant="h4" component="h1" gutterBottom>
+          <AppTypography variant="h4" component="h1" gutterBottom>
             {title}
-          </Typography>
+          </AppTypography>
 
           {subtitle && (
-            <Typography variant="body1" color="text.secondary">
+            <AppTypography variant="body1" color="text.secondary">
               {subtitle}
-            </Typography>
+            </AppTypography>
           )}
         </Box>
 

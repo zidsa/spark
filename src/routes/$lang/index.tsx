@@ -2,8 +2,9 @@ import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+
+import { AppButton } from '@zidsa/zidmui/components/app-button';
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 import { I18nLink } from '~/global/components/i18n-link';
 
@@ -20,19 +21,23 @@ function Home() {
 
   return (
     <Box sx={{ p: 4, textAlign: 'center' }}>
-      <Typography variant="h3" gutterBottom>
+      <AppTypography variant="h3" gutterBottom>
         {t('pages:home.title')}
-      </Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+      </AppTypography>
+      <AppTypography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
         {t('pages:home.subtitle')}
-      </Typography>
+      </AppTypography>
       <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-        <Button variant="contained" color="primary" component={I18nLink} to="/example">
-          {t('common:navigation.example')}
-        </Button>
-        <Button variant="outlined" component="a" href={'/' + otherLocale + '/'}>
-          {t('common:actions.switchLanguage')}
-        </Button>
+        <I18nLink to="/example">
+          <AppButton variant="contained" color="primary">
+            {t('common:navigation.example')}
+          </AppButton>
+        </I18nLink>
+        <a href={'/' + otherLocale + '/'} style={{ textDecoration: 'none' }}>
+          <AppButton variant="outlined">
+            {t('common:actions.switchLanguage')}
+          </AppButton>
+        </a>
       </Box>
     </Box>
   );
