@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -39,4 +41,11 @@ jobs:
         run: bun run test
 
       - name: React Doctor
-        run: bunx -y react-doctor@latest .
+        run: |
+          SCORE=$(bunx -y react-doctor@latest . --score)
+          echo "React Doctor score: $SCORE/100"
+          if [ "$SCORE" -lt 100 ]; then
+            bunx -y react-doctor@latest . --verbose
+            echo "::error::React Doctor score is $SCORE/100. Must be 100."
+            exit 1
+          fi
