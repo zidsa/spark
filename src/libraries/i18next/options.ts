@@ -10,6 +10,7 @@ export const i18nOptions = {
   fallbackLng: localeDefault,
   defaultNS: 'common',
   ns: ['common', 'pages', 'validation'],
+  lowerCaseLng: true,
   interpolation: {
     escapeValue: false,
   },

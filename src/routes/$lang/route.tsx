@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { i18nInstance } from '~/libraries/i18next/client';
 import {
   getSupportedLanguage,
   getLangDirection,
@@ -12,12 +12,16 @@ import {
 //
 
 export const Route = createFileRoute('/$lang')({
-  beforeLoad: ({ params }) => {
+  beforeLoad: async ({ params }: { params: { lang: string } }) => {
     const supported = getSupportedLanguage(params.lang);
 
     if (!supported) {
       // eslint-disable-next-line @typescript-eslint/only-throw-error -- TanStack Router redirect pattern
       throw redirect({ to: '/$lang', params: { lang: localeDefault } });
+    }
+
+    if (i18nInstance.language !== supported) {
+      await i18nInstance.changeLanguage(supported);
     }
   },
   component: LangLayout,
@@ -25,17 +29,12 @@ export const Route = createFileRoute('/$lang')({
 
 function LangLayout() {
   const { lang } = Route.useParams();
-  const { i18n } = useTranslation();
 
   useEffect(() => {
-    if (i18n.language !== lang) {
-      void i18n.changeLanguage(lang);
-    }
-
     const dir = getLangDirection(lang);
     document.documentElement.setAttribute('dir', dir);
     document.documentElement.setAttribute('lang', lang);
-  }, [lang, i18n]);
+  }, [lang]);
 
   return <Outlet />;
 }

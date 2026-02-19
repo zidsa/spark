@@ -4,6 +4,10 @@ Spark is a modern frontend boilerplate for Zid, a Saudi e-commerce SaaS company.
 
 **Stack**: TanStack Start + TanStack Router + Bun 1.3.9 + MUI v7 + @zidsa/zidmui + Emotion + TanStack Query v5 + react-hook-form + zod v4 + react-i18next + Vitest
 
+**CRITICAL**: The main agent must NOT execute any tool calls directly. For ALL file
+reads, writes, terminal commands, Web Search, fetch or any other tool operations, the main agent MUST
+spawn dedicated subagents. This preserves context for the plan-then-execute workflow.
+
 ## Commands
 
 ```bash

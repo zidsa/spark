@@ -15,6 +15,7 @@ import PostHogProvider from '~/integrations/posthog/provider';
 import TanStackQueryDevtools from '~/integrations/tanstack-query/devtools';
 import TanStackQueryProvider from '~/integrations/tanstack-query/root-provider';
 import { i18nInstance } from '~/libraries/i18next/client';
+import { getLangDirection } from '~/libraries/i18next/resource';
 import appCss from '~/styles.css?url';
 
 interface MyRouterContext {
@@ -51,7 +52,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang={i18nInstance.language} dir={getLangDirection(i18nInstance.language)}>
       <head>
         <HeadContent />
       </head>
