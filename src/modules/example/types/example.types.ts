@@ -5,9 +5,3 @@ export interface ExampleItem {
   status: 'active' | 'inactive' | 'draft';
   createdAt: string;
 }
-
-export interface CreateExamplePayload {
-  title: string;
-  description: string;
-  email: string;
-}
