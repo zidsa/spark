@@ -21,7 +21,7 @@ export const ClientCacheProvider: React.FC<ClientCacheProviderProps> = ({
   const dir = i18n.isInitialized ? getLangDirection(i18n.language) : 'rtl';
 
   const currentDir = useRef(dir);
-  const [cache, setCache] = useState(createEmotionCache(dir));
+  const [cache, setCache] = useState(() => createEmotionCache(dir));
 
   const clientStyleContextValue = useMemo(
     () => ({
