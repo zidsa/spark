@@ -134,19 +134,27 @@ import { I18nLink } from '~/global/components/i18n-link';
 
 ### Adding Translations
 
-Add translation files to `public/locales/{locale}/{namespace}.json`:
+Translations are bundled inline in `src/libraries/i18next/locales.ts` (not loaded via HTTP). Add your strings directly to the `i18nResources` object under the appropriate locale and namespace:
 
+```ts
+// src/libraries/i18next/locales.ts
+export const i18nResources: Resource = {
+  'ar-sa': {
+    common: { /* ... */ },
+    'your-namespace': {
+      key: 'القيمة',
+    },
+  },
+  'en-sa': {
+    common: { /* ... */ },
+    'your-namespace': {
+      key: 'Value',
+    },
+  },
+};
 ```
-public/locales/
-├── ar-sa/
-│   ├── common.json
-│   ├── pages.json
-│   └── validation.json
-└── en-sa/
-    ├── common.json
-    ├── pages.json
-    └── validation.json
-```
+
+If you add a new namespace, register it in `src/libraries/i18next/options.ts` under the `ns` array.
 
 ### Rendering Modes
 
@@ -173,7 +181,7 @@ See the [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/r
 1. Create module directory: `src/modules/your-module/`
 2. Add subdirectories: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
 3. Create route: `src/routes/$lang/your-route/index.tsx`
-4. Add translations: `public/locales/{locale}/your-namespace.json`
+4. Add translations to `src/libraries/i18next/locales.ts`
 
 Follow the example module in `src/modules/example/` as a reference.
 

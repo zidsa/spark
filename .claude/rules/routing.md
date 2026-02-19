@@ -12,10 +12,10 @@ All user-facing routes are scoped under `/$lang/` (e.g., `/ar-sa/`, `/en-sa/exam
 - Always use `<I18nLink>` component — never TanStack Router's `<Link>` directly
 - These wrappers ensure locale is preserved across navigation
 
-## Translation Files
+## Translations
 
-Located at `public/locales/{locale}/{namespace}.json`:
+Bundled inline in `src/libraries/i18next/locales.ts`. Namespaces registered in `src/libraries/i18next/options.ts`:
 
-- `common.json` — shared strings
-- `pages.json` — page-specific strings
-- `validation.json` — form validation messages
+- `common` — shared strings
+- `pages` — page-specific strings
+- `validation` — form validation messages
