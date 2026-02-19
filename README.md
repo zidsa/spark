@@ -148,13 +148,25 @@ public/locales/
     └── validation.json
 ```
 
-## Rendering Modes
+### Rendering Modes
 
-TanStack Start supports multiple rendering modes:
+Spark supports three rendering modes. Switch between them by configuring `vite.config.ts` and `src/routes/__root.tsx`:
 
-- **SSR** (default): Server-side rendering with client hydration. Best for SEO pages.
-- **SPA**: Client-side only rendering. Configure by setting `ssr: false` in route options.
-- **SSG**: Static generation at build time. Use TanStack Start's prerender options for static routes.
+**SPA (default)** — static shell, client renders everything:
+- `vite.config.ts`: `tanstackStart({ spa: { enabled: true } })`
+- `__root.tsx`: `ssr: false` on the root route
+- Deploy: CDN with `/_shell.html` catch-all rewrite
+
+**SSR** — server renders full HTML per request:
+- `vite.config.ts`: remove `spa` config from `tanstackStart()`
+- `__root.tsx`: remove `ssr: false` from root route
+- Deploy: requires server runtime (Cloudflare Workers, Node, etc.)
+
+**SSG** — HTML generated at build time:
+- `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
+- Individual routes opt in with `prerender: true` in route options
+
+See the [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/react/guide/ssr) for details.
 
 ## Creating a Module
 

@@ -13,11 +13,6 @@ export function getRouter() {
     scrollRestoration: true,
     defaultPreload: 'intent',
     defaultPreloadStaleTime: 0,
-    // Default to SPA (client-side rendering). Individual routes can opt into
-    // SSR by setting `ssr: true` in their route options.
-    defaultRouteOptions: {
-      ssr: false,
-    },
   });
 
   return router;
