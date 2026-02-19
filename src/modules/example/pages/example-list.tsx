@@ -6,7 +6,6 @@ import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
 import { PageContainer } from '~/global/components/page-container';
 
 import { ExampleCard } from '~/modules/example/components/example-card';

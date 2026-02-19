@@ -4,7 +4,6 @@ import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 import Box from '@mui/material/Box';
 
-
 //
 //
 

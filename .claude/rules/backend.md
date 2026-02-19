@@ -15,6 +15,7 @@ Component → react-query-kit hook → ZidderJS resource → mainKyClient → He
 ## Hermod Proxy
 
 Caddy-based reverse proxy between frontend and backend:
+
 - CORS: Enforces allowed origins (includes `localhost:3000` for Spark dev)
 - Auth: Injects `Authorization: Bearer` header upstream from env config
 - Routing: `/v1/*` and `/v2/*` → extension-backend; everything else → core-backend

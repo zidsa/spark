@@ -15,6 +15,7 @@ All user-facing routes are scoped under `/$lang/` (e.g., `/ar-sa/`, `/en-sa/exam
 ## Translation Files
 
 Located at `public/locales/{locale}/{namespace}.json`:
+
 - `common.json` — shared strings
 - `pages.json` — page-specific strings
 - `validation.json` — form validation messages

@@ -1,7 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-
 import { AppButton } from '@zidsa/zidmui/components/app-button';
 import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
@@ -35,9 +34,7 @@ function Home() {
           </AppButton>
         </I18nLink>
         <a href={'/' + otherLocale + '/'} style={{ textDecoration: 'none' }}>
-          <AppButton variant="outlined">
-            {t('common:actions.switchLanguage')}
-          </AppButton>
+          <AppButton variant="outlined">{t('common:actions.switchLanguage')}</AppButton>
         </a>
       </Box>
     </Box>
