@@ -53,8 +53,7 @@ export const i18nResources: Resource = {
     },
     pages: {
       example: {
-        description:
-          'This is an example page demonstrating the module pattern',
+        description: 'This is an example page demonstrating the module pattern',
         title: 'Example Page',
       },
       home: {
