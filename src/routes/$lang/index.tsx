@@ -1,10 +1,11 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 
-import Box from '@mui/material/Box';
 
 import { AppButton } from '@zidsa/zidmui/components/app-button';
 import { AppTypography } from '@zidsa/zidmui/components/app-typography';
+
+import Box from '@mui/material/Box';
 
 import { I18nLink } from '~/global/components/i18n-link';
 

@@ -2,10 +2,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import Box from '@mui/material/Box';
 
 import { AppButton } from '@zidsa/zidmui/components/app-button';
 import { AppInputBase } from '@zidsa/zidmui/components/app-input-base';
+
+import Box from '@mui/material/Box';
 
 import type { CreateExampleFormData } from '~/modules/example/schemas/example.schema';
 import { createExampleSchema } from '~/modules/example/schemas/example.schema';

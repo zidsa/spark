@@ -1,10 +1,11 @@
 import { useTranslation } from 'react-i18next';
 
+import { AppAlert } from '@zidsa/zidmui/components/app-alert';
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
+
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { AppAlert } from '@zidsa/zidmui/components/app-alert';
-import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 import { PageContainer } from '~/global/components/page-container';
 

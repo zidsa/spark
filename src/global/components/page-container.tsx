@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react';
 
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
+
 import Box from '@mui/material/Box';
 
-import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 //
 //

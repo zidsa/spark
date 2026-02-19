@@ -1,9 +1,10 @@
+import { AppStatus } from '@zidsa/zidmui/components/app-status';
+import { AppTypography } from '@zidsa/zidmui/components/app-typography';
+
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
-import { AppStatus } from '@zidsa/zidmui/components/app-status';
-import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
 import type { ExampleItem } from '~/modules/example/types/example.types';
 
