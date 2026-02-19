@@ -1,14 +1,16 @@
 # Project: Zid-Compatible TanStack Start Boilerplate
 
 ## Agent Instructions
-**CRITICAL**: The main agent must NOT execute any tool calls directly. For ALL file 
-reads, writes, terminal commands, or any other tool operations, the main agent MUST 
+
+**CRITICAL**: The main agent must NOT execute any tool calls directly. For ALL file
+reads, writes, terminal commands, or any other tool operations, the main agent MUST
 spawn dedicated subagents. This preserves context for the plan-then-execute workflow.
 
 ---
 
 ## Context
-Zid is a Saudi e-commerce SaaS company. We are creating a modernized frontend app 
+
+Zid is a Saudi e-commerce SaaS company. We are creating a modernized frontend app
 boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 
 **Target Stack**: TanStack Start + TanStack Router + Bun runtime
@@ -19,14 +21,15 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 
 ## Reference Repositories
 
-| Repository | Path | Purpose |
-|------------|------|---------|
+| Repository           | Path                                            | Purpose                                       |
+| -------------------- | ----------------------------------------------- | --------------------------------------------- |
 | websites-boilerplate | `/Users/yazan/Desktop/zid/websites-boilerplate` | Legacy boilerplate (outdated, reference only) |
-| hermes | `/Users/yazan/Desktop/zid/hermes` | Active merchant dashboard (current patterns) |
-| hermod | `/Users/yazan/Desktop/zid/hermod` | Caddy proxy (backend connectivity) |
-| backend | `/Users/yazan/Desktop/zid/backend` | Backend services (understand API structure) |
+| hermes               | `/Users/yazan/Desktop/zid/hermes`               | Active merchant dashboard (current patterns)  |
+| hermod               | `/Users/yazan/Desktop/zid/hermod`               | Caddy proxy (backend connectivity)            |
+| backend              | `/Users/yazan/Desktop/zid/backend`              | Backend services (understand API structure)   |
 
 ### Mandatory Reading Before Any Work
+
 1. `CLAUDE.md` in both hermes and websites-boilerplate
 2. `.claude/rules` directory files in hermes
 3. `.eslintrc.*` config in hermes
@@ -41,26 +44,28 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 
 ## Technology Stack (Final Decisions)
 
-| Category | Choice | Version | Notes |
-|----------|--------|---------|-------|
-| Runtime | Bun | 1.3.9 | Verified compatible with TanStack Start |
-| Meta-framework | TanStack Start | latest | |
-| Router | TanStack Router | latest | Comes with TanStack Start |
-| UI Library | @zidsa/zidmui | latest | Public npm package |
-| HTTP Client | Internal ky wrapper | N/A | Port `zidderJs` pattern from hermes |
-| State Management | TanStack Query | latest | |
-| Forms | react-hook-form | latest | |
-| Styling | Emotion / styled | N/A | MUI's styling solution |
-| Package Manager | bun | 1.3.9 | NOT pnpm |
-| MUI | 7.3.5 | Verify @zidsa/zidmui compatibility |
-| TypeScript | latest stable | |
+| Category         | Choice              | Version                            | Notes                                   |
+| ---------------- | ------------------- | ---------------------------------- | --------------------------------------- |
+| Runtime          | Bun                 | 1.3.9                              | Verified compatible with TanStack Start |
+| Meta-framework   | TanStack Start      | latest                             |                                         |
+| Router           | TanStack Router     | latest                             | Comes with TanStack Start               |
+| UI Library       | @zidsa/zidmui       | latest                             | Public npm package                      |
+| HTTP Client      | Internal ky wrapper | N/A                                | Port `zidderJs` pattern from hermes     |
+| State Management | TanStack Query      | latest                             |                                         |
+| Forms            | react-hook-form     | latest                             |                                         |
+| Styling          | Emotion / styled    | N/A                                | MUI's styling solution                  |
+| Package Manager  | bun                 | 1.3.9                              | NOT pnpm                                |
+| MUI              | 7.3.5               | Verify @zidsa/zidmui compatibility |
+| TypeScript       | latest stable       |                                    |
 
 ---
 
 ## Architecture Requirements
 
 ### 1. Rendering Modes
+
 The boilerplate MUST support all three modes via configuration:
+
 - **SSR** (Server-Side Rendering) — default for SEO pages
 - **SSG** (Static Site Generation) — for static content
 - **SPA** (Single Page Application) — for authenticated dashboards (default)
@@ -68,6 +73,7 @@ The boilerplate MUST support all three modes via configuration:
 Document how to configure each mode in the README.
 
 ### 2. Internationalization (Arabic-First)
+
 - Default language: Arabic (ar)
 - Supported: Arabic (ar), English (en)
 - URL structure: `/:lang/path` (e.g., `/ar-sa/home`, `/en-sa/home`)
@@ -76,6 +82,7 @@ Document how to configure each mode in the README.
 - Port the `I18nLink` component pattern
 
 ### 3. Styling Rules
+
 - **NO Tailwind CSS** — remove completely if present (check `/Users/yazan/Desktop/zid/README.md` on how to remove)
 - **NO custom SCSS/CSS files**
 - Use only Emotion `styled` or MUI's `sx` prop
@@ -84,6 +91,7 @@ Document how to configure each mode in the README.
 - Dark mode theme nativly supported in the boilerplate
 
 ### 4. Backend Connectivity
+
 - All API calls route through hermod (Caddy proxy)
 - Investigate hermod configuration to understand:
   - How frontend apps connect
@@ -92,9 +100,11 @@ Document how to configure each mode in the README.
 - Update hermod config to support this new boilerplate project
 
 ### 5. Directory Structure
+
 Match the module organization from hermes. Adapt to tanstack-router.
 
 ### 6. Authentication
+
 Out of scope. Authentication is handled by the backend. Do not implement auth logic.
 
 ---
@@ -102,6 +112,7 @@ Out of scope. Authentication is handled by the backend. Do not implement auth lo
 ## Environment Variables
 
 Create `.env.example` with:
+
 ```
 VITE_ENVIRONMENT=dev-YOUR_NAME_ID
 
@@ -121,6 +132,7 @@ VITE_ASSETS_DOMAIN=https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev
 ## Code Quality Configuration
 
 ### ESLint
+
 - Extract exact configuration from hermes
 - Must include:
   - No relative imports (use `~/*` alias)
@@ -130,22 +142,28 @@ VITE_ASSETS_DOMAIN=https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev
   - No console statements (error level)
 
 ### Prettier
+
 - Extract exact configuration from hermes
 
 ### Commitlint
+
 - Conventional commits format
 - Extract rules from hermes
 
 ### Lefthook
+
 - **ONLY** for commitlint (commit-msg hook)
 - **NO** pre-commit linting hooks (linting moves to CI)
 
 ### Taskfile
+
 - Adapt Taskfile from hermes for bun + TanStack Start
 - Common tasks: install, dev, build, lint, typecheck, test, doctor
 
 ### GitHub Actions
+
 Create a PR merge-blocking workflow that runs:
+
 - ESLint
 - TypeScript type checking
 - Prettier check (not fix)
@@ -159,11 +177,13 @@ Create a PR merge-blocking workflow that runs:
 ### Target: Cloudflare Pages
 
 ### Configuration Approach
-Evaluate whether to use `wrangler.jsonc` instead of the legacy `cloudflare-pages-build.sh` 
-script from hermes. If wrangler.jsonc is viable for TanStack Start + Bun, use it. 
+
+Evaluate whether to use `wrangler.jsonc` instead of the legacy `cloudflare-pages-build.sh`
+script from hermes. If wrangler.jsonc is viable for TanStack Start + Bun, use it.
 If not, document why and adapt the shell script.
 
 ### Branch-Based Environments
+
 - `master` → production
 - `develop` → testing/staging
 - Feature branches → preview deployments via cloudflare pages
@@ -172,27 +192,31 @@ If not, document why and adapt the shell script.
 
 ## Decisions Requiring Research
 
-For each of the following, research the current state, evaluate alternatives, and make 
+For each of the following, research the current state, evaluate alternatives, and make
 a recommendation with justification. Document your reasoning in an `ARCHITECTURE.md` file.
 
 ### 1. i18n Library
+
 - Current: hermes uses react-i18next
 - Alternative: paraglide-js
 - Evaluate for: TanStack Start SSR compatibility, Arabic RTL support, bundle size, DX
 - Recommend one with justification
 
 ### 2. Validation Library
+
 - Current: hermes uses yup
 - Alternative: zod
 - Evaluate for: TypeScript inference, bundle size, ecosystem support, migration effort
 - Recommend one with justification
 
 ### 3. Query Builder
+
 - Current: hermes uses react-query-kit
 - Verify compatibility with latest TanStack Query
 - If deprecated or problematic, recommend alternative
 
 ### 4. Testing Infrastructure
+
 - Research testing approaches for TanStack Start + Bun
 - Evaluate: Vitest vs Bun's native test runner
 - Evaluate: Testing Library, MSW for API mocking
@@ -228,7 +252,9 @@ a recommendation with justification. Document your reasoning in an `ARCHITECTURE
 ---
 
 ## Verification Checklist
+
 Before marking complete, verify:
+
 - [ ] `bun install` succeeds
 - [ ] `bun run dev` starts without errors
 - [ ] Arabic (RTL) renders correctly

@@ -1,9 +1,11 @@
 {
   "ignore": {
     "files": [
-      "eslint.config.js",
+      "eslint.config.mjs",
       "instrument.server.mjs",
-      "vite.config.ts"
+      "vite.config.ts",
+      "commitlint.config.cjs",
+      "prettier.config.js"
     ]
   }
 }

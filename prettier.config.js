@@ -1,10 +1,12 @@
-//  @ts-check
-
-/** @type {import('prettier').Config} */
 const config = {
-  semi: false,
+  plugins: ['prettier-plugin-sort-json'],
+  arrowParens: 'avoid',
+  bracketSameLine: false,
+  bracketSpacing: true,
   singleQuote: true,
-  trailingComma: "all",
+  trailingComma: 'all',
+  printWidth: 100,
+  jsonRecursiveSort: true,
 };
 
 export default config;

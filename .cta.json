@@ -1,19 +1,12 @@
 {
-  "projectName": "spark",
-  "mode": "file-router",
-  "typescript": true,
-  "packageManager": "npm",
-  "tailwind": true,
   "addOnOptions": {},
-  "git": true,
-  "version": 1,
+  "chosenAddOns": ["eslint", "sentry", "form", "table", "posthog", "tanstack-query"],
   "framework": "react-cra",
-  "chosenAddOns": [
-    "eslint",
-    "sentry",
-    "form",
-    "table",
-    "posthog",
-    "tanstack-query"
-  ]
+  "git": true,
+  "mode": "file-router",
+  "packageManager": "npm",
+  "projectName": "spark",
+  "tailwind": true,
+  "typescript": true,
+  "version": 1
 }
