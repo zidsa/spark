@@ -45,20 +45,24 @@ Emotion cache is recreated on language change to swap RTL/LTR stylis plugins.
 ## Rendering Modes
 
 **SPA Mode (default)** — static shell, client renders everything:
+
 - `vite.config.ts`: `tanstackStart({ spa: { enabled: true } })`
 - `__root.tsx`: `ssr: false` on root route
 - Deploy to CDN with `/_shell.html` catch-all rewrite
 
 **SSR Mode** — server renders full HTML per request:
+
 - `vite.config.ts`: remove `spa` config from `tanstackStart()`
 - `__root.tsx`: remove `ssr: false` from root route
 - Requires server runtime (Cloudflare Workers, Node, etc.)
 
 **SSG (Static Prerendering)** — HTML generated at build time:
+
 - `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
 - Individual routes opt in with `prerender: true` in route options
 
 **Per-route Selective SSR** — fine-grained control:
+
 - Any route can set `ssr: false` or `ssr: 'data-only'` in its route options
 - Children inherit parent SSR setting (can only become more restrictive)
 - Use `pendingComponent` for the server-side fallback when `ssr: false`

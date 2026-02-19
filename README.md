@@ -140,13 +140,17 @@ Translations are bundled inline in `src/libraries/i18next/locales.ts` (not loade
 // src/libraries/i18next/locales.ts
 export const i18nResources: Resource = {
   'ar-sa': {
-    common: { /* ... */ },
+    common: {
+      /* ... */
+    },
     'your-namespace': {
       key: 'القيمة',
     },
   },
   'en-sa': {
-    common: { /* ... */ },
+    common: {
+      /* ... */
+    },
     'your-namespace': {
       key: 'Value',
     },
@@ -161,16 +165,19 @@ If you add a new namespace, register it in `src/libraries/i18next/options.ts` un
 Spark supports three rendering modes. Switch between them by configuring `vite.config.ts` and `src/routes/__root.tsx`:
 
 **SPA (default)** — static shell, client renders everything:
+
 - `vite.config.ts`: `tanstackStart({ spa: { enabled: true } })`
 - `__root.tsx`: `ssr: false` on the root route
 - Deploy: CDN with `/_shell.html` catch-all rewrite
 
 **SSR** — server renders full HTML per request:
+
 - `vite.config.ts`: remove `spa` config from `tanstackStart()`
 - `__root.tsx`: remove `ssr: false` from root route
 - Deploy: requires server runtime (Cloudflare Workers, Node, etc.)
 
 **SSG** — HTML generated at build time:
+
 - `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
 - Individual routes opt in with `prerender: true` in route options
 
