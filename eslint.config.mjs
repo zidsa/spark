@@ -83,6 +83,7 @@ export default tseslint.config(
         { blankLine: 'always', prev: ['multiline-block-like'], next: '*' },
         { blankLine: 'always', prev: '*', next: ['multiline-block-like'] },
       ],
+      'max-lines': ['error', { max: 250, skipBlankLines: true, skipComments: true }],
       'no-relative-import-paths/no-relative-import-paths': [
         'error',
         {
