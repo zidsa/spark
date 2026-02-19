@@ -1,0 +1,14 @@
+{
+  "actions": {
+    "getStarted": "ابدأ الآن",
+    "switchLanguage": "English"
+  },
+  "app": {
+    "description": "قالب زد لتطبيقات تانستاك ستارت",
+    "name": "سبارك"
+  },
+  "navigation": {
+    "example": "مثال",
+    "home": "الرئيسية"
+  }
+}

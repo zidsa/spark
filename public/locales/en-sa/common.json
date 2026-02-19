@@ -1,0 +1,14 @@
+{
+  "actions": {
+    "getStarted": "Get Started",
+    "switchLanguage": "العربية"
+  },
+  "app": {
+    "description": "Zid TanStack Start Boilerplate",
+    "name": "Spark"
+  },
+  "navigation": {
+    "example": "Example",
+    "home": "Home"
+  }
+}
