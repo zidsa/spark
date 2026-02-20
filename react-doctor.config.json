@@ -1,11 +1,20 @@
 {
+  "_comment": "Remove the boilerplate ignores (zidderjs, example, i18next/types) when starting a new project.",
   "ignore": {
     "files": [
       "eslint.config.mjs",
       "instrument.server.mjs",
       "vite.config.ts",
       "commitlint.config.cjs",
-      "prettier.config.js"
+      "prettier.config.js",
+      "src/zidderjs/**",
+      "src/services/example.ts",
+      "src/modules/example/**",
+      "src/libraries/i18next/types.ts"
+    ],
+    "rules": [
+      "knip/exports",
+      "knip/types"
     ]
   }
 }

@@ -40,4 +40,5 @@ const AllProviders = ({ children }: ProvidersProps) => {
 export const renderWithProviders = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
   render(ui, { wrapper: AllProviders, ...options });
 
+export { default as userEvent } from '@testing-library/user-event';
 export * from '@testing-library/react';

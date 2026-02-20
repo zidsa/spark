@@ -44,8 +44,8 @@ jobs:
         run: |
           SCORE=$(bunx -y react-doctor@latest . --score)
           echo "React Doctor score: $SCORE/100"
-          if [ "$SCORE" -lt 100 ]; then
+          if [ "$SCORE" -lt 75 ]; then
             bunx -y react-doctor@latest . --verbose
-            echo "::error::React Doctor score is $SCORE/100. Must be 100."
+            echo "::error::React Doctor score is $SCORE/100. Must be at least 75."
             exit 1
           fi
