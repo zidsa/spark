@@ -35,6 +35,7 @@ bun run test                # Run tests
 12. PRs target `master` branch
 13. 250 lines max per file
 
+@.claude/rules/workflow.md
 @.claude/rules/code-style.md
 @.claude/rules/architecture.md
 @.claude/rules/routing.md
