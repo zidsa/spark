@@ -20,8 +20,7 @@
     "target": "ES2022",
     "types": ["vite/client", "vitest/config"],
 
-    "verbatimModuleSyntax": true,
-    
+    "verbatimModuleSyntax": true
   },
   "include": ["**/*.ts", "**/*.tsx", "prettier.config.js", "vite.config.js"]
 }

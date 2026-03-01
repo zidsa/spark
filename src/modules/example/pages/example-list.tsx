@@ -14,7 +14,7 @@ import { useQueryExampleList } from '~/modules/example/hooks/use-example-query';
 import type { CreateExampleFormData } from '~/modules/example/schemas/example.schema';
 
 //
-// 
+//
 
 export const ExampleListPage = () => {
   const { t } = useTranslation(['pages', 'common']);

@@ -12,9 +12,6 @@
       "src/modules/example/**",
       "src/libraries/i18next/types.ts"
     ],
-    "rules": [
-      "knip/exports",
-      "knip/types"
-    ]
+    "rules": ["knip/exports", "knip/types"]
   }
 }

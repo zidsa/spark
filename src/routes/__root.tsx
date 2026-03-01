@@ -8,12 +8,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
 import { ClientCacheProvider } from '~/zidmui/libraries/emotion/client-cache';
-import { themeParcel } from '~/zidmui/libraries/mui/theme/parcel';
+import { themeParcel } from '~/zidmui/libraries/theme/parcel';
 import fontsCss from '~/zidmui/styles/fonts.css?url';
 
 import PostHogProvider from '~/integrations/posthog/provider';
-import TanStackQueryDevtools from '~/integrations/tanstack-query/devtools';
-import TanStackQueryProvider from '~/integrations/tanstack-query/root-provider';
+import TanStackQueryDevtools from '~/integrations/tanstack/devtools';
+import TanStackQueryProvider from '~/integrations/tanstack/root-provider';
 import { i18nInstance } from '~/libraries/i18next/client';
 import appCss from '~/styles.css?url';
 
