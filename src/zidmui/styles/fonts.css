@@ -7,8 +7,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/thin.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/thin.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/thin.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/thin.woff') format('woff');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
@@ -18,8 +17,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/extra-light.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/extra-light.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/extra-light.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/extra-light.woff') format('woff');
   font-weight: 200;
   font-style: normal;
   font-display: swap;
@@ -29,8 +27,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/light.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/light.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/light.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/light.woff') format('woff');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
@@ -40,8 +37,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/regular.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/regular.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/regular.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/regular.woff') format('woff');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -51,8 +47,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/medium.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/medium.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/medium.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/medium.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -62,8 +57,7 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/semi-bold.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/semi-bold.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/semi-bold.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/semi-bold.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -73,9 +67,26 @@
   font-family: 'IBM Plex Sans Arabic';
   src:
     url('/fonts/ibm-plex-sans-arabic/bold.woff2') format('woff2'),
-    url('/fonts/ibm-plex-sans-arabic/bold.woff') format('woff'),
-    url('/fonts/ibm-plex-sans-arabic/bold.ttf') format('truetype');
+    url('/fonts/ibm-plex-sans-arabic/bold.woff') format('woff');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+/*
+ * Saudi Riyal Font
+ */
+@font-face {
+  font-family: 'saudi_riyal';
+  src:
+    url('/fonts/saudi-riyal-font/saudi_riyal.woff2') format('woff2'),
+    url('/fonts/saudi-riyal-font/saudi_riyal.woff') format('woff'),
+    url('/fonts/saudi-riyal-font/saudi_riyal.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.riyal {
+  font-family: 'saudi_riyal', 'IBM Plex Sans Arabic', Arial, sans-serif;
 }
