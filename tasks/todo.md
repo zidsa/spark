@@ -2,7 +2,7 @@
 
 ## Steps
 
-- [x] Install packages (@mui/material, @mui/lab, @mui/icons-material, @emotion/react, @emotion/cache, @emotion/styled, @zidsa/zidmui, stylis, stylis-plugin-rtl, notistack)
+- [x] Install packages (@mui/material, @mui/lab, @emotion/react, @emotion/cache, @emotion/styled, @zidsa/zidmui, stylis, stylis-plugin-rtl, notistack)
 - [x] Read hermes theme files for reference
 - [x] Create Emotion cache files (create-cache.ts, style-context.tsx, client-cache.tsx)
 - [x] Create MUI theme files (palette.ts, palette-dark.ts, shadows.ts, index.ts, types.d.ts)
