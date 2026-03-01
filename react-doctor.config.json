@@ -2,7 +2,7 @@
   "_comment": "Remove the boilerplate ignores (zidderjs, example, i18next/types) when starting a new project.",
   "ignore": {
     "files": [
-      "eslint.config.mjs",
+      ".oxlintrc.json",
       "instrument.server.mjs",
       "vite.config.ts",
       "commitlint.config.cjs",

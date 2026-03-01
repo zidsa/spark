@@ -1,3 +1,4 @@
+// oxlint-disable-next-line no-restricted-imports
 import '@mui/material';
 
 import type { ComponentsPalette } from './types-components';
@@ -92,10 +93,10 @@ declare module '@mui/material/styles' {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- MUI module augmentation
+  // oxlint-disable-next-line @typescript-eslint/no-empty-object-type -- MUI module augmentation
   interface PaletteOptions extends CustomPalette {}
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- MUI module augmentation
+  // oxlint-disable-next-line @typescript-eslint/no-empty-object-type -- MUI module augmentation
   interface Palette extends CustomPalette {}
 
   //

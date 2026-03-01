@@ -22,16 +22,16 @@ tasks:
       - bun run preview {{.CLI_ARGS}}
 
   lint:
-    desc: Lint and format code
-    cmds:
-      - bun run lint:eslint-fix
-      - bun run lint:prettier-fix
-
-  lint-check:
     desc: Check lint (no fix)
     cmds:
-      - bun run lint:eslint
+      - bun run lint
       - bun run lint:prettier-check
+
+  lint-fix:
+    desc: Lint and format code
+    cmds:
+      - bun run lint:fix
+      - bun run lint:prettier-fix
 
   test:
     desc: Run tests

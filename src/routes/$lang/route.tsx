@@ -16,7 +16,6 @@ export const Route = createFileRoute('/$lang')({
     const supported = getSupportedLanguage(params.lang);
 
     if (!supported) {
-      // eslint-disable-next-line @typescript-eslint/only-throw-error -- TanStack Router redirect pattern
       throw redirect({ to: '/$lang', params: { lang: localeDefault } });
     }
 

@@ -17,7 +17,7 @@ export const useI18nNavigate = () => {
 
 export const prependLocale = (to: string | number, lang: string): string => {
   if (typeof to === 'number') return String(to);
-  if (/^\./.test(to)) return to;
+  if (to.startsWith('.')) return to;
   if (/^https?:\/\//.test(to)) return to;
 
   return '/' + lang + '/' + String(to).replace(/^\//, '');

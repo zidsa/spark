@@ -39,8 +39,8 @@ The app starts at [http://localhost:3000](http://localhost:3000).
 | `bun run start`               | Start production server              |
 | `bun run test`                | Run tests                            |
 | `bun run test:watch`          | Run tests in watch mode              |
-| `bun run lint:eslint`         | Lint with ESLint                     |
-| `bun run lint:eslint-fix`     | Lint and auto-fix                    |
+| `bun run lint`                | Lint with oxlint                     |
+| `bun run lint:fix`            | Lint and auto-fix                    |
 | `bun run lint:prettier-check` | Check formatting                     |
 | `bun run lint:prettier-fix`   | Fix formatting                       |
 | `bun run tscheck`             | TypeScript type checking             |

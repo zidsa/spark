@@ -14,14 +14,14 @@ import { useQueryExampleList } from '~/modules/example/hooks/use-example-query';
 import type { CreateExampleFormData } from '~/modules/example/schemas/example.schema';
 
 //
-//
+// 
 
 export const ExampleListPage = () => {
   const { t } = useTranslation(['pages', 'common']);
   const { data: items, isLoading, error } = useQueryExampleList();
 
   const handleFormSubmit = (data: CreateExampleFormData) => {
-    // eslint-disable-next-line no-console
+    // oxlint-disable-next-line no-console
     console.log('Form submitted:', data);
   };
 
