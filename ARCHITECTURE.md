@@ -49,7 +49,7 @@
 
 ## Key Patterns
 
-### ZidderJS HTTP Client
+### API HTTP Client
 
 All API calls go through the `mainKyClient` (ky instance) configured with:
 
@@ -61,7 +61,7 @@ All API calls go through the `mainKyClient` (ky instance) configured with:
 - 90-second timeout
 - Credentials included (cookies sent cross-origin)
 
-Flow: `Component -> react-query-kit hook -> ZidderJS resource -> mainKyClient -> Hermod -> Backend`
+Flow: `Component -> react-query-kit hook -> API resource -> mainKyClient -> Hermod -> Backend`
 
 ### Backend Connectivity
 
@@ -73,7 +73,7 @@ Frontend apps never call the backend directly. All requests go through **Hermod*
 
 ### Query Client
 
-The TanStack Query client (`src/services/client.ts`) is configured with:
+The TanStack Query client (`src/api/hooks/client.ts`) is configured with:
 
 - `staleTime: 180_000` (3 minutes) -- reduces unnecessary refetches
 - `retry: 0` -- retries are handled at the ky/HTTP layer, not the query layer

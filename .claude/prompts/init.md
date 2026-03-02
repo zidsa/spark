@@ -50,7 +50,7 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 | Meta-framework   | TanStack Start      | latest                             |                                         |
 | Router           | TanStack Router     | latest                             | Comes with TanStack Start               |
 | UI Library       | @zidsa/zidmui       | latest                             | Public npm package                      |
-| HTTP Client      | Internal ky wrapper | N/A                                | Port `zidderJs` pattern from hermes     |
+| HTTP Client      | Internal ky wrapper | N/A                                | Port `api` pattern from hermes          |
 | State Management | TanStack Query      | latest                             |                                         |
 | Forms            | react-hook-form     | latest                             |                                         |
 | Styling          | Emotion / styled    | N/A                                | MUI's styling solution                  |

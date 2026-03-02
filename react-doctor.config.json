@@ -1,5 +1,5 @@
 {
-  "_comment": "Remove the boilerplate ignores (zidderjs, example, i18next/types) when starting a new project.",
+  "_comment": "Remove the boilerplate ignores (api, example, i18next/types) when starting a new project.",
   "ignore": {
     "files": [
       ".oxlintrc.json",
@@ -7,8 +7,7 @@
       "vite.config.ts",
       "commitlint.config.cjs",
       "prettier.config.js",
-      "src/zidderjs/**",
-      "src/services/example.ts",
+      "src/api/**",
       "src/modules/example/**",
       "src/libraries/i18next/types.ts"
     ],

@@ -1,10 +1,10 @@
 # Data Flow & Backend
 
 ```
-Component → react-query-kit hook → ZidderJS resource → mainKyClient → Hermod proxy → Backend
+Component → react-query-kit hook → API resource → mainKyClient → Hermod proxy → Backend
 ```
 
-## ZidderJS (`~/zidderjs/`)
+## API (`~/api/`)
 
 - Wraps `ky` HTTP client with Zid-specific interceptors
 - Base URL: `VITE_API_URL` (Hermod proxy, e.g., `https://hermod.zid.dev/`)
@@ -26,4 +26,4 @@ Caddy-based reverse proxy between frontend and backend:
 
 - `staleTime`: 180 seconds
 - `retry`: 0 (retries handled at HTTP/ky layer)
-- Query client singleton in `~/services/client.ts`
+- Query client singleton in `~/api/hooks/client.ts`

@@ -1,7 +1,7 @@
 import { HTTPError } from 'ky';
 import type { KyRequest, KyResponse, Options } from 'ky';
 
-import { parseErrors } from '~/zidderjs/utils/interceptors';
+import { parseErrors } from '~/api/utils/interceptors';
 
 //
 // Token Helpers

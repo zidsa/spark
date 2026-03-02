@@ -1,4 +1,4 @@
-import type { ZidderHeaders } from '~/zidderjs/types/headers';
+import type { ZidderHeaders } from '~/api/types/headers';
 
 //
 //

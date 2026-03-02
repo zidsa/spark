@@ -10,7 +10,7 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 - **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
 - **State**: [TanStack Query v5](https://tanstack.com/query) + [react-query-kit](https://github.com/nicktomlin/react-query-kit)
 - **Forms**: [react-hook-form](https://react-hook-form.com) + [zod v4](https://zod.dev)
-- **HTTP**: [ky](https://github.com/sindresorhus/ky) (ZidderJS wrapper)
+- **HTTP**: [ky](https://github.com/sindresorhus/ky) (API wrapper)
 - **i18n**: [react-i18next](https://react.i18next.com) -- Arabic-first, RTL support
 - **Testing**: [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com)
 
@@ -81,9 +81,10 @@ src/
 │   ├── components/      # Shared components (I18nLink, PageContainer)
 │   ├── hooks/           # Shared hooks (useI18nNavigate)
 │   └── utils/           # Utility functions
-├── zidderjs/            # HTTP client (ky wrapper)
+├── api/            # HTTP client (ky wrapper)
 │   ├── client/          # Main ky client + interceptors
 │   ├── errors/          # Error classes
+│   ├── hooks/           # react-query-kit query/mutation hooks
 │   ├── resources/       # API endpoint definitions
 │   ├── types/           # Request/response types
 │   └── utils/           # HTTP utilities
@@ -94,7 +95,6 @@ src/
 │   └── styles/          # Font declarations
 ├── libraries/           # Third-party library setup
 │   └── i18next/         # i18n configuration
-├── services/            # react-query-kit query/mutation hooks
 └── integrations/        # Analytics (PostHog, Sentry)
 ```
 

@@ -19,15 +19,15 @@ src/
 │   ├── components/         # I18nLink, PageContainer, etc.
 │   ├── hooks/              # useI18nNavigate, etc.
 │   └── utils/              # Shared utilities
-├── zidderjs/               # HTTP client (ky wrapper)
+├── api/                    # HTTP client (ky wrapper)
 │   ├── client/             # mainKyClient + interceptors
 │   ├── errors/             # Typed error classes
+│   ├── hooks/              # react-query-kit query/mutation hooks
 │   ├── resources/          # API endpoint definitions
 │   ├── types/              # Request/response types
 │   └── utils/              # HTTP utilities
 ├── zidmui/                 # MUI theme + Emotion RTL
 ├── libraries/              # Third-party integration configs (i18next)
-├── services/               # react-query-kit query/mutation hooks
 ├── integrations/           # Analytics/monitoring providers
 ├── router.tsx              # Router instance
 ├── routeTree.gen.ts        # Auto-generated (do NOT edit)

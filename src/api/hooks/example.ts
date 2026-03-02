@@ -1,6 +1,6 @@
 import { createQuery } from 'react-query-kit';
 
-import { exampleResource } from '~/zidderjs/resources/example';
+import { exampleResource } from '~/api/resources/example';
 
 //
 //

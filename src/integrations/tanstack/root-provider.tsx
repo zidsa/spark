@@ -1,7 +1,7 @@
 import { QueryClientProvider } from '@tanstack/react-query';
 import type { ReactNode } from 'react';
 
-import { queryClient } from '~/services/client';
+import { queryClient } from '~/api/hooks/client';
 
 export function getContext() {
   return {

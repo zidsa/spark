@@ -1,6 +1,6 @@
 import { HTTPError } from 'ky';
 
-import * as ZidderErrors from '~/zidderjs/errors/generic';
+import * as ZidderErrors from '~/api/errors/generic';
 
 //
 //

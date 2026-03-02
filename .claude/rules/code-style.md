@@ -8,7 +8,7 @@
 - Import order (enforced by ESLint):
   1. External packages (`react`, `@mui/*`, `@tanstack/*`)
   2. `@zidsa/*` and `@mui/*` packages
-  3. Internal absolute imports (`~/modules/*`, `~/global/*`, `~/zidderjs/*`)
+  3. Internal absolute imports (`~/modules/*`, `~/global/*`, `~/api/*`)
 
 ## Naming
 
