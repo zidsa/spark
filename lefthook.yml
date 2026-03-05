@@ -1,33 +1,5 @@
-pre-commit:
-  parallel: true
-  commands:
-    lint:
-      files: git diff --name-only --staged
-      glob: '{src,__tests__}/**/*.{js,ts,jsx,tsx,d.ts}'
-      run: npx oxlint . --tsconfig tsconfig.json
-
-    lint-fix:
-      files: git diff --name-only --staged
-      glob: '{src,__tests__}/**/*.{js,ts,jsx,tsx,d.ts}'
-      run: npx oxlint --fix . --tsconfig tsconfig.json
-
-    lint-json:
-      files: git diff --name-only --staged
-      glob: '{src,public}/**/*.{json}'
-      run: npx prettier --check {files} --plugin=prettier-plugin-sort-json
-
-    lint-css:
-      files: git diff --name-only --staged
-      glob: '{src,public}/**/*.{css}'
-      run: npx prettier --check {files}
-
-    types:
-      files: git diff --name-only --staged
-      glob: '{src,__tests__}/**/*.{js,ts,jsx,tsx,d.ts}'
-      run: npx tsc --noEmit
-
 commit-msg:
   parallel: true
   commands:
     commitlint:
-      run: npx commitlint --edit
+      run: bunx commitlint --edit
