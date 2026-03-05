@@ -168,7 +168,7 @@ Create a PR merge-blocking workflow that runs:
 - TypeScript type checking
 - Prettier check (not fix)
 - Tests
-- npx -y react-doctor@latest .
+- bunx -y react-doctor@latest .
 
 ---
 

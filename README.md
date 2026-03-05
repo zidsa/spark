@@ -81,7 +81,7 @@ src/
 │   ├── components/      # Shared components (I18nLink, PageContainer)
 │   ├── hooks/           # Shared hooks (useI18nNavigate)
 │   └── utils/           # Utility functions
-├── api/            # HTTP client (ky wrapper)
+├── api/                 # HTTP client (ky wrapper)
 │   ├── client/          # Main ky client + interceptors
 │   ├── errors/          # Error classes
 │   ├── hooks/           # react-query-kit query/mutation hooks
