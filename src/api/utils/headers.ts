@@ -13,7 +13,10 @@ export const zidderGetHeaders = (headers?: ZidderHeaders) => {
 
     if (!mappedKey) continue; // unknown header
 
-    if (!value) { data[mappedKey] = undefined; continue; } // remove header
+    if (!value) {
+      data[mappedKey] = undefined;
+      continue;
+    } // remove header
 
     if (key === 'authorizationToken') {
       data[mappedKey] = `Bearer ${value}`;
