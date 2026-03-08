@@ -12,7 +12,7 @@ import {
 //
 
 export const Route = createFileRoute('/$lang')({
-  beforeLoad: async ({ params }: { params: { lang: string } }) => {
+  beforeLoad: async ({ params }) => {
     const supported = getSupportedLanguage(params.lang);
 
     if (!supported) {

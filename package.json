@@ -5,9 +5,10 @@
   "packageManager": "bun@1.3.9",
   "scripts": {
     "dev": "bun --env-file .env.local --preload ./instrument.server.mjs ./node_modules/.bin/vite dev --port 3000",
-    "build": "vite build && cp instrument.server.mjs dist/server/",
-    "preview": "vite preview",
-    "start": "bun --preload ./dist/server/instrument.server.mjs dist/server/server.js",
+    "build": "vite build",
+    "build:ssr": "vite build && cp instrument.server.mjs dist/server/",
+    "start": "bunx serve dist/client -p 3000",
+    "start:ssr": "bun --preload ./dist/server/instrument.server.mjs dist/server/server.js",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",

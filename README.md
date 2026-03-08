@@ -34,9 +34,10 @@ The app starts at [http://localhost:3000](http://localhost:3000).
 | Script                        | Description                          |
 | ----------------------------- | ------------------------------------ |
 | `bun run dev`                 | Start development server (port 3000) |
-| `bun run build`               | Production build                     |
-| `bun run preview`             | Preview production build             |
-| `bun run start`               | Start production server              |
+| `bun run build`               | Build for production (SPA)           |
+| `bun run start`               | Serve production build locally       |
+| `bun run build:ssr`           | Build for production (SSR)           |
+| `bun run start:ssr`           | Start SSR server                     |
 | `bun run test`                | Run tests                            |
 | `bun run test:watch`          | Run tests in watch mode              |
 | `bun run lint`                | Lint with oxlint                     |

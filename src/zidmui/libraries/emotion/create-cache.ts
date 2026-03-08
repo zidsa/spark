@@ -7,7 +7,7 @@ import rtlPlugin from 'stylis-plugin-rtl';
 
 export const createEmotionCache = (dir?: 'ltr' | 'rtl') => {
   return createCache({
-    key: 'css',
+    key: dir === 'rtl' ? 'css-rtl' : 'css-ltr',
     stylisPlugins: dir === 'rtl' ? [prefixer, rtlPlugin] : undefined,
   });
 };

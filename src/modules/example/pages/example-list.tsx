@@ -10,7 +10,7 @@ import { PageContainer } from '~/global/components/page-container';
 
 import { ExampleCard } from '~/modules/example/components/example-card';
 import { ExampleForm } from '~/modules/example/components/example-form';
-import { useQueryExampleList } from '~/modules/example/hooks/use-example-query';
+import { useMockExampleQuery } from '~/modules/example/hooks/use-mock-example-query';
 import type { CreateExampleFormData } from '~/modules/example/schemas/example.schema';
 
 //
@@ -18,7 +18,7 @@ import type { CreateExampleFormData } from '~/modules/example/schemas/example.sc
 
 export const ExampleListPage = () => {
   const { t } = useTranslation(['pages', 'common']);
-  const { data: items, isLoading, error } = useQueryExampleList();
+  const { data: items, isLoading, error } = useMockExampleQuery();
 
   const handleFormSubmit = (data: CreateExampleFormData) => {
     // oxlint-disable-next-line no-console

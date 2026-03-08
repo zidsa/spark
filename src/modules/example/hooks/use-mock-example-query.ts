@@ -1,3 +1,4 @@
+// Mock data hook for demonstration. Replace with real API hooks from ~/api/hooks/ in production.
 import { createQuery } from 'react-query-kit';
 
 import type { ExampleItem } from '~/modules/example/types/example.types';
@@ -29,7 +30,7 @@ const mockItems: ExampleItem[] = [
   },
 ];
 
-export const useQueryExampleList = createQuery<ExampleItem[]>({
+export const useMockExampleQuery = createQuery<ExampleItem[]>({
   queryKey: ['example', 'list'],
   fetcher: async () => {
     // Simulate API delay

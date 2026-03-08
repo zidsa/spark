@@ -1,14 +1,17 @@
+import { useMemo } from 'react';
+
 import { TanStackDevtools } from '@tanstack/react-devtools';
 import type { QueryClient } from '@tanstack/react-query';
 import { HeadContent, Outlet, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
-import { I18nextProvider } from 'react-i18next';
+import { I18nextProvider, useTranslation } from 'react-i18next';
 
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import { ClientCacheProvider } from '~/zidmui/libraries/emotion/client-cache';
-import { themeParcel } from '~/zidmui/libraries/theme/parcel';
+import { themeParcelOptions } from '~/zidmui/libraries/theme/parcel';
+import { getLangDirection } from '~/libraries/i18next/resource';
 import fontsCss from '~/zidmui/styles/fonts.css?url';
 
 import PostHogProvider from '~/integrations/posthog/provider';
@@ -71,10 +74,14 @@ function RootPending() {
 }
 
 function RootComponent() {
+  const { i18n } = useTranslation();
+  const dir = getLangDirection(i18n.language);
+  const theme = useMemo(() => createTheme({ ...themeParcelOptions, direction: dir }), [dir]);
+
   return (
     <I18nextProvider i18n={i18nInstance}>
       <ClientCacheProvider>
-        <ThemeProvider theme={themeParcel}>
+        <ThemeProvider theme={theme}>
           <CssBaseline />
           <PostHogProvider>
             <TanStackQueryProvider>

@@ -12,7 +12,8 @@ spawn dedicated subagents. This preserves context for the plan-then-execute work
 
 ```bash
 bun run dev                 # Dev server on http://localhost:3000
-bun run build && bun start  # Production build + run
+bun run build && bun run start  # Production build + serve (SPA)
+bun run build:ssr && bun run start:ssr  # Production build + serve (SSR)
 bun run lint:fix     # Auto-fix lint errors
 bun run lint:prettier-fix   # Auto-fix formatting
 bun run tscheck             # TypeScript type check

@@ -9,13 +9,12 @@ import { createTheme } from '@mui/material/styles';
 //
 //
 
-export const themeParcel = createTheme({
-  shape: {
-    borderRadius: 8,
-    standardBorderRadius: 12,
-  },
+export const themeParcelOptions = {
+  shape: { borderRadius: 8, standardBorderRadius: 12 },
   shadows,
   palette,
   typography,
   components,
-});
+};
+
+export const themeParcel = createTheme(themeParcelOptions);
