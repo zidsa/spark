@@ -14,7 +14,6 @@ export const mainKyClient = ky.create({
   prefixUrl: String(import.meta.env.VITE_API_URL),
   timeout: 90000, // 90 seconds
   headers: {
-    'accept-language': 'en',
     accept: 'application/json',
     'Content-Type': 'application/json',
   },

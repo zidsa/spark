@@ -1,6 +1,7 @@
 import { HTTPError } from 'ky';
 import type { KyRequest, KyResponse, Options } from 'ky';
 
+import { i18nInstance } from '~/libraries/i18next/client';
 import { parseErrors } from '~/api/utils/interceptors';
 
 //
@@ -21,12 +22,13 @@ export const authTokenInterceptor = (req: KyRequest) => {
   if (!req?.url) return;
 
   try {
+    req.headers.set('accept-language', i18nInstance.language);
+
     const url = new URL(req.url);
     if (!url?.pathname || guestEndpoints.includes(url.pathname)) return;
 
     const token = getToken();
     const storeId = window?.localStorage?.getItem('storeId');
-    const acceptLanguage = window?.localStorage?.getItem('acceptLanguage');
 
     if (token) {
       req.headers.set('x-manager-token', token);
@@ -35,10 +37,6 @@ export const authTokenInterceptor = (req: KyRequest) => {
     if (storeId) {
       req.headers.set('role', 'Manager');
       req.headers.set('store-id', storeId);
-    }
-
-    if (acceptLanguage) {
-      req.headers.set('accept-language', acceptLanguage);
     }
   } catch {
     // Silently handle interceptor errors
