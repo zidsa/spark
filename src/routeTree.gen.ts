@@ -9,120 +9,72 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as LangRouteRouteImport } from './routes/$lang/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as DemoTanstackQueryRouteImport } from './routes/demo/tanstack-query'
-import { Route as DemoTableRouteImport } from './routes/demo/table'
-import { Route as DemoPosthogRouteImport } from './routes/demo/posthog'
-import { Route as DemoSentryTestingRouteImport } from './routes/demo/sentry.testing'
-import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
-import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as LangIndexRouteImport } from './routes/$lang/index'
+import { Route as LangExampleIndexRouteImport } from './routes/$lang/example/index'
 
+const LangRouteRoute = LangRouteRouteImport.update({
+  id: '/$lang',
+  path: '/$lang',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const DemoTanstackQueryRoute = DemoTanstackQueryRouteImport.update({
-  id: '/demo/tanstack-query',
-  path: '/demo/tanstack-query',
-  getParentRoute: () => rootRouteImport,
+const LangIndexRoute = LangIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LangRouteRoute,
 } as any)
-const DemoTableRoute = DemoTableRouteImport.update({
-  id: '/demo/table',
-  path: '/demo/table',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoPosthogRoute = DemoPosthogRouteImport.update({
-  id: '/demo/posthog',
-  path: '/demo/posthog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoSentryTestingRoute = DemoSentryTestingRouteImport.update({
-  id: '/demo/sentry/testing',
-  path: '/demo/sentry/testing',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFormSimpleRoute = DemoFormSimpleRouteImport.update({
-  id: '/demo/form/simple',
-  path: '/demo/form/simple',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
-  id: '/demo/form/address',
-  path: '/demo/form/address',
-  getParentRoute: () => rootRouteImport,
+const LangExampleIndexRoute = LangExampleIndexRouteImport.update({
+  id: '/example/',
+  path: '/example/',
+  getParentRoute: () => LangRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/demo/posthog': typeof DemoPosthogRoute
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/$lang': typeof LangRouteRouteWithChildren
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/example/': typeof LangExampleIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/demo/posthog': typeof DemoPosthogRoute
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/$lang': typeof LangIndexRoute
+  '/$lang/example': typeof LangExampleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/demo/posthog': typeof DemoPosthogRoute
-  '/demo/table': typeof DemoTableRoute
-  '/demo/tanstack-query': typeof DemoTanstackQueryRoute
-  '/demo/form/address': typeof DemoFormAddressRoute
-  '/demo/form/simple': typeof DemoFormSimpleRoute
-  '/demo/sentry/testing': typeof DemoSentryTestingRoute
+  '/$lang': typeof LangRouteRouteWithChildren
+  '/$lang/': typeof LangIndexRoute
+  '/$lang/example/': typeof LangExampleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/demo/posthog'
-    | '/demo/table'
-    | '/demo/tanstack-query'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
+  fullPaths: '/' | '/$lang' | '/$lang/' | '/$lang/example/'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/demo/posthog'
-    | '/demo/table'
-    | '/demo/tanstack-query'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
-  id:
-    | '__root__'
-    | '/'
-    | '/demo/posthog'
-    | '/demo/table'
-    | '/demo/tanstack-query'
-    | '/demo/form/address'
-    | '/demo/form/simple'
-    | '/demo/sentry/testing'
+  to: '/' | '/$lang' | '/$lang/example'
+  id: '__root__' | '/' | '/$lang' | '/$lang/' | '/$lang/example/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  DemoPosthogRoute: typeof DemoPosthogRoute
-  DemoTableRoute: typeof DemoTableRoute
-  DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
-  DemoFormAddressRoute: typeof DemoFormAddressRoute
-  DemoFormSimpleRoute: typeof DemoFormSimpleRoute
-  DemoSentryTestingRoute: typeof DemoSentryTestingRoute
+  LangRouteRoute: typeof LangRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/$lang': {
+      id: '/$lang'
+      path: '/$lang'
+      fullPath: '/$lang'
+      preLoaderRoute: typeof LangRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -130,59 +82,40 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/demo/tanstack-query': {
-      id: '/demo/tanstack-query'
-      path: '/demo/tanstack-query'
-      fullPath: '/demo/tanstack-query'
-      preLoaderRoute: typeof DemoTanstackQueryRouteImport
-      parentRoute: typeof rootRouteImport
+    '/$lang/': {
+      id: '/$lang/'
+      path: '/'
+      fullPath: '/$lang/'
+      preLoaderRoute: typeof LangIndexRouteImport
+      parentRoute: typeof LangRouteRoute
     }
-    '/demo/table': {
-      id: '/demo/table'
-      path: '/demo/table'
-      fullPath: '/demo/table'
-      preLoaderRoute: typeof DemoTableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/posthog': {
-      id: '/demo/posthog'
-      path: '/demo/posthog'
-      fullPath: '/demo/posthog'
-      preLoaderRoute: typeof DemoPosthogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/sentry/testing': {
-      id: '/demo/sentry/testing'
-      path: '/demo/sentry/testing'
-      fullPath: '/demo/sentry/testing'
-      preLoaderRoute: typeof DemoSentryTestingRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/form/simple': {
-      id: '/demo/form/simple'
-      path: '/demo/form/simple'
-      fullPath: '/demo/form/simple'
-      preLoaderRoute: typeof DemoFormSimpleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/demo/form/address': {
-      id: '/demo/form/address'
-      path: '/demo/form/address'
-      fullPath: '/demo/form/address'
-      preLoaderRoute: typeof DemoFormAddressRouteImport
-      parentRoute: typeof rootRouteImport
+    '/$lang/example/': {
+      id: '/$lang/example/'
+      path: '/example'
+      fullPath: '/$lang/example/'
+      preLoaderRoute: typeof LangExampleIndexRouteImport
+      parentRoute: typeof LangRouteRoute
     }
   }
 }
 
+interface LangRouteRouteChildren {
+  LangIndexRoute: typeof LangIndexRoute
+  LangExampleIndexRoute: typeof LangExampleIndexRoute
+}
+
+const LangRouteRouteChildren: LangRouteRouteChildren = {
+  LangIndexRoute: LangIndexRoute,
+  LangExampleIndexRoute: LangExampleIndexRoute,
+}
+
+const LangRouteRouteWithChildren = LangRouteRoute._addFileChildren(
+  LangRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  DemoPosthogRoute: DemoPosthogRoute,
-  DemoTableRoute: DemoTableRoute,
-  DemoTanstackQueryRoute: DemoTanstackQueryRoute,
-  DemoFormAddressRoute: DemoFormAddressRoute,
-  DemoFormSimpleRoute: DemoFormSimpleRoute,
-  DemoSentryTestingRoute: DemoSentryTestingRoute,
+  LangRouteRoute: LangRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

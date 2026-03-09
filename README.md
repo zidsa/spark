@@ -1,215 +1,223 @@
-Welcome to your new TanStack Start app! 
+# Spark
 
-# Getting Started
+Zid's TanStack Start boilerplate -- a modern, production-ready foundation for building Zid frontend applications.
 
-To run this application:
+## Stack
+
+- **Runtime**: [Bun](https://bun.sh) 1.3.9
+- **Framework**: [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
+- **UI**: [MUI v7](https://mui.com) + [@zidsa/zidmui](https://www.npmjs.com/package/@zidsa/zidmui)
+- **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
+- **State**: [TanStack Query v5](https://tanstack.com/query) + [react-query-kit](https://github.com/nicktomlin/react-query-kit)
+- **Forms**: [react-hook-form](https://react-hook-form.com) + [zod v4](https://zod.dev)
+- **HTTP**: [ky](https://github.com/sindresorhus/ky) (API wrapper)
+- **i18n**: [react-i18next](https://react.i18next.com) -- Arabic-first, RTL support
+- **Testing**: [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com)
+
+## Quick Start
 
 ```bash
-bum install
+# Install dependencies
+bun install
+
+# Copy environment file
+cp .env.example .env.local
+
+# Start development server
 bun run dev
 ```
 
-# Building For Production
+The app starts at [http://localhost:3000](http://localhost:3000).
 
-To build this application for production:
+## Scripts
 
-```bash
-bun run build
+| Script                        | Description                          |
+| ----------------------------- | ------------------------------------ |
+| `bun run dev`                 | Start development server (port 3000) |
+| `bun run build`               | Build for production (SPA)           |
+| `bun run start`               | Serve production build locally       |
+| `bun run build:ssr`           | Build for production (SSR)           |
+| `bun run start:ssr`           | Start SSR server                     |
+| `bun run test`                | Run tests                            |
+| `bun run test:watch`          | Run tests in watch mode              |
+| `bun run lint`                | Lint with oxlint                     |
+| `bun run lint:fix`            | Lint and auto-fix                    |
+| `bun run lint:prettier-check` | Check formatting                     |
+| `bun run lint:prettier-fix`   | Fix formatting                       |
+| `bun run tscheck`             | TypeScript type checking             |
+
+If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.yml` and use `task dev`, `task lint`, etc.
+
+## Environment Variables
+
+Copy `.env.example` to `.env.local` and configure:
+
+| Variable             | Description            | Default                   |
+| -------------------- | ---------------------- | ------------------------- |
+| `VITE_ENVIRONMENT`   | Environment identifier | `dev-YOUR_NAME_ID`        |
+| `VITE_API_URL`       | Hermod API proxy URL   | `https://hermod.zid.dev/` |
+| `VITE_ASSETS_DOMAIN` | Static assets CDN      | (see .env.example)        |
+| `VITE_SENTRY_DSN`    | Sentry error tracking  | (optional)                |
+| `VITE_POSTHOG_KEY`   | PostHog analytics      | (optional)                |
+
+## Directory Structure
+
+```
+src/
+├── routes/              # TanStack Router file-based routes
+│   ├── __root.tsx       # Root layout (providers, theme)
+│   ├── index.tsx        # / → redirects to /$lang/
+│   └── $lang/           # Language-scoped routes
+│       ├── route.tsx    # Language layout (validates locale, sets dir)
+│       ├── index.tsx    # Home page
+│       └── example/     # Example route
+├── modules/             # Feature modules
+│   └── example/         # Example module
+│       ├── components/  # Module-specific components
+│       ├── hooks/       # Module-specific hooks
+│       ├── pages/       # Page components
+│       ├── schemas/     # Zod validation schemas
+│       └── types/       # TypeScript types
+├── global/              # Shared utilities
+│   ├── components/      # Shared components (I18nLink, PageContainer)
+│   ├── hooks/           # Shared hooks (useI18nNavigate)
+│   └── utils/           # Utility functions
+├── api/                 # HTTP client (ky wrapper)
+│   ├── client/          # Main ky client + interceptors
+│   ├── errors/          # Error classes
+│   ├── hooks/           # react-query-kit query/mutation hooks
+│   ├── resources/       # API endpoint definitions
+│   ├── types/           # Request/response types
+│   └── utils/           # HTTP utilities
+├── zidmui/              # MUI theme + Emotion
+│   ├── libraries/
+│   │   ├── emotion/     # Emotion cache + RTL
+│   │   └── mui/         # Theme configuration
+│   └── styles/          # Font declarations
+├── libraries/           # Third-party library setup
+│   └── i18next/         # i18n configuration
+└── integrations/        # Analytics (PostHog, Sentry)
 ```
 
-## Testing
+## i18n
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+### Language Support
 
-```bash
-bun run test
-```
+- **Arabic (ar-sa)**: Default language, RTL
+- **English (en-sa)**: LTR
 
-## Styling
+### URL Structure
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
+All routes are prefixed with the locale: `/{locale}/path`
 
-### Removing Tailwind CSS
+- `/ar-sa/` -- Arabic home
+- `/en-sa/example` -- English example page
+- `/` -- Redirects to `/ar-sa/`
 
-If you prefer not to use Tailwind CSS:
+### Navigation
 
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
-
-```bash
-bun run lint
-bun run format
-bun run check
-```
-
-
-## Setting up PostHog
-
-1. Create a PostHog account at [posthog.com](https://posthog.com)
-2. Get your Project API Key from [Project Settings](https://app.posthog.com/project/settings)
-3. Set `VITE_POSTHOG_KEY` in your `.env.local`
-
-### Optional Configuration
-
-- `VITE_POSTHOG_HOST` - Set this if you're using PostHog Cloud EU (`https://eu.i.posthog.com`) or self-hosting
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+Always use the i18n-aware navigation utilities:
 
 ```tsx
-import { Link } from "@tanstack/react-router";
+// Programmatic navigation
+import { useI18nNavigate } from '~/global/hooks/use-i18n-navigate';
+
+const navigate = useI18nNavigate();
+navigate('/example'); // → /ar-sa/example (auto-prefixes locale)
+
+// Link component
+import { I18nLink } from '~/global/components/i18n-link';
+
+<I18nLink to="/example">Go to Example</I18nLink>;
 ```
 
-Then anywhere in your JSX you can use it like so:
+**Never use `useNavigate` or `Link` from TanStack Router directly** -- they won't prefix the locale.
 
-```tsx
-<Link to="/about">About</Link>
-```
+### Adding Translations
 
-This will create a link that will navigate to the `/about` route.
+Translations are bundled inline in `src/libraries/i18next/locales.ts` (not loaded via HTTP). Add your strings directly to the `i18nResources` object under the appropriate locale and namespace:
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
+```ts
+// src/libraries/i18next/locales.ts
+export const i18nResources: Resource = {
+  'ar-sa': {
+    common: {
+      /* ... */
+    },
+    'your-namespace': {
+      key: 'القيمة',
     },
   },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
+  'en-sa': {
+    common: {
+      /* ... */
+    },
+    'your-namespace': {
+      key: 'Value',
+    },
   },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
+};
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+If you add a new namespace, register it in `src/libraries/i18next/options.ts` under the `ns` array.
 
-# Demo files
+### Rendering Modes
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
+Spark supports three rendering modes. Switch between them by configuring `vite.config.ts` and `src/routes/__root.tsx`:
 
-# Learn More
+**SPA (default)** — static shell, client renders everything:
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+- `vite.config.ts`: `tanstackStart({ spa: { enabled: true } })`
+- `__root.tsx`: `ssr: false` on the root route
+- Deploy: CDN with `/_shell.html` catch-all rewrite
 
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+**SSR** — server renders full HTML per request:
+
+- `vite.config.ts`: remove `spa` config from `tanstackStart()`
+- `__root.tsx`: remove `ssr: false` from root route
+- Deploy: requires server runtime (Cloudflare Workers, Node, etc.)
+
+**SSG** — HTML generated at build time:
+
+- `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
+- Individual routes opt in with `prerender: true` in route options
+
+See the [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/react/guide/ssr) for details.
+
+## Creating a Module
+
+1. Create module directory: `src/modules/your-module/`
+2. Add subdirectories: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
+3. Create route: `src/routes/$lang/your-route/index.tsx`
+4. Add translations to `src/libraries/i18next/locales.ts`
+
+Follow the example module in `src/modules/example/` as a reference.
+
+## Styling Rules
+
+- Use MUI components and `sx` prop or `styled` from `@mui/material/styles`
+- Colors must come from `theme.palette.*` -- never hardcode colors
+- No Tailwind CSS, no custom SCSS/CSS files
+- Use `Box` instead of raw `div`/`span` for MUI theme access
+
+## Code Conventions
+
+- **Imports**: Absolute with `~/` prefix. No relative imports (same-folder allowed).
+- **File names**: kebab-case (e.g., `example-card.tsx`)
+- **Components**: PascalCase named exports. No default exports.
+- **Commits**: Conventional commits (`feat:`, `fix:`, `chore:`, etc.)
+- **Max file size**: ~300 lines (warning)
+- **No console.log**: Error in ESLint
+
+## Deployment
+
+### Cloudflare Pages
+
+Build command: `bash cloudflare-pages-build.sh`
+Output directory: `.output/public`
+
+Branch mapping:
+
+- `master` -- Production
+- `develop` -- Staging
+- Feature branches -- Preview deployments
