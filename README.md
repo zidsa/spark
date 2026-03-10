@@ -89,7 +89,7 @@ src/
 │   ├── resources/       # API endpoint definitions
 │   ├── types/           # Request/response types
 │   └── utils/           # HTTP utilities
-├── zidmui/              # MUI theme + Emotion
+├── ui/                  # MUI theme + Emotion
 │   ├── libraries/
 │   │   ├── emotion/     # Emotion cache + RTL
 │   │   └── mui/         # Theme configuration

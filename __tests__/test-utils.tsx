@@ -6,7 +6,7 @@ import { I18nextProvider } from 'react-i18next';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { themeParcel } from '~/zidmui/libraries/theme/parcel';
+import { themeParcel } from '~/ui/libraries/theme/parcel';
 
 import { i18nInstance } from '~/libraries/i18next/client';
 

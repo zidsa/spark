@@ -26,7 +26,7 @@ src/
 │   ├── resources/          # API endpoint definitions
 │   ├── types/              # Request/response types
 │   └── utils/              # HTTP utilities
-├── zidmui/                 # MUI theme + Emotion RTL
+├── ui/                     # MUI theme + Emotion RTL
 ├── libraries/              # Third-party integration configs (i18next)
 ├── integrations/           # Analytics/monitoring providers
 ├── router.tsx              # Router instance

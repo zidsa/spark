@@ -105,7 +105,7 @@ Routes in `src/routes/$lang/` are thin wrappers that import page components from
 
 ### Theme System
 
-The MUI theme is configured in `src/zidmui/libraries/mui/theme/parcel/`:
+The MUI theme is configured in `src/ui/libraries/mui/theme/parcel/`:
 
 - Light mode (default) and dark mode palettes
 - Zid brand colors (primary `#AE72FF`, secondary `#3C1C54`)
