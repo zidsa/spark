@@ -9,10 +9,10 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { ClientCacheProvider } from '~/zidmui/libraries/emotion/client-cache';
-import { themeParcelOptions } from '~/zidmui/libraries/theme/parcel';
+import { ClientCacheProvider } from '~/ui/libraries/emotion/client-cache';
+import { themeParcelOptions } from '~/ui/libraries/theme/parcel';
 import { getLangDirection } from '~/libraries/i18next/resource';
-import fontsCss from '~/zidmui/styles/fonts.css?url';
+import fontsCss from '~/ui/styles/fonts.css?url';
 
 import PostHogProvider from '~/integrations/posthog/provider';
 import TanStackQueryDevtools from '~/integrations/tanstack/devtools';
