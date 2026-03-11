@@ -17,4 +17,8 @@ bun install --frozen-lockfile
 # Build
 bun run build
 
+# Cloudflare Pages SPA setup
+mv dist/client/_shell.html dist/client/index.html
+echo '/* /index.html 200' > dist/client/_redirects
+
 echo "==> Build complete!"
