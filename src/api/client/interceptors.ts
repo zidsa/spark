@@ -1,8 +1,9 @@
 import { HTTPError } from 'ky';
 import type { KyRequest, KyResponse, Options } from 'ky';
 
-import { i18nInstance } from '~/libraries/i18next/client';
 import { parseErrors } from '~/api/utils/interceptors';
+
+import { i18nInstance } from '~/libraries/i18next/client';
 
 //
 // Token Helpers

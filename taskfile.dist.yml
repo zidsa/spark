@@ -22,16 +22,20 @@ tasks:
       - bun run preview {{.CLI_ARGS}}
 
   lint:
-    desc: Check lint (no fix)
+    desc: Check lint and format (no fix)
     cmds:
       - bun run lint
-      - bun run lint:prettier-check
+      - bun run fmt
+      - bun run fmt:json
+      - bun run fmt:css
 
   lint-fix:
-    desc: Lint and format code
+    desc: Lint and format (fix)
     cmds:
       - bun run lint:fix
-      - bun run lint:prettier-fix
+      - bun run fmt:fix
+      - bun run fmt:json:fix
+      - bun run fmt:css:fix
 
   test:
     desc: Run tests

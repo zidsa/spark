@@ -1,9 +1,9 @@
-import type {} from '@mui/lab/themeAugmentation';
 import { components } from '@zidsa/zidmui/theme/components';
-import { typography } from '@zidsa/zidmui/theme/typography';
-import { shadows } from '@zidsa/zidmui/theme/shadows';
 import { palette } from '@zidsa/zidmui/theme/palette';
+import { shadows } from '@zidsa/zidmui/theme/shadows';
+import { typography } from '@zidsa/zidmui/theme/typography';
 
+import type {} from '@mui/lab/themeAugmentation';
 import { createTheme } from '@mui/material/styles';
 
 //

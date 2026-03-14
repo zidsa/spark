@@ -42,8 +42,8 @@ The app starts at [http://localhost:3000](http://localhost:3000).
 | `bun run test:watch`          | Run tests in watch mode              |
 | `bun run lint`                | Lint with oxlint                     |
 | `bun run lint:fix`            | Lint and auto-fix                    |
-| `bun run lint:prettier-check` | Check formatting                     |
-| `bun run lint:prettier-fix`   | Fix formatting                       |
+| `bun run fmt`                 | Check formatting                     |
+| `bun run fmt:fix`             | Fix formatting                       |
 | `bun run tscheck`             | TypeScript type checking             |
 
 If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.yml` and use `task dev`, `task lint`, etc.
