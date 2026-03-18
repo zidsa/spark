@@ -1,0 +1,56 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "arrowParens": "avoid",
+  "bracketSameLine": false,
+  "bracketSpacing": true,
+  "ignorePatterns": [
+    ".claude",
+    ".github",
+    ".vscode",
+    "build",
+    "coverage",
+    "node_modules",
+    "public",
+    "tasks",
+    "bun-lock",
+    "bunfig.toml",
+    "**/*.css",
+    "**/*.md",
+    "**/*.json",
+    "**/*.yml",
+    "**/*.yaml"
+  ],
+  "printWidth": 100,
+  "singleQuote": true,
+  "sortImports": {
+    "customGroups": [
+      {
+        "elementNamePattern": ["@zidsa/zidmui/**"],
+        "groupName": "@zidsa/zidmui"
+      },
+      { "elementNamePattern": ["@mui/**"], "groupName": "@mui" },
+      { "elementNamePattern": ["~/ui/**"], "groupName": "~/ui" },
+      { "elementNamePattern": ["~/api/**"], "groupName": "~/api" },
+      { "elementNamePattern": ["~/global/**"], "groupName": "~/global" },
+      { "elementNamePattern": ["~/**"], "groupName": "~/internal" }
+    ],
+    "groups": [
+      "builtin",
+      "external",
+      "@zidsa/zidmui",
+      "@mui",
+      "internal",
+      "~/ui",
+      "~/api",
+      "~/global",
+      "~/internal",
+      "parent",
+      "sibling",
+      "index"
+    ],
+    "newlinesBetween": true,
+    "order": "asc"
+  },
+  "sortPackageJson": true,
+  "trailingComma": "all"
+}

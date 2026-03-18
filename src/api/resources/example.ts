@@ -1,5 +1,6 @@
-import { mainKyClient } from '~/api/client/main';
 import type { Options } from 'ky';
+
+import { mainKyClient } from '~/api/client/main';
 import { getResponseJSON } from '~/api/utils/get-response-json';
 
 //

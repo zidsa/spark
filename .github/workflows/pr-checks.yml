@@ -28,11 +28,17 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: ESLint
+      - name: Lint
         run: bun run lint
 
-      - name: Prettier
-        run: bun run lint:prettier-check
+      - name: Format
+        run: bun run fmt
+
+      - name: Check json format
+        run: bun run fmt:json
+
+      - name: Check css format
+        run: bun run fmt:css
 
       - name: TypeScript
         run: bun run tscheck
