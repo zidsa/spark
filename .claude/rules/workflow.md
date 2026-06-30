@@ -13,10 +13,11 @@
 
 ### 2. Subagent Strategy
 
-- Use subagents any tool calls to keep main context window clean
-- Offload ALL file reads, writes, terminal commands, Web Search, fetch, research, exploration, parallel analysis or any other tool operations to subagents
+- Consider subagents for tool-heavy work to keep the main context window clean
+- Good candidates: broad research, codebase exploration, parallel analysis, or large batches of reads
 - For complex problems, throw more compute at it via subagents
 - One task per subagent for focused execution
+- Use judgment — simple, direct tasks don't need a subagent
 
 ### 3. Self-Improvement Loop
 
