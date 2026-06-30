@@ -2,9 +2,7 @@
 
 ## Agent Instructions
 
-**CRITICAL**: The main agent must NOT execute any tool calls directly. For ALL file
-reads, writes, terminal commands, or any other tool operations, the main agent MUST
-spawn dedicated subagents. This preserves context for the plan-then-execute workflow.
+Use judgment — simple, direct tasks don't need a subagent.
 
 ---
 
