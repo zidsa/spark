@@ -3,9 +3,11 @@
     "**/routeTree.gen.ts": true
   },
   "files.watcherExclude": {
+    "**/graphify-out/**": true,
     "**/routeTree.gen.ts": true
   },
   "search.exclude": {
+    "**/graphify-out/**": true,
     "**/routeTree.gen.ts": true
   },
     "[javascript]": {
