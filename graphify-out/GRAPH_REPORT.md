@@ -4,9 +4,9 @@
 - Corpus is ~21,848 words - fits in a single context window. You may not need a graph.
 
 ## Summary
-- 441 nodes · 526 edges · 64 communities (22 shown, 42 thin omitted)
-- Extraction: 97% EXTRACTED · 3% INFERRED · 0% AMBIGUOUS · INFERRED: 17 edges (avg confidence: 0.63)
-- Token cost: 33,239 input · 1,594 output
+- 455 nodes · 537 edges · 68 communities (26 shown, 42 thin omitted)
+- Extraction: 96% EXTRACTED · 4% INFERRED · 0% AMBIGUOUS · INFERRED: 21 edges (avg confidence: 0.69)
+- Token cost: 35,055 input · 2,615 output
 
 ## Community Hubs (Navigation)
 - Providers and Queries
@@ -26,7 +26,11 @@
 - Request Headers
 - Query Formatting
 - Search Parameters
+- Commit Hooks
 - README and Logos
+- Robots Policy
+- Saudi Riyal Assets
+- TanStack Wordmark
 - Date Formatting
 - Architecture and Theme
 - Cloudflare Deployment
@@ -100,7 +104,7 @@
 ## Hyperedges (group relationships)
 - **Spark Technology Stack** — agents, architecture, readme, claude_prompts_init [EXTRACTED 1.00]
 
-## Communities (64 total, 42 thin omitted)
+## Communities (68 total, 42 thin omitted)
 
 ### Community 0 - "Providers and Queries"
 Cohesion: 0.07
@@ -170,12 +174,28 @@ Nodes (3): AllPropsAreParamValue, ParamPrimitive, ParamValue
 Cohesion: 0.40
 Nodes (3): AllPropsAreParamValue, ParamPrimitive, ParamValue
 
-### Community 17 - "README and Logos"
+### Community 17 - "Commit Hooks"
+Cohesion: 0.50
+Nodes (4): Commit Message Hook, Commitlint CLI, Commitlint Command, Parallel Command Execution
+
+### Community 18 - "README and Logos"
 Cohesion: 0.50
 Nodes (4): React Logo 192px, React Logo 512px, TanStack Circle Logo, Spark README
 
+### Community 19 - "Robots Policy"
+Cohesion: 0.67
+Nodes (3): All User Agents, Robots Exclusion Protocol, Unrestricted Crawling
+
+### Community 20 - "Saudi Riyal Assets"
+Cohesion: 0.67
+Nodes (3): IcoMoon, Saudi Riyal Currency Symbol, Saudi Riyal Icon Font
+
+### Community 21 - "TanStack Wordmark"
+Cohesion: 0.67
+Nodes (3): Monochrome White Logo Treatment, TanStack White Word Logo, TanStack Wordmark
+
 ## Knowledge Gaps
-- **225 isolated node(s):** `$schema`, `arrowParens`, `bracketSameLine`, `bracketSpacing`, `.claude` (+220 more)
+- **231 isolated node(s):** `$schema`, `arrowParens`, `bracketSameLine`, `bracketSpacing`, `.claude` (+226 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **42 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -183,11 +203,11 @@ Nodes (4): React Logo 192px, React Logo 512px, TanStack Circle Logo, Spark READM
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `dependencies` connect `Runtime Dependencies` to `Package Scripts`, `Emotion Styling`, `Form Resolver`, `I18next Runtime`, `Language Detection`, `MUI Lab`, `MUI Material`, `Snackbar UI`, `PostHog Client`, `PostHog React`, `React Runtime`, `React DOM`, `Form Handling`, `React I18n`, `Query Hooks`, `Sentry Monitoring`, `Stylis Processor`, `RTL Styling`, `TanStack Matchers`, `React Devtools`, `TanStack Forms`, `TanStack Query`, `Query Devtools`, `TanStack Router`, `Router Devtools`, `Router SSR Query`, `TanStack Start`, `TanStack Table`, `Router Plugin`, `Vite Path Resolver`, `ZidMUI Components`, `Zod Validation`?**
-  _High betweenness centrality (0.080) - this node is a cross-community bridge._
+  _High betweenness centrality (0.075) - this node is a cross-community bridge._
 - **Why does `devDependencies` connect `Package Dependencies` to `Package Scripts`?**
-  _High betweenness centrality (0.058) - this node is a cross-community bridge._
+  _High betweenness centrality (0.055) - this node is a cross-community bridge._
 - **What connects `$schema`, `arrowParens`, `bracketSameLine` to the rest of the system?**
-  _225 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _231 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Providers and Queries` be split into smaller, more focused modules?**
   _Cohesion score 0.0700354609929078 - nodes in this community are weakly interconnected._
 - **Should `Package Dependencies` be split into smaller, more focused modules?**
