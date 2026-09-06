@@ -174,7 +174,7 @@ Spark supports three rendering modes:
 
 - Build with `bun run build`, then serve locally with `bun run start`.
 - The default build enables SPA mode and disables SSR on the root route.
-- Deploy: CDN with `/_shell.html` catch-all rewrite
+- Deploy `dist/client` with `/index.html` as the SPA fallback (automatic on Cloudflare Pages).
 
 **SSR** — server renders full HTML per request:
 
@@ -218,11 +218,32 @@ Follow the example module in `src/modules/example/` as a reference.
 
 ### Cloudflare Pages
 
-Build command: `bash cloudflare-pages-build.sh`
-Output directory: `dist/client`
+[`wrangler.jsonc`](wrangler.jsonc) is the source of truth for the project name,
+output directory (`dist/client`), compatibility date/flags and build variables.
+`BUN_VERSION` pins Bun to 1.4.1; keep it aligned with `.bun-version` and `package.json`.
+`SKIP_DEPENDENCY_INSTALL=1` lets the build command enforce the frozen lockfile.
 
-Branch mapping:
+Set the Pages **Build command** to `bun install --frozen-lockfile && bun run build`.
+TanStack emits `index.html` directly. Pages supplies SPA fallback when there is no
+top-level `404.html`, so no shell script, file rename or `_redirects` is needed.
 
-- `master` -- Production
-- `develop` -- Staging
-- Feature branches -- Preview deployments
+Pages does not support Wrangler's `build.command`. Git repository connection,
+root directory, build system version (v3), production branch (`master`), preview
+branch controls, build watch paths, build caching, build comments and custom
+domains remain Pages project settings, managed through the dashboard or API.
+
+For a repo created from Spark, set `name` to its Pages project name. Add non-secret
+`VITE_*` values and resource bindings to Wrangler as needed. Keep secrets in Pages
+secrets; never commit credentials. Use `env.production` and `env.preview` for
+overrides, repeating all variables/bindings when overriding non-inheritable keys.
+`develop` and feature branches both use preview settings; a separate staging
+configuration requires a separate Pages project or explicit build-time logic.
+
+When migrating an existing project, compare its current settings before deploying.
+While older branches still need the script, use this temporary Pages build command:
+`if [ -f cloudflare-pages-build.sh ]; then bash cloudflare-pages-build.sh; else bun install --frozen-lockfile && bun run build; fi`.
+After migrating those branches, replace it with the build command above.
+
+References: [Pages configuration](https://developers.cloudflare.com/pages/functions/wrangler-configuration/),
+[build settings](https://developers.cloudflare.com/pages/configuration/build-image/),
+[SPA fallback](https://developers.cloudflare.com/pages/configuration/serving-pages/#single-page-application-spa-rendering).

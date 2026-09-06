@@ -38,14 +38,17 @@
 - Hermes uses the same stack
 - Bun's test runner lacks rich plugin ecosystem
 
-### Deployment: Shell script (chosen) vs wrangler.jsonc
+### Deployment: wrangler.jsonc
 
-**Chosen: cloudflare-pages-build.sh**
+**Chosen: Cloudflare Pages with `wrangler.jsonc`**
 
-- More flexible for branch-based environment variables
-- Handles private registry authentication
-- Matches hermes deployment pattern
-- wrangler.jsonc is for Workers-specific features (D1, KV)
+- Pages supports Wrangler configuration, including output directory, compatibility settings, variables and bindings.
+- Bun's version and the dependency-install policy live in the repository.
+- TanStack generates `index.html`; Pages provides SPA fallback without a redirect file.
+- The build command remains a Pages project setting: `bun install --frozen-lockfile && bun run build`.
+- Git integration, branch controls, build image/caching and domains remain Pages project settings.
+- Pages has production and preview environments; `develop` shares preview configuration with feature branches.
+- Private package credentials remain secrets. See `README.md` for migration and new-project setup.
 
 ## Key Patterns
 

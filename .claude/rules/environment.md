@@ -25,4 +25,16 @@ Runs on PRs to `master`/`develop`: ESLint, Prettier, TypeScript, Vitest, React D
 
 ## Deployment
 
-Cloudflare Pages via `cloudflare-pages-build.sh` with branch-based env injection.
+Cloudflare Pages uses `wrangler.jsonc` for project name, output directory,
+compatibility settings and build variables. Bun is pinned with `BUN_VERSION`;
+keep it aligned with `.bun-version` and `package.json`.
+
+Set the Pages build command to `bun install --frozen-lockfile && bun run build`.
+`SKIP_DEPENDENCY_INSTALL=1` disables the automatic install. TanStack creates
+`dist/client/index.html`; Pages supplies SPA fallback without `_redirects`.
+
+Put non-secret app variables and bindings in Wrangler. Keep credentials in Pages
+secrets. Only `env.production` and `env.preview` are supported; `develop` shares
+preview configuration with feature branches. Git integration, build command,
+root directory, build system version, branch/watch controls, caching, comments
+and domains remain Pages project settings. See `README.md` for migration steps.

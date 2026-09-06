@@ -18,6 +18,11 @@ bun run test                # Run tests
 
 ## Hard Rules
 
+Cloudflare Pages uses `wrangler.jsonc` for deployment settings and build variables.
+The Pages build command is `bun install --frozen-lockfile && bun run build`.
+The SPA build emits `dist/client/index.html`; Pages supplies the SPA fallback.
+See `README.md` for project settings that cannot be stored in Wrangler.
+
 1. `bun` only — never `npm` or `pnpm`
 2. Absolute imports only (`~/`) — no relative imports
 3. No barrel files — import from source directly

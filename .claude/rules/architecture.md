@@ -48,7 +48,7 @@ Emotion cache is recreated on language change to swap RTL/LTR stylis plugins.
 
 - `bun run build` enables SPA mode and disables SSR on the root route.
 - `bun run start` serves the built app and static assets with srvx on Bun.
-- Deploy to CDN with `/_shell.html` catch-all rewrite
+- Deploy `dist/client` with `/index.html` as the SPA fallback (automatic on Cloudflare Pages).
 
 **SSR Mode** — server renders full HTML per request:
 

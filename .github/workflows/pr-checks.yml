@@ -49,6 +49,11 @@ jobs:
       - name: Build SPA
         run: bun run build
 
+      - name: Verify Pages SPA output
+        run: |
+          test -s dist/client/index.html
+          test ! -e dist/client/404.html
+
       - name: Build SSR
         run: bun run build:ssr
 
