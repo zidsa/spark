@@ -143,29 +143,23 @@ import { useQueryOneTimeOffersGetEligible } from '~/api/hooks/one-time-offers';
 
 ### Keep routes thin and pages responsible for composition
 
-When extending a route, keep URL-only work there and move feature behavior into its module. When
-creating a route, export the module page and route metadata. Let the page compose loading, guards,
-data, and feature components.
+Keep URL validation and `beforeLoad` guards in the route; compose feature UI and data in
+the module page. TanStack Start automatically splits route components and their imports.
+Keep the root route free of feature UI imports, which would pull those features into startup.
 
-Reference: [`094d8d61b`](https://github.com/zidsa/hermes/commit/094d8d61b),
-`app/routes/stores.$storeId+/marketing+/referrals_.program.tsx`.
+Follow [Spark's code-splitting guide](docs/code-splitting.md) for optional UI, SDKs, named
+lazy exports, and the production bundle check. Do not wrap every route in `React.lazy`,
+add `.lazy.tsx` files by default, or raise the warning limit to hide bundle growth.
 
 ```tsx
-// Good
-import { handle, ReferralsProgramPage } from '~/modules/marketing-referrals/pages/program';
+// src/routes/$lang/example/index.tsx
+import { createFileRoute } from '@tanstack/react-router';
 
-export { handle };
-export default ReferralsProgramPage;
+import { ExampleListPage } from '~/modules/example/pages/example-list';
 
-// Bad: app/routes/subscription+/_index.tsx
-if (isModalContext) {
-  return (
-    <SubscriptionModal open={true}>
-      <SubscriptionPage isModal={true} />
-    </SubscriptionModal>
-  );
-}
-return <SubscriptionPage isModal={false} />;
+export const Route = createFileRoute('/$lang/example/')({
+  component: ExampleListPage,
+});
 ```
 
 ## Components and styling

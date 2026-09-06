@@ -12,7 +12,7 @@ import { ClientCacheProvider } from '~/ui/libraries/emotion/client-cache';
 import { themeParcelOptions } from '~/ui/libraries/theme/parcel';
 import fontsCss from '~/ui/styles/fonts.css?url';
 
-import PostHogProvider from '~/integrations/posthog/provider';
+import { PostHogProvider } from '~/integrations/posthog/provider';
 import TanStackQueryDevtools from '~/integrations/tanstack/devtools';
 import TanStackQueryProvider from '~/integrations/tanstack/root-provider';
 import { i18nInstance } from '~/libraries/i18next/client';

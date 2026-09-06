@@ -42,6 +42,10 @@ I18nextProvider → EmotionCacheProvider → MUI ThemeProvider → CssBaseline �
 
 Emotion cache is recreated on language change to swap RTL/LTR stylis plugins.
 
+PostHog's provider renders immediately and loads its SDK after client mount only when configured.
+Use `usePostHog` from `~/integrations/posthog/provider`; it returns `undefined` until ready.
+Keep app providers eager and optional SDK work asynchronous; see [code splitting](../../docs/code-splitting.md).
+
 ## Rendering Modes
 
 **SPA Mode (default)** — static shell, client renders everything:

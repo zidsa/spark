@@ -23,6 +23,10 @@ Copy `.env.example` to `.env.local` for local development.
 
 Runs on PRs to `master`/`develop`: ESLint, Prettier, TypeScript, Vitest, React Doctor.
 
+Both SPA and SSR builds run `bun run check:bundle`, which rejects client JavaScript chunks
+over 500 kB (minified, before gzip). Check the built artifacts; do not increase the limit.
+See [code splitting](../../docs/code-splitting.md) for the development and review workflow.
+
 ## Deployment
 
 Cloudflare Pages uses `wrangler.jsonc` for project name, output directory,
