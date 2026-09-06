@@ -10,6 +10,7 @@ Spark is a modern frontend boilerplate for Zid, a Saudi e-commerce SaaS company.
 bun run dev                 # Dev server on http://localhost:3000
 bun run build && bun run start  # Production build + serve (SPA)
 bun run build:ssr && bun run start:ssr  # Production build + serve (SSR)
+bun run check:bundle        # Check client chunks after either production build
 bun run lint:fix     # Auto-fix lint errors
 bun run lint:prettier-fix   # Auto-fix formatting
 bun run tscheck             # TypeScript type check
@@ -36,6 +37,7 @@ See `README.md` for project settings that cannot be stored in Wrangler.
 11. Conventional commits: `feat:`, `fix:`, `chore:`, `refactor:`, etc.
 12. PRs target `master` branch
 13. 250 lines max per file
+14. Follow [code splitting](docs/code-splitting.md): keep route splitting automatic, defer optional heavy code, and keep client chunks within 500 kB.
 
 @.claude/rules/code-style.md
 @.claude/rules/architecture.md

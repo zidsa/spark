@@ -5,6 +5,7 @@
 - Absolute imports with `~/` prefix: `import { Foo } from '~/modules/foo/components/foo'`
 - Never use relative imports (`../`, `./`)
 - Never use barrel file re-exports — import directly from the source file
+- Dynamic imports also use `~/` and source files. Adapt named exports with `.then(module => ({ default: module.Component }))` for `React.lazy`; keep the source export named.
 - Import order (enforced by ESLint):
   1. External packages (`react`, `@mui/*`, `@tanstack/*`)
   2. `@zidsa/*` and `@mui/*` packages

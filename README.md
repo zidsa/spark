@@ -196,7 +196,8 @@ See the [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/r
 3. Create route: `src/routes/$lang/your-route/index.tsx`
 4. Add translations to `src/libraries/i18next/locales.ts`
 
-Follow the example module in `src/modules/example/` as a reference.
+Follow `src/modules/example/` and the [code-splitting guide](docs/code-splitting.md).
+Route UI splits automatically; defer optional heavy code and run `bun run check:bundle` after building.
 
 ## Styling Rules
 
