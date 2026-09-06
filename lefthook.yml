@@ -2,4 +2,4 @@ commit-msg:
   parallel: true
   commands:
     commitlint:
-      run: bunx commitlint --edit
+      run: bunx --bun --no-install commitlint --edit

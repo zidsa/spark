@@ -4,10 +4,10 @@ set -euo pipefail
 echo "==> Branch: $CF_PAGES_BRANCH"
 echo "==> Building spark..."
 
-# Install bun if not present
-if ! command -v bun &> /dev/null; then
-  echo "==> Installing bun..."
-  curl -fsSL https://bun.sh/install | bash
+# Install the project's Bun version if it is missing or different
+if ! command -v bun &> /dev/null || [ "$(bun --version)" != "$(cat .bun-version)" ]; then
+  echo "==> Installing Bun $(cat .bun-version)..."
+  curl -fsSL https://bun.sh/install | bash -s "bun-v$(cat .bun-version)"
   export PATH="$HOME/.bun/bin:$PATH"
 fi
 

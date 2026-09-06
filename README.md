@@ -4,7 +4,7 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 
 ## Stack
 
-- **Runtime**: [Bun](https://bun.sh) 1.3.9
+- **Runtime**: [Bun](https://bun.sh) 1.4.1
 - **Framework**: [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - **UI**: [MUI v7](https://mui.com) + [@zidsa/zidmui](https://www.npmjs.com/package/@zidsa/zidmui)
 - **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
@@ -14,9 +14,14 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 - **i18n**: [react-i18next](https://react.i18next.com) -- Arabic-first, RTL support
 - **Testing**: [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com)
 
+MUI Material and Lab stay on their newest stable v7 releases because ZidMUI 3.3.1 requires MUI v7. All other direct dependencies use their latest published releases.
+
 ## Quick Start
 
 ```bash
+# Install the pinned runtime
+curl -fsSL https://bun.sh/install | bash -s "bun-v$(cat .bun-version)"
+
 # Install dependencies
 bun install
 
@@ -163,19 +168,19 @@ If you add a new namespace, register it in `src/libraries/i18next/options.ts` un
 
 ### Rendering Modes
 
-Spark supports three rendering modes. Switch between them by configuring `vite.config.ts` and `src/routes/__root.tsx`:
+Spark supports three rendering modes:
 
 **SPA (default)** — static shell, client renders everything:
 
-- `vite.config.ts`: `tanstackStart({ spa: { enabled: true } })`
-- `__root.tsx`: `ssr: false` on the root route
+- Build with `bun run build`, then serve locally with `bun run start`.
+- The default build enables SPA mode and disables SSR on the root route.
 - Deploy: CDN with `/_shell.html` catch-all rewrite
 
 **SSR** — server renders full HTML per request:
 
-- `vite.config.ts`: remove `spa` config from `tanstackStart()`
-- `__root.tsx`: remove `ssr: false` from root route
-- Deploy: requires server runtime (Cloudflare Workers, Node, etc.)
+- Build with `bun run build:ssr`, then run `bun run start:ssr`.
+- The `ssr` build mode disables SPA mode and enables SSR on the root route.
+- Both start commands use srvx on Bun to serve the built app and its static assets.
 
 **SSG** — HTML generated at build time:
 
@@ -214,7 +219,7 @@ Follow the example module in `src/modules/example/` as a reference.
 ### Cloudflare Pages
 
 Build command: `bash cloudflare-pages-build.sh`
-Output directory: `.output/public`
+Output directory: `dist/client`
 
 Branch mapping:
 

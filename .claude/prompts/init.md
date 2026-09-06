@@ -44,7 +44,7 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 
 | Category         | Choice              | Version                            | Notes                                   |
 | ---------------- | ------------------- | ---------------------------------- | --------------------------------------- |
-| Runtime          | Bun                 | 1.3.9                              | Verified compatible with TanStack Start |
+| Runtime          | Bun                 | 1.4.1                              | Verified compatible with TanStack Start |
 | Meta-framework   | TanStack Start      | latest                             |                                         |
 | Router           | TanStack Router     | latest                             | Comes with TanStack Start               |
 | UI Library       | @zidsa/zidmui       | latest                             | Public npm package                      |
@@ -52,7 +52,7 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 | State Management | TanStack Query      | latest                             |                                         |
 | Forms            | react-hook-form     | latest                             |                                         |
 | Styling          | Emotion / styled    | N/A                                | MUI's styling solution                  |
-| Package Manager  | bun                 | 1.3.9                              | NOT pnpm                                |
+| Package Manager  | bun                 | 1.4.1                              | NOT pnpm                                |
 | MUI              | 7.3.5               | Verify @zidsa/zidmui compatibility |
 | TypeScript       | latest stable       |                                    |
 

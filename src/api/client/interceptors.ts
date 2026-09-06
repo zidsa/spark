@@ -1,5 +1,5 @@
-import { HTTPError } from 'ky';
-import type { KyRequest, KyResponse, Options } from 'ky';
+import { isHTTPError } from 'ky';
+import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook } from 'ky';
 
 import { parseErrors } from '~/api/utils/interceptors';
 
@@ -19,7 +19,7 @@ export const removeToken = () => window?.localStorage?.removeItem('_t');
 //
 // AUTH TOKEN INTERCEPTOR
 //
-export const authTokenInterceptor = (req: KyRequest) => {
+export const authTokenInterceptor: BeforeRequestHook = ({ request: req }) => {
   if (!req?.url) return;
 
   try {
@@ -47,11 +47,7 @@ export const authTokenInterceptor = (req: KyRequest) => {
 //
 // RESPONSE HANDLER
 //
-export const authTokenResponseHandler = async (
-  _req: KyRequest,
-  _options: Options,
-  res: KyResponse,
-) => {
+export const authTokenResponseHandler: AfterResponseHook = async ({ response: res }) => {
   try {
     const url = new URL(res?.url);
 
@@ -72,8 +68,8 @@ export const authTokenResponseHandler = async (
 //
 // ERROR HANDLER
 //
-export const errorHandler = (error: HTTPError) => {
-  if (error?.response?.status === 401) {
+export const errorHandler: BeforeErrorHook = ({ error }) => {
+  if (isHTTPError(error) && error.response.status === 401) {
     removeToken();
     window.location.reload();
   }
@@ -81,8 +77,8 @@ export const errorHandler = (error: HTTPError) => {
   return error;
 };
 
-export const parseErrorHandler = (error: HTTPError) => {
-  throw parseErrors(error);
+export const parseErrorHandler: BeforeErrorHook = ({ error }) => {
+  return isHTTPError(error) ? parseErrors(error) : error;
 };
 
 //

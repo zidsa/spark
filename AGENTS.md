@@ -2,7 +2,7 @@
 
 Spark is a modern frontend boilerplate for Zid, a Saudi e-commerce SaaS company.
 
-**Stack**: TanStack Start + TanStack Router + Bun 1.3.9 + MUI v7 + @zidsa/zidmui + Emotion + TanStack Query v5 + react-hook-form + zod v4 + react-i18next + Vitest
+**Stack**: TanStack Start + TanStack Router + Bun 1.4.1 + MUI v7 + @zidsa/zidmui + Emotion + TanStack Query v5 + react-hook-form + zod v4 + react-i18next + Vitest
 
 ## Commands
 

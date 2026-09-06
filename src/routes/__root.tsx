@@ -48,7 +48,7 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
       },
     ],
   }),
-  ssr: false,
+  ssr: import.meta.env.MODE === 'ssr',
   shellComponent: RootShell,
   pendingComponent: RootPending,
   component: RootComponent,

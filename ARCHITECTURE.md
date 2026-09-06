@@ -53,7 +53,7 @@
 
 All API calls go through the `mainKyClient` (ky instance) configured with:
 
-- `prefixUrl`: Hermod proxy URL (`VITE_API_URL`)
+- `prefix`: Hermod proxy URL (`VITE_API_URL`)
 - Authentication interceptors (token injection via `beforeRequest`)
 - Error handling (maps HTTP errors to typed error classes via `beforeError`)
 - Token refresh handling (via `afterResponse`)
