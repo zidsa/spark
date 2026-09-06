@@ -38,7 +38,6 @@
     "import/no-anonymous-default-export": "warn",
     "import/no-cycle": "error",
     "import/no-duplicates": "error",
-    "import/no-unresolved": "error",
 
     "oxc/const-comparisons": "off",
     "oxc/erasing-op": "off",

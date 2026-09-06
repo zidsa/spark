@@ -5,13 +5,13 @@ import {
   authTokenResponseHandler,
   errorHandler,
   parseErrorHandler,
-} from './interceptors';
+} from '~/api/client/interceptors';
 
 //
 //
 
 export const mainKyClient = ky.create({
-  prefixUrl: String(import.meta.env.VITE_API_URL),
+  prefix: String(import.meta.env.VITE_API_URL),
   timeout: 90000, // 90 seconds
   headers: {
     accept: 'application/json',

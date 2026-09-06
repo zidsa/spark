@@ -4,11 +4,17 @@ import type { KyResponse } from 'ky';
 //
 //
 
-export class ZidderError<T = unknown> extends HTTPError<T> {
+// Ky 2 narrows name to 'HTTPError'; keep custom error names writable and correctly typed.
+const NamedHTTPError: new <T = unknown>(
+  ...args: ConstructorParameters<typeof HTTPError>
+) => Omit<HTTPError<T>, 'name'> & Error = HTTPError;
+
+export class ZidderError<T = unknown> extends NamedHTTPError<T> {
   name = 'ZidderError';
 
-  constructor(err: HTTPError, message?: string) {
+  constructor(err: HTTPError<T>, message?: string) {
     super(err.response, err.request, err.options);
+    this.data = err.data;
     this.message = message || err?.message;
     this.stack = err?.stack;
     this.cause = err?.cause;

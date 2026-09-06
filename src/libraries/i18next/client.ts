@@ -24,7 +24,7 @@ void i18nInstance.use(initReactI18next).init({
   ...i18nOptions,
   resources: i18nResources,
   lng: getInitialLanguage(),
-  initImmediate: false,
+  initAsync: false,
 });
 
 export { i18nInstance };
