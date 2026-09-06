@@ -176,15 +176,18 @@ Create a PR merge-blocking workflow that runs:
 
 ### Configuration Approach
 
-Evaluate whether to use `wrangler.jsonc` instead of the legacy `cloudflare-pages-build.sh`
-script from hermes. If wrangler.jsonc is viable for TanStack Start + Bun, use it.
-If not, document why and adapt the shell script.
+Use `wrangler.jsonc` for Pages project name, output directory, compatibility
+settings, non-secret variables and bindings. Pin Bun through `BUN_VERSION` and
+set `SKIP_DEPENDENCY_INSTALL=1`. Keep credentials in Pages secrets.
+Set the Pages build command to `bun install --frozen-lockfile && bun run build`.
+Generate `dist/client/index.html` through TanStack's SPA prerender settings and
+use Pages' automatic SPA fallback. See `README.md` for dashboard-only settings.
 
 ### Branch-Based Environments
 
 - `master` → production
-- `develop` → testing/staging
-- Feature branches → preview deployments via cloudflare pages
+- `develop` and feature branches → Pages preview environment
+- Separate staging settings require a separate Pages project or explicit build-time logic
 
 ---
 

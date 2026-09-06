@@ -10,7 +10,7 @@ const config = defineConfig(({ mode }) => ({
   plugins: [
     devtools(),
     tanstackStart({
-      spa: { enabled: mode !== 'ssr' },
+      spa: { enabled: mode !== 'ssr', prerender: { outputPath: '/index.html' } },
     }),
     viteReact(),
   ],
