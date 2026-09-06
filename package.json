@@ -8,6 +8,7 @@
     "build": "vite build",
     "build:ssr": "vite build --mode ssr",
     "check:bundle": "bun scripts/check-bundle.mjs",
+    "doctor": "bun scripts/check-doctor.mjs",
     "start": "bun --preload ./instrument.server.mjs ./node_modules/.bin/srvx --prod --static ../client dist/server/server.js",
     "start:ssr": "bun run start",
     "test": "vitest run",

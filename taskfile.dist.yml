@@ -55,6 +55,6 @@ tasks:
       - rm -rf .output
 
   doctor:
-    desc: Run react-doctor
+    desc: Run the strict full React Doctor gate
     cmds:
-      - bunx -y react-doctor@latest .
+      - bun run doctor

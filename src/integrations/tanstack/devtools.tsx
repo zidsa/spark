@@ -1,7 +1,6 @@
 import { ReactQueryDevtoolsPanel } from '@tanstack/react-query-devtools';
 
-// oxlint-disable-next-line no-anonymous-default-export
-export default {
+export const tanStackQueryDevtools = {
   name: 'Tanstack Devtools',
   render: <ReactQueryDevtoolsPanel />,
 };

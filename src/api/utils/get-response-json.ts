@@ -1,6 +1,6 @@
 import type { KyResponse } from 'ky';
 
-import { throwUnexpectedResponse } from './errors';
+import { throwUnexpectedResponse } from '~/api/utils/errors';
 
 //
 //

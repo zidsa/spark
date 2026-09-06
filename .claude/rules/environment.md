@@ -23,6 +23,15 @@ Copy `.env.example` to `.env.local` for local development.
 
 Runs on PRs to `master`/`develop`: ESLint, Prettier, TypeScript, Vitest, React Doctor.
 
+Run `bun run doctor` locally for the same full-scan gate as CI: score 100,
+zero findings, and a complete report with no skipped checks. Missing or invalid
+reports fail. The official `millionco/react-doctor@v2` action also posts PR diagnostics.
+React Doctor intentionally uses `latest`; upstream rule changes may require fixes.
+
+`doctor.config.json` uses the defaults without file or rule exclusions. Preserve
+the generated route tree's suppressions and the line-specific `no-console` exception
+for the missing-Sentry startup warning. Fix findings instead of widening exclusions.
+
 Both SPA and SSR builds run `bun run check:bundle`, which rejects client JavaScript chunks
 over 500 kB (minified, before gzip). Check the built artifacts; do not increase the limit.
 See [code splitting](../../docs/code-splitting.md) for the development and review workflow.

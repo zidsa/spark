@@ -16,14 +16,12 @@ import type { CreateExampleFormData } from '~/modules/example/schemas/example.sc
 //
 //
 
+// This demo exercises validation without persisting submitted values.
+const handleFormSubmit = (_data: CreateExampleFormData) => undefined;
+
 export const ExampleListPage = () => {
   const { t } = useTranslation(['pages', 'common']);
   const { data: items, isLoading, error } = useMockExampleQuery();
-
-  const handleFormSubmit = (data: CreateExampleFormData) => {
-    // oxlint-disable-next-line no-console
-    console.log('Form submitted:', data);
-  };
 
   return (
     <PageContainer title={t('pages:example.title')} subtitle={t('pages:example.description')}>

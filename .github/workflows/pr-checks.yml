@@ -4,6 +4,12 @@ on:
   pull_request:
     branches: [master, develop]
 
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+  statuses: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -16,9 +22,11 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -63,12 +71,11 @@ jobs:
       - name: Check SSR client chunks
         run: bun run check:bundle
 
-      - name: React Doctor
-        run: |
-          SCORE=$(bunx --bun -y react-doctor@latest . --score)
-          echo "React Doctor score: $SCORE/100"
-          if [ "$SCORE" -lt 75 ]; then
-            bunx --bun -y react-doctor@latest . --verbose
-            echo "::error::React Doctor score is $SCORE/100. Must be at least 75."
-            exit 1
-          fi
+      - name: React Doctor review
+        uses: millionco/react-doctor@v2
+        with:
+          blocking: warning
+          scope: full
+
+      - name: React Doctor strict gate
+        run: bun run doctor

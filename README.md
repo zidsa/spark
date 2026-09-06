@@ -49,6 +49,7 @@ The app starts at [http://localhost:3000](http://localhost:3000).
 | `bun run lint:fix`            | Lint and auto-fix                    |
 | `bun run fmt`                 | Check formatting                     |
 | `bun run fmt:fix`             | Fix formatting                       |
+| `bun run doctor`             | Require a complete 100/100 scan       |
 | `bun run tscheck`             | TypeScript type checking             |
 
 If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.yml` and use `task dev`, `task lint`, etc.
@@ -184,10 +185,9 @@ Spark supports three rendering modes:
 
 **SSG** — HTML generated at build time:
 
-- `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
-- Individual routes opt in with `prerender: true` in route options
-
-See the [TanStack Start docs](https://tanstack.com/start/latest/docs/framework/react/guide/ssr) for details.
+- In `vite.config.ts`, keep the SPA setting and add `prerender: { enabled: mode === 'ssr' }` and `pages: [{ path: '/ar-sa/' }, { path: '/en-sa/' }]` to `tanstackStart()`.
+- Run `bun run build:ssr` and deploy `dist/client`; root SSR must be enabled to generate HTML. `bun run build` remains SPA.
+- List desired localized URLs in `pages` because discovery cannot fill `$lang`. Prerendering follows links by default; configure it in the plugin, not route options. See [TanStack static prerendering](https://tanstack.com/start/latest/docs/framework/react/guide/static-prerendering).
 
 ## Creating a Module
 
