@@ -41,6 +41,7 @@ it.each(['ar-sa', 'en-sa'])('preserves %s in links and imperative navigation', a
     </RouterContextProvider>,
   );
   expect(screen.getByRole('link')).toHaveAttribute('href', `/${locale}/example#items`);
+  expect(screen.getByRole('link')).toHaveStyle({ textDecoration: 'none' });
   fireEvent.click(screen.getByRole('button'));
   await waitFor(() => expect(router.history.location.href).toBe(`/${locale}/example#items`));
   expect(router.history.length).toBe(1);
