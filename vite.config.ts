@@ -25,7 +25,9 @@ const config = defineConfig(({ mode }) => ({
   plugins: [
     devtools(),
     tanstackStart({
-      spa: { enabled: mode !== 'ssr', prerender: { outputPath: '/index.html' } },
+      spa: { enabled: !['ssr', 'ssg'].includes(mode), prerender: { outputPath: '/index.html' } },
+      prerender: { enabled: mode === 'ssg' },
+      pages: mode === 'ssg' ? [{ path: '/ar-sa/' }, { path: '/en-sa/' }] : undefined,
     }),
     viteReact(),
   ],

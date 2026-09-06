@@ -1,43 +1,25 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, type RenderOptions } from '@testing-library/react';
-import type { ReactElement, ReactNode } from 'react';
-import { I18nextProvider } from 'react-i18next';
+import type { PropsWithChildren, ReactElement } from 'react';
 
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
+import { AppProviders } from '~/global/components/app-providers';
 
-import { themeParcel } from '~/ui/libraries/theme/parcel';
+import type { Locale } from '~/libraries/i18next/resource';
+import { getRouter } from '~/router';
 
-import { i18nInstance } from '~/libraries/i18next/client';
-
-const createTestQueryClient = () =>
-  new QueryClient({
-    defaultOptions: {
-      queries: {
-        retry: false,
-        gcTime: 0,
-      },
-    },
-  });
-
-interface ProvidersProps {
-  children: ReactNode;
+interface ProviderRenderOptions extends Omit<RenderOptions, 'wrapper'> {
+  locale?: Locale;
 }
 
-const AllProviders = ({ children }: ProvidersProps) => {
-  const queryClient = createTestQueryClient();
-
-  return (
-    <I18nextProvider i18n={i18nInstance}>
-      <ThemeProvider theme={themeParcel}>
-        <CssBaseline />
-        <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-      </ThemeProvider>
-    </I18nextProvider>
+export function renderWithProviders(
+  ui: ReactElement,
+  { locale = 'en-sa', ...options }: ProviderRenderOptions = {},
+) {
+  const runtime = getRouter().options.context;
+  void runtime.i18n.changeLanguage(locale);
+  const wrapper = ({ children }: PropsWithChildren) => (
+    <AppProviders {...runtime}>{children}</AppProviders>
   );
-};
-
-export const renderWithProviders = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
-  render(ui, { wrapper: AllProviders, ...options });
+  return render(ui, { wrapper, ...options });
+}
 
 export { default as userEvent } from '@testing-library/user-event';

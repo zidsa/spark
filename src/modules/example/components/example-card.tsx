@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { AppStatus } from '@zidsa/zidmui/components/app-status';
 import { AppTypography } from '@zidsa/zidmui/components/app-typography';
 
@@ -5,7 +7,7 @@ import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
-import type { ExampleItem } from '~/modules/example/types/example.types';
+import type { ExampleItem } from '~/api/resources/example';
 
 //
 //
@@ -21,6 +23,8 @@ const statusColors = {
 };
 
 export const ExampleCard = ({ item }: ExampleCardProps) => {
+  const { t } = useTranslation('pages');
+
   return (
     <Card variant="outlined">
       <CardContent>
@@ -33,7 +37,11 @@ export const ExampleCard = ({ item }: ExampleCardProps) => {
           }}
         >
           <AppTypography variant="h6">{item.title}</AppTypography>
-          <AppStatus label={item.status} color={statusColors[item.status]} size="small" />
+          <AppStatus
+            label={t('pages:example.status', { context: item.status })}
+            color={statusColors[item.status]}
+            size="small"
+          />
         </Box>
         <AppTypography variant="body2" color="text.secondary">
           {item.description}

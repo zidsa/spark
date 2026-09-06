@@ -32,7 +32,7 @@ React Doctor intentionally uses `latest`; upstream rule changes may require fixe
 the generated route tree's suppressions and the line-specific `no-console` exception
 for the missing-Sentry startup warning. Fix findings instead of widening exclusions.
 
-Both SPA and SSR builds run `bun run check:bundle`, which rejects client JavaScript chunks
+SPA, SSR, and SSG builds run `bun run check:bundle`, which rejects client JavaScript chunks
 over 500 kB (minified, before gzip). Check the built artifacts; do not increase the limit.
 See [code splitting](../../docs/code-splitting.md) for the development and review workflow.
 

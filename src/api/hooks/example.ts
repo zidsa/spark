@@ -1,16 +1,12 @@
 import { createQuery } from 'react-query-kit';
 
 import { exampleResource } from '~/api/resources/example';
+import type { ExampleItem, ExampleListVariables } from '~/api/resources/example';
 
 //
 //
 
-export const useQueryExampleList = createQuery({
+export const useQueryExampleList = createQuery<ExampleItem[], ExampleListVariables>({
   queryKey: ['example', 'list'],
-  fetcher: () => exampleResource.getList(),
-});
-
-export const useQueryExampleById = createQuery<unknown, { id: string }>({
-  queryKey: ['example', 'detail'],
-  fetcher: ({ id }) => exampleResource.getById(id),
+  fetcher: (variables, { signal }) => exampleResource.getList(variables, { signal }),
 });

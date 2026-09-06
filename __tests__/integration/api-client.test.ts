@@ -82,3 +82,24 @@ it('preserves authenticated requests, login tokens, retries and typed API errors
     vi.unstubAllEnvs();
   }
 });
+
+it('preserves an explicit request locale and typed errors without browser globals', async () => {
+  const { mainKyClient } = await import('~/api/client/main');
+  vi.stubGlobal('window', undefined);
+  const fetch = vi.fn(async (input: RequestInfo | URL) => {
+    expect(new Request(input).headers.get('accept-language')).toBe('ar-sa');
+    return new Response(null, { status: 401 });
+  });
+  try {
+    await expect(
+      mainKyClient.get('server', {
+        headers: { 'accept-language': 'ar-sa' },
+        fetch,
+        retry: 0,
+      }),
+    ).rejects.toBeInstanceOf(ZidderErrorUnauthorized);
+    expect(fetch).toHaveBeenCalledOnce();
+  } finally {
+    vi.unstubAllGlobals();
+  }
+});

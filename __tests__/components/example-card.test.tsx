@@ -1,8 +1,9 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
+import type { ExampleItem } from '~/api/resources/example';
+
 import { ExampleCard } from '~/modules/example/components/example-card';
-import type { ExampleItem } from '~/modules/example/types/example.types';
 
 import { renderWithProviders } from '../test-utils';
 
