@@ -1,7 +1,7 @@
 # Coding Standards
 
 This file defines how Zid Frontent TypeScript and React code is written.
-It is for contributors and coding agents extending or creating Zid Frontent code.
+Spark-specific runtime, data, and navigation rules are in [docs/runtime.md](docs/runtime.md); historical Hermes examples below must be adapted to Spark's Zod and router-owned query cache.
 Precedence: [Oxc](.oxlintrc.json), [Oxfmt](.oxfmtrc.json), and [TypeScript](tsconfig.json) tooling -> this file -> the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) where this file is silent.
 
 ## Contents
@@ -249,7 +249,7 @@ useEffect(() => {
 
 ### Keep form values, validation, defaults, and transforms together
 
-Use React Hook Form and Yup for a multi-field form. When extending a form, update its value type,
+Use React Hook Form and Zod v4 for a multi-field form in Spark. When extending a form, update its value type,
 schema, defaults, and API transforms together. When creating one, separate field layout from
 validation and submission; share form state through form context when sections need it.
 
@@ -258,10 +258,10 @@ Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
 
 ```tsx
 // Good
-const form = useForm<CreateFlowNameFormValues>({
-  defaultValues: { name: '' },
-  resolver: yupResolver(createFlowNameSchema),
-  mode: FORM_MODE,
+const form = useForm<CreateExampleFormData>({
+  defaultValues: { title: '', description: '', email: '' },
+  resolver: zodResolver(createExampleSchema),
+  mode: 'onSubmit',
 });
 
 // Bad: app/modules/marketplace-connect/components/activation/jahez/custom-schedule-dialog.tsx

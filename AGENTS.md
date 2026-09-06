@@ -10,7 +10,8 @@ Spark is a modern frontend boilerplate for Zid, a Saudi e-commerce SaaS company.
 bun run dev                 # Dev server on http://localhost:3000
 bun run build && bun run start  # Production build + serve (SPA)
 bun run build:ssr && bun run start:ssr  # Production build + serve (SSR)
-bun run check:bundle        # Check client chunks after either production build
+bun run build:ssg           # Prerender HTML; deploy dist/client as static files
+bun run check:bundle        # Check client chunks after each production build
 bun run lint:fix     # Auto-fix lint errors
 bun run lint:prettier-fix   # Auto-fix formatting
 bun run tscheck             # TypeScript type check

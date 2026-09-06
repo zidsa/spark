@@ -1,30 +1,19 @@
 import i18next from 'i18next';
-import { initReactI18next } from 'react-i18next';
 
-import { i18nResources } from './locales';
-import { i18nOptions } from './options';
-import { getSupportedLanguage, localeDefault } from './resource';
+import { i18nResources } from '~/libraries/i18next/locales';
+import { i18nOptions } from '~/libraries/i18next/options';
+import { getSupportedLanguageFromPathname, localeDefault } from '~/libraries/i18next/resource';
 
-//
-//
-
-const getInitialLanguage = (): string => {
-  if (typeof window !== 'undefined') {
-    const pathLang = window.location.pathname.split('/')[1];
-
-    return getSupportedLanguage(pathLang) ?? localeDefault;
-  }
-
-  return localeDefault;
-};
-
-const i18nInstance = i18next.createInstance();
-
-void i18nInstance.use(initReactI18next).init({
-  ...i18nOptions,
-  resources: i18nResources,
-  lng: getInitialLanguage(),
-  initAsync: false,
-});
-
-export { i18nInstance };
+export function createI18nInstance() {
+  const i18n = i18next.createInstance();
+  void i18n.init({
+    ...i18nOptions,
+    resources: i18nResources,
+    lng:
+      typeof window === 'undefined'
+        ? localeDefault
+        : (getSupportedLanguageFromPathname(window.location.pathname) ?? localeDefault),
+    initAsync: false,
+  });
+  return i18n;
+}

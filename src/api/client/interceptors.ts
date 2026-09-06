@@ -3,16 +3,21 @@ import type { AfterResponseHook, BeforeErrorHook, BeforeRequestHook } from 'ky';
 
 import { parseErrors } from '~/api/utils/interceptors';
 
-import { i18nInstance } from '~/libraries/i18next/client';
+import { getSupportedLanguageFromPathname, localeDefault } from '~/libraries/i18next/resource';
 
 //
 // Token Helpers
 //
-export const getToken = () => window?.localStorage?.getItem('_t');
+export const getToken = () =>
+  typeof window === 'undefined' ? null : window.localStorage.getItem('_t');
 
-export const saveToken = (token: string) => window?.localStorage?.setItem('_t', token);
+export const saveToken = (token: string) => {
+  if (typeof window !== 'undefined') window.localStorage.setItem('_t', token);
+};
 
-export const removeToken = () => window?.localStorage?.removeItem('_t');
+export const removeToken = () => {
+  if (typeof window !== 'undefined') window.localStorage.removeItem('_t');
+};
 
 //
 
@@ -23,10 +28,16 @@ export const authTokenInterceptor: BeforeRequestHook = ({ request: req }) => {
   if (!req?.url) return;
 
   try {
-    req.headers.set('accept-language', i18nInstance.language);
+    if (!req.headers.has('accept-language')) {
+      const locale =
+        typeof window === 'undefined'
+          ? localeDefault
+          : (getSupportedLanguageFromPathname(window.location.pathname) ?? localeDefault);
+      req.headers.set('accept-language', locale);
+    }
 
     const url = new URL(req.url);
-    if (!url?.pathname || guestEndpoints.includes(url.pathname)) return;
+    if (typeof window === 'undefined' || guestEndpoints.includes(url.pathname)) return;
 
     const token = getToken();
     const storeId = window?.localStorage?.getItem('storeId');
@@ -71,7 +82,7 @@ export const authTokenResponseHandler: AfterResponseHook = async ({ response: re
 export const errorHandler: BeforeErrorHook = ({ error }) => {
   if (isHTTPError(error) && error.response.status === 401) {
     removeToken();
-    window.location.reload();
+    if (typeof window !== 'undefined') window.location.reload();
   }
 
   return error;

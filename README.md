@@ -36,21 +36,22 @@ The app starts at [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Script                        | Description                          |
-| ----------------------------- | ------------------------------------ |
-| `bun run dev`                 | Start development server (port 3000) |
-| `bun run build`               | Build for production (SPA)           |
-| `bun run start`               | Serve production build locally       |
-| `bun run build:ssr`           | Build for production (SSR)           |
-| `bun run start:ssr`           | Start SSR server                     |
-| `bun run test`                | Run tests                            |
-| `bun run test:watch`          | Run tests in watch mode              |
-| `bun run lint`                | Lint with oxlint                     |
-| `bun run lint:fix`            | Lint and auto-fix                    |
-| `bun run fmt`                 | Check formatting                     |
-| `bun run fmt:fix`             | Fix formatting                       |
-| `bun run doctor`             | Require a complete 100/100 scan       |
-| `bun run tscheck`             | TypeScript type checking             |
+| Script               | Description                          |
+| -------------------- | ------------------------------------ |
+| `bun run dev`        | Start development server (port 3000) |
+| `bun run build`      | Build for production (SPA)           |
+| `bun run start`      | Serve production build locally       |
+| `bun run build:ssr`  | Build for production (SSR)           |
+| `bun run start:ssr`  | Start SSR server                     |
+| `bun run build:ssg`  | Prerender static HTML for Pages      |
+| `bun run test`       | Run tests                            |
+| `bun run test:watch` | Run tests in watch mode              |
+| `bun run lint`       | Lint with oxlint                     |
+| `bun run lint:fix`   | Lint and auto-fix                    |
+| `bun run fmt`        | Check formatting                     |
+| `bun run fmt:fix`    | Fix formatting                       |
+| `bun run doctor`     | Require a complete 100/100 scan      |
+| `bun run tscheck`    | TypeScript type checking             |
 
 If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.yml` and use `task dev`, `task lint`, etc.
 
@@ -98,7 +99,7 @@ src/
 ├── ui/                  # MUI theme + Emotion
 │   ├── libraries/
 │   │   ├── emotion/     # Emotion cache + RTL
-│   │   └── mui/         # Theme configuration
+│   │   └── theme/       # Theme configuration
 │   └── styles/          # Font declarations
 ├── libraries/           # Third-party library setup
 │   └── i18next/         # i18n configuration
@@ -106,8 +107,6 @@ src/
 ```
 
 ## i18n
-
-### Language Support
 
 - **Arabic (ar-sa)**: Default language, RTL
 - **English (en-sa)**: LTR
@@ -129,15 +128,15 @@ Always use the i18n-aware navigation utilities:
 import { useI18nNavigate } from '~/global/hooks/use-i18n-navigate';
 
 const navigate = useI18nNavigate();
-navigate('/example'); // → /ar-sa/example (auto-prefixes locale)
+void navigate({ to: '/$lang/example' }); // preserves the current lang parameter
 
 // Link component
 import { I18nLink } from '~/global/components/i18n-link';
 
-<I18nLink to="/example">Go to Example</I18nLink>;
+<I18nLink to="/$lang/example">Go to Example</I18nLink>;
 ```
 
-**Never use `useNavigate` or `Link` from TanStack Router directly** -- they won't prefix the locale.
+These are TanStack navigation functions bound to `/$lang`. Use them inside localized routes; route params, search, hash, and link props retain native typing. Pass `params: { lang: 'en-sa' }` to switch locale. Paths use route templates, not string prefixes.
 
 ### Adding Translations
 
@@ -147,17 +146,13 @@ Translations are bundled inline in `src/libraries/i18next/locales.ts` (not loade
 // src/libraries/i18next/locales.ts
 export const i18nResources: Resource = {
   'ar-sa': {
-    common: {
-      /* ... */
-    },
+    common: {/* ... */},
     'your-namespace': {
       key: 'القيمة',
     },
   },
   'en-sa': {
-    common: {
-      /* ... */
-    },
+    common: {/* ... */},
     'your-namespace': {
       key: 'Value',
     },
@@ -185,9 +180,9 @@ Spark supports three rendering modes:
 
 **SSG** — HTML generated at build time:
 
-- In `vite.config.ts`, keep the SPA setting and add `prerender: { enabled: mode === 'ssr' }` and `pages: [{ path: '/ar-sa/' }, { path: '/en-sa/' }]` to `tanstackStart()`.
-- Run `bun run build:ssr` and deploy `dist/client`; root SSR must be enabled to generate HTML. `bun run build` remains SPA.
-- List desired localized URLs in `pages` because discovery cannot fill `$lang`. Prerendering follows links by default; configure it in the plugin, not route options. See [TanStack static prerendering](https://tanstack.com/start/latest/docs/framework/react/guide/static-prerendering).
+- Run `bun run build:ssg` and deploy only `dist/client`; no request-time server is needed.
+- `vite.config.ts` seeds both localized home URLs; prerendering follows their example links. Add seeds for other dynamic paths.
+- Router-owned caches and locales are isolated per server render and retained during browser navigation; app and tests share providers. See [runtime and data flow](docs/runtime.md).
 
 ## Creating a Module
 
@@ -196,7 +191,7 @@ Spark supports three rendering modes:
 3. Create route: `src/routes/$lang/your-route/index.tsx`
 4. Add translations to `src/libraries/i18next/locales.ts`
 
-Follow `src/modules/example/` and the [code-splitting guide](docs/code-splitting.md).
+The example uses one query/resource path with validated local fixtures, including during prerendering. Its form validates only; it does not persist. Follow [runtime and data flow](docs/runtime.md) and [code splitting](docs/code-splitting.md).
 Route UI splits automatically; defer optional heavy code and run `bun run check:bundle` after building.
 
 ## Styling Rules
@@ -208,11 +203,11 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 
 ## Code Conventions
 
-- **Imports**: Absolute with `~/` prefix. No relative imports (same-folder allowed).
+- **Imports**: Absolute with `~/` prefix. No relative imports.
 - **File names**: kebab-case (e.g., `example-card.tsx`)
 - **Components**: PascalCase named exports. No default exports.
 - **Commits**: Conventional commits (`feat:`, `fix:`, `chore:`, etc.)
-- **Max file size**: ~300 lines (warning)
+- **Max file size**: 250 lines
 - **No console.log**: Error in ESLint
 
 ## Deployment

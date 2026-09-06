@@ -28,14 +28,14 @@ function Home() {
         {t('pages:home.subtitle')}
       </AppTypography>
       <Box sx={{ display: 'flex', gap: 2, justifyContent: 'center' }}>
-        <I18nLink to="/example">
+        <I18nLink to="/$lang/example">
           <AppButton variant="contained" color="primary">
             {t('common:navigation.example')}
           </AppButton>
         </I18nLink>
-        <a href={'/' + otherLocale + '/'} style={{ textDecoration: 'none' }}>
+        <I18nLink to="/$lang" params={{ lang: otherLocale }} preload={false}>
           <AppButton variant="outlined">{t('common:actions.switchLanguage')}</AppButton>
-        </a>
+        </I18nLink>
       </Box>
     </Box>
   );

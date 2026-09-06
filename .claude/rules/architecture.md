@@ -34,13 +34,13 @@ src/
 └── types/                  # Global type definitions
 ```
 
-## Provider Stack (in `global/components/root-component.tsx`)
+## Provider Stack (in `global/components/app-providers.tsx`)
 
 ```
 I18nextProvider → EmotionCacheProvider → MUI ThemeProvider → CssBaseline → PostHogProvider → QueryClientProvider
 ```
 
-Emotion cache is recreated on language change to swap RTL/LTR stylis plugins.
+Each router owns its cache and locale. App and tests use the same providers. Theme and Emotion cache change together when direction changes; children stay mounted.
 
 PostHog's provider renders immediately and loads its SDK after client mount only when configured.
 Use `usePostHog` from `~/integrations/posthog/provider`; it returns `undefined` until ready.
@@ -61,12 +61,10 @@ Keep app providers eager and optional SDK work asynchronous; see [code splitting
 
 **SSG (Static Prerendering)** — HTML generated at build time:
 
-- In `vite.config.ts`, keep the SPA setting and add `prerender: { enabled: mode === 'ssr' }`
-  plus `pages: [{ path: '/ar-sa/' }, { path: '/en-sa/' }]` to `tanstackStart()`.
-- Run `bun run build:ssr` and deploy `dist/client`; this mode enables root SSR for prerendering.
-- List desired localized URLs in `pages` because automatic discovery cannot fill `$lang`.
-  Prerendering follows links by default; it is configured in the plugin, not route options.
-- `bun run build` remains the default SPA build. See the README for the full recipe.
+- Run `bun run build:ssg` and deploy `dist/client`; server rendering runs only during the build.
+- `vite.config.ts` seeds `/ar-sa/` and `/en-sa/`; prerendering follows their example links.
+- Add explicit seeds for other dynamic paths. SPA remains the default; no server is deployed for SPA/SSG.
+- See [runtime and data flow](../../docs/runtime.md) for ownership and verification.
 
 **Per-route Selective SSR** — fine-grained control:
 

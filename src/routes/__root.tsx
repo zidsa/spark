@@ -1,18 +1,33 @@
 import type { QueryClient } from '@tanstack/react-query';
-import { HeadContent, Scripts, createRootRouteWithContext } from '@tanstack/react-router';
+import {
+  HeadContent,
+  Scripts,
+  createRootRouteWithContext,
+  useRouterState,
+} from '@tanstack/react-router';
+import type { i18n } from 'i18next';
+import { useEffect } from 'react';
 
 import fontsCss from '~/ui/styles/fonts.css?url';
 
 import { RootComponent } from '~/global/components/root-component';
 
+import {
+  getSupportedLanguageFromPathname,
+  getLangDirection,
+  localeDefault,
+} from '~/libraries/i18next/resource';
 import appCss from '~/styles.css?url';
 
 interface MyRouterContext {
   queryClient: QueryClient;
+  i18n: i18n;
 }
 
+const renderOnServer = ['ssr', 'ssg'].includes(import.meta.env.MODE);
+
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  ssr: import.meta.env.MODE === 'ssr',
+  ssr: renderOnServer,
   head: () => ({
     meta: [
       {
@@ -43,8 +58,18 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 });
 
 function RootShell({ children }: { children: React.ReactNode }) {
+  const locale = useRouterState({
+    select: state => getSupportedLanguageFromPathname(state.location.pathname) ?? localeDefault,
+  });
+  useEffect(() => {
+    // One static SPA shell serves every locale; hydration does not repair its attributes.
+    if (!renderOnServer) {
+      document.documentElement.lang = locale;
+      document.documentElement.dir = getLangDirection(locale);
+    }
+  }, [locale]);
   return (
-    <html lang="ar" dir="rtl" suppressHydrationWarning>
+    <html lang={locale} dir={getLangDirection(locale)} suppressHydrationWarning={!renderOnServer}>
       <head>
         <HeadContent />
       </head>

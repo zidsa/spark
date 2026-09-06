@@ -59,7 +59,7 @@ All API calls go through the `mainKyClient` (ky instance) configured with:
 - `prefix`: Hermod proxy URL (`VITE_API_URL`)
 - Authentication interceptors (token injection via `beforeRequest`)
 - Error handling (maps HTTP errors to typed error classes via `beforeError`)
-- Token refresh handling (via `afterResponse`)
+- Login-token capture (via `afterResponse`; this is not a refresh-token flow)
 - Automatic retry (1 retry with exponential backoff)
 - 90-second timeout
 - Credentials included (cookies sent cross-origin)
@@ -76,10 +76,13 @@ Frontend apps never call the backend directly. All requests go through **Hermod*
 
 ### Query Client
 
-The TanStack Query client (`src/api/hooks/client.ts`) is configured with:
+Each `getRouter()` call owns a fresh TanStack Query client and i18next instance. The client uses:
 
 - `staleTime: 180_000` (3 minutes) -- reduces unnecessary refetches
 - `retry: 0` -- retries are handled at the ky/HTTP layer, not the query layer
+
+Routes use `context.queryClient`; rendered code uses `useQueryClient()`. The installed TanStack
+SSR Query integration transfers query data to the browser. See [runtime and data flow](docs/runtime.md).
 
 ### RTL Support
 
@@ -87,10 +90,10 @@ RTL is handled at the Emotion CSS-in-JS level:
 
 1. `ClientCacheProvider` reads the current language direction from i18next
 2. Creates an Emotion cache with `stylis-plugin-rtl` for Arabic (`dir === 'rtl'`)
-3. MUI components automatically flip layout (margins, paddings, text alignment)
-4. The `<html dir>` and `<html lang>` attributes are set dynamically by the `$lang` route layout
+3. The same provider creates the MUI theme with that direction.
+4. The root shell derives `<html dir>` and `<html lang>` from the URL, on server and client.
 
-When the language changes, the Emotion cache is recreated with the correct stylis plugins, triggering a full re-render of styled components with correct directionality.
+When direction changes, theme and Emotion cache change in the same render without remounting the app.
 
 ### Module Structure
 
@@ -108,7 +111,7 @@ Routes in `src/routes/$lang/` are thin wrappers that import page components from
 
 ### Theme System
 
-The MUI theme is configured in `src/ui/libraries/mui/theme/parcel/`:
+The MUI theme is configured in `src/ui/libraries/theme/parcel/`:
 
 - Light mode (default) and dark mode palettes
 - Zid brand colors (primary `#AE72FF`, secondary `#3C1C54`)
@@ -118,14 +121,14 @@ The MUI theme is configured in `src/ui/libraries/mui/theme/parcel/`:
 
 ### Provider Stack
 
-The root layout (`src/routes/__root.tsx`) composes providers in this order:
+`AppProviders` (`src/global/components/app-providers.tsx`) is shared by the app and tests:
 
 1. `I18nextProvider` -- i18n context
 2. `ClientCacheProvider` -- Emotion cache (RTL-aware)
 3. `ThemeProvider` -- MUI theme
 4. `CssBaseline` -- MUI CSS reset
 5. `PostHogProvider` -- Analytics
-6. `TanStackQueryProvider` -- React Query client + devtools
+6. `QueryClientProvider` -- the owning router's cache; devtools remain in the root view
 
 ### i18n Route Architecture
 
@@ -133,5 +136,13 @@ The locale is embedded in the URL as a route parameter (`$lang`):
 
 - `/` redirects to `/$lang` using the default locale (`ar-sa`)
 - The `$lang` route layout validates the locale and redirects to the default if unsupported
-- On mount and language change, it syncs `i18n.language`, `document.dir`, and `document.lang`
+- Actual route loads change the router's i18next locale; speculative preloads do not.
+- The root shell renders language and direction attributes, including in SSR and SSG.
 - All child routes inherit the validated locale context
+
+## Rendering and example data
+
+SPA remains the default (`bun run build`). SSR uses `build:ssr`; SSG uses `build:ssg`.
+SPA and SSG deploy static `dist/client` files to Cloudflare Pages. Only SSR needs a live renderer.
+The example route, page, and tests share one query and a Zod-validated resource. Its local fetch
+adapter keeps the demo self-contained; replacing it with Hermod requires a real backend contract.

@@ -101,10 +101,12 @@ bun run build
 bun run check:bundle
 bun run build:ssr
 bun run check:bundle
+bun run build:ssg
+bun run check:bundle
 ```
 
 The check fails if any emitted client JavaScript chunk exceeds 500 kB before gzip,
-or if no chunks exist. CI runs it after both builds. It measures the browser output
+or if no chunks exist. CI runs it after all three builds. It measures the browser output
 in `dist/client/assets`, including the client half of an SSR build. The Pages build
 also produces a temporary server build for prerendering; that log heading does not
 make a preceding client bundle warning a server deployment issue.

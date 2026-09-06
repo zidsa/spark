@@ -1,11 +1,14 @@
 import { CacheProvider } from '@emotion/react';
-import { useState, useMemo, useEffect, useRef } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { getLangDirection } from '~/libraries/i18next/resource';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 
-import { createEmotionCache } from './create-cache';
-import { EmotionStyleContext } from './style-context';
+import { createEmotionCache } from '~/ui/libraries/emotion/create-cache';
+import { themeParcelOptions } from '~/ui/libraries/theme/parcel';
+
+import { getLangDirection } from '~/libraries/i18next/resource';
 
 //
 //
@@ -18,29 +21,16 @@ export const ClientCacheProvider: React.FC<ClientCacheProviderProps> = ({
   children,
 }: ClientCacheProviderProps) => {
   const { i18n } = useTranslation();
-  const dir = i18n.isInitialized ? getLangDirection(i18n.language) : 'rtl';
-
-  const currentDir = useRef(dir);
-  const [cache, setCache] = useState(() => createEmotionCache(dir));
-
-  const clientStyleContextValue = useMemo(
-    () => ({
-      reset() {
-        setCache(createEmotionCache(dir));
-      },
-    }),
-    [dir],
-  );
-
-  useEffect(() => {
-    if (currentDir.current === dir) return;
-    clientStyleContextValue.reset();
-    currentDir.current = dir;
-  }, [clientStyleContextValue, dir]);
+  const dir = getLangDirection(i18n.language);
+  const cache = useMemo(() => createEmotionCache(dir), [dir]);
+  const theme = useMemo(() => createTheme({ ...themeParcelOptions, direction: dir }), [dir]);
 
   return (
-    <EmotionStyleContext value={clientStyleContextValue}>
-      <CacheProvider value={cache}>{children}</CacheProvider>
-    </EmotionStyleContext>
+    <CacheProvider value={cache}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </ThemeProvider>
+    </CacheProvider>
   );
 };

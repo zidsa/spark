@@ -1,6 +1,6 @@
 import type { InitOptions } from 'i18next';
 
-import { localeDefault, localesSupported } from './resource';
+import { localeDefault, localesSupported } from '~/libraries/i18next/resource';
 
 //
 //

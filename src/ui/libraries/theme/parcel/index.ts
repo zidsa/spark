@@ -4,7 +4,6 @@ import { shadows } from '@zidsa/zidmui/theme/shadows';
 import { typography } from '@zidsa/zidmui/theme/typography';
 
 import type {} from '@mui/lab/themeAugmentation';
-import { createTheme } from '@mui/material/styles';
 
 //
 //
@@ -16,5 +15,3 @@ export const themeParcelOptions = {
   typography,
   components,
 };
-
-export const themeParcel = createTheme(themeParcelOptions);

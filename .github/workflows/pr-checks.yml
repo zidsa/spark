@@ -71,6 +71,19 @@ jobs:
       - name: Check SSR client chunks
         run: bun run check:bundle
 
+      - name: Build SSG
+        run: bun run build:ssg
+
+      - name: Check SSG client chunks
+        run: bun run check:bundle
+
+      - name: Verify prerendered locales and example pages
+        run: |
+          test -s dist/client/ar-sa/index.html
+          test -s dist/client/en-sa/index.html
+          test -s dist/client/ar-sa/example/index.html
+          test -s dist/client/en-sa/example/index.html
+
       - name: React Doctor review
         uses: millionco/react-doctor@v2
         with:

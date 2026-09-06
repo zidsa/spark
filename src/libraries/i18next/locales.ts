@@ -21,7 +21,20 @@ export const i18nResources: Resource = {
     },
     pages: {
       example: {
+        create: 'إنشاء جديد',
         description: 'هذه صفحة مثال توضح نمط الوحدة',
+        errors: {
+          load: 'تعذر تحميل العناصر',
+        },
+        form: {
+          description: 'الوصف',
+          email: 'البريد الإلكتروني',
+          title: 'العنوان',
+        },
+        items: 'العناصر',
+        status_active: 'نشط',
+        status_draft: 'مسودة',
+        status_inactive: 'غير نشط',
         title: 'صفحة المثال',
       },
       home: {
@@ -53,7 +66,20 @@ export const i18nResources: Resource = {
     },
     pages: {
       example: {
+        create: 'Create New',
         description: 'This is an example page demonstrating the module pattern',
+        errors: {
+          load: 'Failed to load items',
+        },
+        form: {
+          description: 'Description',
+          email: 'Email',
+          title: 'Title',
+        },
+        items: 'Items',
+        status_active: 'active',
+        status_draft: 'draft',
+        status_inactive: 'inactive',
         title: 'Example Page',
       },
       home: {

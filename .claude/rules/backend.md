@@ -26,4 +26,7 @@ Caddy-based reverse proxy between frontend and backend:
 
 - `staleTime`: 180 seconds
 - `retry`: 0 (retries handled at HTTP/ky layer)
-- Query client singleton in `~/api/hooks/client.ts`
+- One query client per `getRouter()` call; loaders use context, UI uses `useQueryClient()`.
+- Query keys include response-affecting inputs such as locale. The example resource validates JSON with Zod.
+- The demo uses a local fetch adapter through the real query/resource path, including SSR/SSG.
+- Pass an explicit `accept-language` for server requests. Browser storage auth is skipped on the server; authenticated SSR requires explicit request-scoped credentials.
