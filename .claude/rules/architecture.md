@@ -34,7 +34,7 @@ src/
 └── types/                  # Global type definitions
 ```
 
-## Provider Stack (in `__root.tsx`)
+## Provider Stack (in `global/components/root-component.tsx`)
 
 ```
 I18nextProvider → EmotionCacheProvider → MUI ThemeProvider → CssBaseline → PostHogProvider → QueryClientProvider
@@ -61,8 +61,12 @@ Keep app providers eager and optional SDK work asynchronous; see [code splitting
 
 **SSG (Static Prerendering)** — HTML generated at build time:
 
-- `vite.config.ts`: add `prerender: { enabled: true }` to `tanstackStart()`
-- Individual routes opt in with `prerender: true` in route options
+- In `vite.config.ts`, keep the SPA setting and add `prerender: { enabled: mode === 'ssr' }`
+  plus `pages: [{ path: '/ar-sa/' }, { path: '/en-sa/' }]` to `tanstackStart()`.
+- Run `bun run build:ssr` and deploy `dist/client`; this mode enables root SSR for prerendering.
+- List desired localized URLs in `pages` because automatic discovery cannot fill `$lang`.
+  Prerendering follows links by default; it is configured in the plugin, not route options.
+- `bun run build` remains the default SPA build. See the README for the full recipe.
 
 **Per-route Selective SSR** — fine-grained control:
 

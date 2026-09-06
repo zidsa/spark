@@ -3,6 +3,7 @@ import * as Sentry from '@sentry/tanstackstart-react';
 const sentryDsn = import.meta.env?.VITE_SENTRY_DSN ?? process.env.VITE_SENTRY_DSN;
 
 if (!sentryDsn) {
+  // oxlint-disable-next-line no-console -- Startup has no Sentry transport when the DSN is absent.
   console.warn('VITE_SENTRY_DSN is not defined. Sentry is not running.');
 } else {
   Sentry.init({

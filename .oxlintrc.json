@@ -9,8 +9,7 @@
     "!**/.client",
     "build/",
     ".eslint-cache",
-    "public/tinymce/**/*",
-    "instrument.server.mjs"
+    "public/tinymce/**/*"
   ],
   "plugins": ["react", "unicorn", "typescript", "oxc", "import", "jsx-a11y", "react-perf"],
   "rules": {
