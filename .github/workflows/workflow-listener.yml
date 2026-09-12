@@ -23,3 +23,9 @@ jobs:
     uses: zidsa/.github/.github/workflows/code-review.yml@master
     secrets:
       CODEX_ACCESS_TOKEN: ${{ secrets.CODEX_ACCESS_TOKEN }}
+      WORKFLOWS_READ_TOKEN: ${{ secrets.WORKFLOWS_READ_TOKEN }}
+      JIRA_API_KEY: ${{ secrets.JIRA_API_KEY }}
+      HUBSPOT_ACCESS_TOKEN: ${{ secrets.HUBSPOT_ACCESS_TOKEN }}
+      JAM_ACCESS_TOKEN: ${{ secrets.JAM_ACCESS_TOKEN }}
+      FIGMA_ACCESS_TOKEN: ${{ secrets.FIGMA_ACCESS_TOKEN }}
+      OPENCODE_GO_API_KEY: ${{ secrets.OPENCODE_GO_API_KEY }}
