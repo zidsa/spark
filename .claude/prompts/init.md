@@ -22,37 +22,37 @@ boilerplate to replace our outdated Remix-based `websites-boilerplate`.
 | Repository           | Path                                            | Purpose                                       |
 | -------------------- | ----------------------------------------------- | --------------------------------------------- |
 | websites-boilerplate | `/Users/yazan/Desktop/zid/websites-boilerplate` | Legacy boilerplate (outdated, reference only) |
-| hermes               | `/Users/yazan/Desktop/zid/hermes`               | Active merchant dashboard (current patterns)  |
+| merchant-dashboard   | `/Users/yazan/Desktop/zid/merchant-dashboard`   | Active merchant dashboard (current patterns)  |
 | hermod               | `/Users/yazan/Desktop/zid/hermod`               | Caddy proxy (backend connectivity)            |
 | backend              | `/Users/yazan/Desktop/zid/backend`              | Backend services (understand API structure)   |
 
 ### Mandatory Reading Before Any Work
 
-1. `CLAUDE.md` in both hermes and websites-boilerplate
-2. `.claude/rules` directory files in hermes
-3. `.eslintrc.*` config in hermes
-4. `.prettierrc.*` config in hermes
-5. `lefthook.yml` in hermes
-6. `commitlint.config.*` in hermes
+1. `CLAUDE.md` in both merchant-dashboard and websites-boilerplate
+2. `.claude/rules` directory files in merchant-dashboard
+3. `.eslintrc.*` config in merchant-dashboard
+4. `.prettierrc.*` config in merchant-dashboard
+5. `lefthook.yml` in merchant-dashboard
+6. `commitlint.config.*` in merchant-dashboard
 7. Hermod's Caddyfile or proxy configuration
-8. How hermes connects to hermod (look for proxy config, API base URLs)
+8. How merchant-dashboard connects to hermod (look for proxy config, API base URLs)
 9. How hermod connects to backend (look for proxy config, API base URLs)
 
 ---
 
 ## Technology Stack (Final Decisions)
 
-| Category         | Choice              | Version                            | Notes                                   |
-| ---------------- | ------------------- | ---------------------------------- | --------------------------------------- |
-| Runtime          | Bun                 | 1.4.1                              | Verified compatible with TanStack Start |
-| Meta-framework   | TanStack Start      | latest                             |                                         |
-| Router           | TanStack Router     | latest                             | Comes with TanStack Start               |
-| UI Library       | @zidsa/zidmui       | latest                             | Public npm package                      |
-| HTTP Client      | Internal ky wrapper | N/A                                | Port `api` pattern from hermes          |
-| State Management | TanStack Query      | latest                             |                                         |
-| Forms            | react-hook-form     | latest                             |                                         |
-| Styling          | Emotion / styled    | N/A                                | MUI's styling solution                  |
-| Package Manager  | bun                 | 1.4.1                              | NOT pnpm                                |
+| Category         | Choice              | Version                            | Notes                                      |
+| ---------------- | ------------------- | ---------------------------------- | ------------------------------------------ |
+| Runtime          | Bun                 | 1.4.1                              | Verified compatible with TanStack Start    |
+| Meta-framework   | TanStack Start      | latest                             |                                            |
+| Router           | TanStack Router     | latest                             | Comes with TanStack Start                  |
+| UI Library       | @zidsa/zidmui       | latest                             | Public npm package                         |
+| HTTP Client      | Internal ky wrapper | N/A                                | Port `api` pattern from merchant-dashboard |
+| State Management | TanStack Query      | latest                             |                                            |
+| Forms            | react-hook-form     | latest                             |                                            |
+| Styling          | Emotion / styled    | N/A                                | MUI's styling solution                     |
+| Package Manager  | bun                 | 1.4.1                              | NOT pnpm                                   |
 | MUI              | 7.3.5               | Verify @zidsa/zidmui compatibility |
 | TypeScript       | latest stable       |                                    |
 
@@ -76,7 +76,7 @@ Document how to configure each mode in the README.
 - Supported: Arabic (ar), English (en)
 - URL structure: `/:lang/path` (e.g., `/ar-sa/home`, `/en-sa/home`)
 - Full RTL support using Emotion + stylis-plugin-rtl
-- Port the `useI18nNavigate` pattern from hermes/websites-boilerplate
+- Port the `useI18nNavigate` pattern from merchant-dashboard/websites-boilerplate
 - Port the `I18nLink` component pattern
 
 ### 3. Styling Rules
@@ -85,7 +85,7 @@ Document how to configure each mode in the README.
 - **NO custom SCSS/CSS files**
 - Use only Emotion `styled` or MUI's `sx` prop
 - Colors MUST come from `theme.palette.*` only
-- Port Zid brand theme from hermes (purple primary, dark purple secondary)
+- Port Zid brand theme from merchant-dashboard (purple primary, dark purple secondary)
 - Dark mode theme nativly supported in the boilerplate
 
 ### 4. Backend Connectivity
@@ -99,7 +99,7 @@ Document how to configure each mode in the README.
 
 ### 5. Directory Structure
 
-Match the module organization from hermes. Adapt to tanstack-router.
+Match the module organization from merchant-dashboard. Adapt to tanstack-router.
 
 ### 6. Authentication
 
@@ -131,7 +131,7 @@ VITE_ASSETS_DOMAIN=https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev
 
 ### ESLint
 
-- Extract exact configuration from hermes
+- Extract exact configuration from merchant-dashboard
 - Must include:
   - No relative imports (use `~/*` alias)
   - No direct `useNavigate` (must use i18n-aware hook)
@@ -141,12 +141,12 @@ VITE_ASSETS_DOMAIN=https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev
 
 ### Prettier
 
-- Extract exact configuration from hermes
+- Extract exact configuration from merchant-dashboard
 
 ### Commitlint
 
 - Conventional commits format
-- Extract rules from hermes
+- Extract rules from merchant-dashboard
 
 ### Lefthook
 
@@ -155,7 +155,7 @@ VITE_ASSETS_DOMAIN=https://pub-c3284fa51357406ca9a56ec1740ae4c0.r2.dev
 
 ### Taskfile
 
-- Adapt Taskfile from hermes for bun + TanStack Start
+- Adapt Taskfile from merchant-dashboard for bun + TanStack Start
 - Common tasks: install, dev, build, lint, typecheck, test, doctor
 
 ### GitHub Actions
@@ -198,21 +198,21 @@ a recommendation with justification. Document your reasoning in an `ARCHITECTURE
 
 ### 1. i18n Library
 
-- Current: hermes uses react-i18next
+- Current: merchant-dashboard uses react-i18next
 - Alternative: paraglide-js
 - Evaluate for: TanStack Start SSR compatibility, Arabic RTL support, bundle size, DX
 - Recommend one with justification
 
 ### 2. Validation Library
 
-- Current: hermes uses yup
+- Current: merchant-dashboard uses yup
 - Alternative: zod
 - Evaluate for: TypeScript inference, bundle size, ecosystem support, migration effort
 - Recommend one with justification
 
 ### 3. Query Builder
 
-- Current: hermes uses react-query-kit
+- Current: merchant-dashboard uses react-query-kit
 - Verify compatibility with latest TanStack Query
 - If deprecated or problematic, recommend alternative
 

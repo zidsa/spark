@@ -1,7 +1,7 @@
 # Coding Standards
 
 This file defines how Zid Frontent TypeScript and React code is written.
-Spark-specific runtime, data, and navigation rules are in [docs/runtime.md](docs/runtime.md); historical Hermes examples below must be adapted to Spark's Zod and router-owned query cache.
+Spark-specific runtime, data, and navigation rules are in [docs/runtime.md](docs/runtime.md); historical Merchant Dashboard examples below must be adapted to Spark's Zod and router-owned query cache.
 Precedence: [Oxc](.oxlintrc.json), [Oxfmt](.oxfmtrc.json), and [TypeScript](tsconfig.json) tooling -> this file -> the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) where this file is silent.
 
 ## Contents
@@ -48,7 +48,7 @@ Name booleans as states or questions, handlers `handle...`, and callback props `
 stored value when an abbreviation hides the comparison, unit, or domain action. Conventional local
 positions, such as comparator parameters, may stay short.
 
-Reference: [`3b11a7fa0`](https://github.com/zidsa/hermes/commit/3b11a7fa0),
+Reference: [`3b11a7fa0`](https://github.com/zidsa/merchant-dashboard/commit/3b11a7fa0),
 `app/modules/analytics-insights/components/market-payment-gaps/tab.tsx`.
 
 ```ts
@@ -72,7 +72,7 @@ return desc ? bv - av : av - bv;
 Write a comment when it preserves a contract or explains why surprising code is deliberate. Keep it
 beside the constraint. Remove narration, owner names, phase notes, and vague future work.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/modules/whatsapp-auto-replies/types/use-flow-types.ts`.
 
 ```ts
@@ -94,7 +94,7 @@ Give request, response, form, component, and domain objects named types. Keep AP
 resource. Use a discriminated union when one field selects the valid fields of a variant. A short,
 one-use component props type may stay beside its component.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/api/resources/manager/whatsapp-flows/types.ts`.
 
 ```ts
@@ -126,7 +126,7 @@ When extending a module, follow its current `components`, `hooks`, `pages`, `sch
 `utils` boundaries. When creating a module, add only the folders required by the feature. Keep code
 local until a second feature proves it is shared.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/modules/whatsapp-auto-replies/pages/editor.tsx` and its sibling folders.
 
 ```ts
@@ -171,7 +171,7 @@ When creating one, check ZidMUI and `app/ui/` first; use MUI primitives for layo
 base. Use theme tokens for application surfaces. Keep literal colors for brand assets,
 user-controlled values, embedded SDKs, or fixed chart series.
 
-Reference: [`e1c3d8b90`](https://github.com/zidsa/hermes/commit/e1c3d8b90),
+Reference: [`e1c3d8b90`](https://github.com/zidsa/merchant-dashboard/commit/e1c3d8b90),
 `app/modules/whatsapp-auto-replies/components/editor/flow-nodes/flow-action.tsx`.
 
 ```tsx
@@ -194,7 +194,7 @@ Keep a small change to an existing legacy table on its current engine. Do not mi
 feature. Create a new table with `AppTableV2`; keep columns, filters, ordering, bulk actions, and row
 actions in focused neighbors.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/modules/whatsapp-auto-replies/components/auto-replies/table.tsx`.
 
 ```tsx
@@ -218,7 +218,7 @@ state, or URL state during render. Use an Effect only to synchronize React with 
 system. When creating reusable state behavior, use a focused hook; keep deterministic mapping in
 `utils`.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/modules/whatsapp-auto-replies/hooks/use-remove-detached-nodes.ts`.
 
 ```tsx
@@ -253,7 +253,7 @@ Use React Hook Form and Zod v4 for a multi-field form in Spark. When extending a
 schema, defaults, and API transforms together. When creating one, separate field layout from
 validation and submission; share form state through form context when sections need it.
 
-Reference: [`379022bfd`](https://github.com/zidsa/hermes/commit/379022bfd),
+Reference: [`379022bfd`](https://github.com/zidsa/merchant-dashboard/commit/379022bfd),
 `app/modules/whatsapp-auto-replies/components/auto-replies/create-flow-dialog.tsx`.
 
 ```tsx
@@ -280,7 +280,7 @@ When extending an API domain, add the operation beside its resource and query ho
 domain, add its named wire types, `mainKyClient` resource, and `createQuery` or `createMutation` hook
 as one unit. Keep shared invalidation and mutation success work in the query hook.
 
-Reference: [`094d8d61b`](https://github.com/zidsa/hermes/commit/094d8d61b),
+Reference: [`094d8d61b`](https://github.com/zidsa/merchant-dashboard/commit/094d8d61b),
 `app/api/resources/customer-referrals/program.ts` and `app/api/hooks/customer-referrals.ts`.
 
 ```ts
@@ -307,7 +307,7 @@ Validate the smallest stable response shape at the resource boundary. Handle an 
 result next to the action that caused it. Let unknown failures reach the shared error path. For
 best-effort work, state the reason and provide a deliberate fallback.
 
-Reference: [`094d8d61b`](https://github.com/zidsa/hermes/commit/094d8d61b),
+Reference: [`094d8d61b`](https://github.com/zidsa/merchant-dashboard/commit/094d8d61b),
 `app/api/resources/customer-referrals/program.ts`.
 
 ```ts
@@ -329,7 +329,7 @@ Use literal, namespaced keys. Use `context` and `count` for closed variants and 
 and English entries together and list page namespaces in `PageHandle`. For a genuinely open backend
 value set, add an explicit mapping or a narrow `preservePatterns` entry.
 
-Reference: [`e1c3d8b90`](https://github.com/zidsa/hermes/commit/e1c3d8b90),
+Reference: [`e1c3d8b90`](https://github.com/zidsa/merchant-dashboard/commit/e1c3d8b90),
 `app/modules/whatsapp-auto-replies/components/editor/flow-nodes/flow-action.tsx`.
 
 ```tsx
@@ -350,7 +350,7 @@ Guard a whole page or feature at its exported boundary. Check a flag inside a ch
 changes one control rather than access to the feature. Use manager-permission constants from
 `app/global/utils/permissions.ts`; keep policies, package codes, and roles in their own systems.
 
-Reference: [`83dcf0814`](https://github.com/zidsa/hermes/commit/83dcf0814),
+Reference: [`83dcf0814`](https://github.com/zidsa/merchant-dashboard/commit/83dcf0814),
 `app/modules/reports/pages/reports-list.tsx`.
 
 ```tsx
@@ -375,7 +375,7 @@ change that alters routing, timeout, or error behavior ships a focused test. For
 add coverage when the behavior has a stable deterministic seam. Copy, assets, static layout, and
 mechanical moves may omit a new test when behavior is unchanged. Keep tests beside their units.
 
-Reference: [`a15c42e35`](https://github.com/zidsa/hermes/commit/a15c42e35),
+Reference: [`a15c42e35`](https://github.com/zidsa/merchant-dashboard/commit/a15c42e35),
 `app/client-loader.test.ts`.
 
 ```ts
@@ -407,7 +407,7 @@ Start a new API domain in `app/api/`, a new table on `AppTableV2`, and a new mod
 changed unit and its direct consumers. Do not expand a deprecated surface or migrate unrelated
 code.
 
-Reference: [`094d8d61b`](https://github.com/zidsa/hermes/commit/094d8d61b),
+Reference: [`094d8d61b`](https://github.com/zidsa/merchant-dashboard/commit/094d8d61b),
 `app/api/resources/customer-referrals/program.ts`.
 
 ```ts
@@ -732,7 +732,7 @@ Why: A local action and its consumer become coupled through an untyped, applicat
 
 Do instead: Lift the callback to their closest shared owner or use a scoped React context.
 
-Evidence, as of [`720930367`](https://github.com/zidsa/hermes/commit/720930367),
+Evidence, as of [`720930367`](https://github.com/zidsa/merchant-dashboard/commit/720930367),
 `app/modules/orders/components/order-details/status-select.tsx`.
 
 ```tsx
@@ -752,7 +752,7 @@ Why: A new feature takes on the table surface that current Zid Frontent work is 
 
 Do instead: Create the table with `AppTableV2` and its TanStack table hooks.
 
-Evidence: [`0b4b1206a`](https://github.com/zidsa/hermes/commit/0b4b1206a),
+Evidence: [`0b4b1206a`](https://github.com/zidsa/merchant-dashboard/commit/0b4b1206a),
 `app/modules/marketplace-connect/components/products/trendyol-rev-share-table.tsx`.
 
 ```tsx
@@ -770,9 +770,9 @@ Why: Feedback, reset, delay, and navigation are caused by the interaction, not b
 
 Do instead: Await the mutation in the interaction handler, then run its success work there.
 
-Evidence, as of [`abd7c934a`](https://github.com/zidsa/hermes/commit/abd7c934a),
+Evidence, as of [`abd7c934a`](https://github.com/zidsa/merchant-dashboard/commit/abd7c934a),
 `app/global/components/app-subscription/packages/ngo-package/package-banner.tsx`. Commit
-[`3a26072b2`](https://github.com/zidsa/hermes/commit/3a26072b2) removed it.
+[`3a26072b2`](https://github.com/zidsa/merchant-dashboard/commit/3a26072b2) removed it.
 
 ```tsx
 // Bad
@@ -793,7 +793,7 @@ Why: A key built from an open backend string is not statically resolvable and ca
 Do instead: Map the backend value explicitly; for a closed set use a literal key with `context`, and
 for an open set configure a narrow `preservePatterns` entry.
 
-Evidence: [`4cdaaf3e0`](https://github.com/zidsa/hermes/commit/4cdaaf3e0),
+Evidence: [`4cdaaf3e0`](https://github.com/zidsa/merchant-dashboard/commit/4cdaaf3e0),
 `app/modules/notification-center/components/notification-list-item.tsx`.
 
 ```tsx
@@ -809,9 +809,9 @@ Why: `Record<Variant, string>` erases the literal values that type-aware extract
 
 Do instead: Keep a finite map `as const`, call `t` in literal branches, or use `context`.
 
-Evidence, as of [`a8eb85644`](https://github.com/zidsa/hermes/commit/a8eb85644),
+Evidence, as of [`a8eb85644`](https://github.com/zidsa/merchant-dashboard/commit/a8eb85644),
 `app/modules/one-time-offers/components/offers-list-dialog.tsx`. Commit
-[`cee6636f3`](https://github.com/zidsa/hermes/commit/cee6636f3) removed it.
+[`cee6636f3`](https://github.com/zidsa/merchant-dashboard/commit/cee6636f3) removed it.
 
 ```tsx
 // Bad
@@ -830,7 +830,7 @@ Why: A failed write loses shared error handling, user feedback, telemetry, and f
 Do instead: Use the shared error path, show a suitable message, or document a deliberate
 best-effort fallback.
 
-Evidence: [`a8eb85644`](https://github.com/zidsa/hermes/commit/a8eb85644),
+Evidence: [`a8eb85644`](https://github.com/zidsa/merchant-dashboard/commit/a8eb85644),
 `app/modules/one-time-offers/hooks/use-one-time-offer-trigger.tsx`.
 
 ```tsx

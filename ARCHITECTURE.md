@@ -6,7 +6,7 @@
 
 **Chosen: react-i18next**
 
-- Matches the existing Zid ecosystem (hermes, websites-boilerplate)
+- Matches the existing Zid ecosystem (merchant-dashboard, websites-boilerplate)
 - Proven with Arabic RTL support and TanStack Start SSR
 - Framework-agnostic, works client-side and server-side
 - Large ecosystem: plugins for HTTP backend, language detection, etc.
@@ -20,11 +20,11 @@
 - Already installed in TanStack Start boilerplate
 - TanStack Form has native zod adapter support
 - Smaller bundle size than yup
-- Hermes uses yup (legacy), but zod is the modern standard
+- Merchant Dashboard uses yup (legacy), but zod is the modern standard
 
 ### Query Factory: react-query-kit (chosen)
 
-- Hermes uses react-query-kit v3 with TanStack Query v5
+- Merchant Dashboard uses react-query-kit v3 with TanStack Query v5
 - Provides clean `createQuery` / `createMutation` factories
 - Type-safe query key management
 - Compatible with latest TanStack Query
@@ -35,7 +35,7 @@
 
 - Mature ecosystem with `@testing-library` integration
 - Watch mode, coverage, UI reporter
-- Hermes uses the same stack
+- Merchant Dashboard uses the same stack
 - Bun's test runner lacks rich plugin ecosystem
 
 ### Deployment: wrangler.jsonc
