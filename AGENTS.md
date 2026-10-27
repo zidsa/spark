@@ -28,7 +28,7 @@ See `README.md` for project settings that cannot be stored in Wrangler.
 1. `bun` only — never `npm` or `pnpm`
 2. Absolute imports only (`~/`) — no relative imports
 3. No barrel files — import from source directly
-4. No Tailwind, no custom CSS/SCSS — Emotion + MUI `sx` only
+4. No Tailwind, no new CSS/SCSS files — Emotion + MUI `sx` only (existing global reset and font CSS excepted)
 5. No hardcoded colors — `theme.palette.*` only
 6. No `console.log` — use Sentry for error tracking
 7. No direct `useNavigate` or `<Link>` — use `useI18nNavigate` and `<I18nLink>`

@@ -20,7 +20,8 @@ Copy `.env.example` to `.env.local` for local development.
 
 ## PR Checks (`.github/workflows/pr-checks.yml`)
 
-Runs on PRs to `master`/`develop`: ESLint, Prettier, TypeScript, Vitest, React Doctor.
+Runs on PRs to `master`/`develop`: oxlint, oxfmt, Prettier (JSON/CSS), TypeScript, Vitest,
+SPA/SSR/SSG builds with bundle checks, and React Doctor.
 
 Run `bun run doctor` locally for the same full-scan gate as CI: score 100,
 zero findings, and a complete report with no skipped checks. Missing or invalid

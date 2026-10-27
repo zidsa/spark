@@ -7,7 +7,7 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 - **Runtime**: [Bun](https://bun.sh) 1.4.4
 - **Framework**: [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - **UI**: [MUI v7](https://mui.com) + [@zidsa/zidmui](https://www.npmjs.com/package/@zidsa/zidmui)
-- **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
+- **Styling**: Emotion (CSS-in-JS) -- no Tailwind; plain CSS only for the global reset and fonts
 - **State**: [TanStack Query v5](https://tanstack.com/query) + [react-query-kit](https://github.com/nicktomlin/react-query-kit)
 - **Forms**: [react-hook-form](https://react-hook-form.com) + [zod v4](https://zod.dev)
 - **HTTP**: [ky](https://github.com/sindresorhus/ky) (API wrapper)
@@ -80,10 +80,8 @@ src/
 ├── modules/             # Feature modules
 │   └── example/         # Example module
 │       ├── components/  # Module-specific components
-│       ├── hooks/       # Module-specific hooks
 │       ├── pages/       # Page components
-│       ├── schemas/     # Zod validation schemas
-│       └── types/       # TypeScript types
+│       └── schemas/     # Zod validation schemas
 ├── global/              # Shared utilities
 │   ├── components/      # Shared components (I18nLink, PageContainer)
 │   ├── hooks/           # Shared hooks (useI18nNavigate)
@@ -102,7 +100,7 @@ src/
 │   └── styles/          # Font declarations
 ├── libraries/           # Third-party library setup
 │   └── i18next/         # i18n configuration
-└── integrations/        # Analytics (PostHog, Sentry)
+└── integrations/        # PostHog provider, TanStack devtools
 ```
 
 ## i18n
@@ -186,7 +184,7 @@ Spark supports three rendering modes:
 ## Creating a Module
 
 1. Create module directory: `src/modules/your-module/`
-2. Add subdirectories: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
+2. Add only the subdirectories it needs: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
 3. Create route: `src/routes/$lang/your-route/index.tsx`
 4. Add translations to `src/libraries/i18next/locales.ts`
 
@@ -197,7 +195,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 
 - Use MUI components and `sx` prop or `styled` from `@mui/material/styles`
 - Colors must come from `theme.palette.*` -- never hardcode colors
-- No Tailwind CSS, no custom SCSS/CSS files
+- No Tailwind CSS and no new CSS/SCSS files (`src/styles.css` and `src/ui/styles/fonts.css` hold the global reset and fonts)
 - Use `Box` instead of raw `div`/`span` for MUI theme access
 
 ## Code Conventions
@@ -207,7 +205,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 - **Components**: PascalCase named exports. No default exports.
 - **Commits**: Conventional commits (`feat:`, `fix:`, `chore:`, etc.)
 - **Max file size**: 250 lines
-- **No console.log**: Error in ESLint
+- **No console.log**: Error in oxlint
 
 ## Deployment
 
