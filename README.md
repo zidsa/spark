@@ -4,7 +4,7 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 
 ## Stack
 
-- **Runtime**: [Bun](https://bun.sh) 1.4.1
+- **Runtime**: [Bun](https://bun.sh) 1.4.4
 - **Framework**: [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - **UI**: [MUI v7](https://mui.com) + [@zidsa/zidmui](https://www.npmjs.com/package/@zidsa/zidmui)
 - **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
@@ -14,7 +14,7 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 - **i18n**: [react-i18next](https://react.i18next.com) -- Arabic-first, RTL support
 - **Testing**: [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com)
 
-MUI Material and Lab stay on their newest stable v7 releases because ZidMUI 3.3.1 requires MUI v7. All other direct dependencies use their latest published releases.
+MUI Material and Lab stay on their newest stable v7 releases because ZidMUI 3.4.2 requires MUI v7. All other direct dependencies use their latest published releases.
 
 ## Quick Start
 
@@ -216,7 +216,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 
 [`wrangler.jsonc`](wrangler.jsonc) is the source of truth for the project name,
 output directory (`dist/client`), compatibility date/flags and build variables.
-`BUN_VERSION` pins Bun to 1.4.1; keep it aligned with `.bun-version` and `package.json`.
+`BUN_VERSION` pins Bun to 1.4.4; keep it aligned with `.bun-version` and `package.json`.
 `SKIP_DEPENDENCY_INSTALL=1` lets the build command enforce the frozen lockfile.
 
 Set the Pages **Build command** to `bun install --frozen-lockfile && bun run build`.
