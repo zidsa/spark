@@ -2,13 +2,12 @@
 
 ## Environment Variables
 
-| Variable             | Required | Description                                |
-| -------------------- | -------- | ------------------------------------------ |
-| `VITE_ENVIRONMENT`   | Yes      | Environment identifier (e.g., `dev-spark`) |
-| `VITE_API_URL`       | Yes      | Hermod proxy URL                           |
-| `VITE_ASSETS_DOMAIN` | Yes      | R2 CDN for static assets                   |
-| `VITE_SENTRY_DSN`    | No       | Sentry error tracking DSN                  |
-| `VITE_POSTHOG_KEY`   | No       | PostHog analytics key                      |
+| Variable            | Required | Description                                   |
+| ------------------- | -------- | --------------------------------------------- |
+| `VITE_API_URL`      | Yes      | Hermod proxy URL                              |
+| `VITE_SENTRY_DSN`   | No       | Server-side Sentry error tracking DSN         |
+| `VITE_POSTHOG_KEY`  | No       | PostHog analytics key                         |
+| `VITE_POSTHOG_HOST` | No       | PostHog API host (default `us.i.posthog.com`) |
 
 Copy `.env.example` to `.env.local` for local development.
 

@@ -59,13 +59,12 @@ If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.y
 
 Copy `.env.example` to `.env.local` and configure:
 
-| Variable             | Description            | Required |
-| -------------------- | ---------------------- | -------- |
-| `VITE_ENVIRONMENT`   | Environment identifier | Yes      |
-| `VITE_API_URL`       | Hermod API proxy URL   | Yes      |
-| `VITE_ASSETS_DOMAIN` | Static assets CDN      | Yes      |
-| `VITE_SENTRY_DSN`    | Sentry error tracking  | No       |
-| `VITE_POSTHOG_KEY`   | PostHog analytics      | No       |
+| Variable            | Description                                   | Required |
+| ------------------- | --------------------------------------------- | -------- |
+| `VITE_API_URL`      | Hermod API proxy URL                          | Yes      |
+| `VITE_SENTRY_DSN`   | Server-side Sentry error tracking             | No       |
+| `VITE_POSTHOG_KEY`  | PostHog analytics                             | No       |
+| `VITE_POSTHOG_HOST` | PostHog API host (default `us.i.posthog.com`) | No       |
 
 ## Directory Structure
 
