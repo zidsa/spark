@@ -243,3 +243,7 @@ After migrating those branches, replace it with the build command above.
 References: [Pages configuration](https://developers.cloudflare.com/pages/functions/wrangler-configuration/),
 [build settings](https://developers.cloudflare.com/pages/configuration/build-image/),
 [SPA fallback](https://developers.cloudflare.com/pages/configuration/serving-pages/#single-page-application-spa-rendering).
+
+## License
+
+[MIT](LICENSE). Bundled fonts are under the SIL Open Font License 1.1: [IBM Plex Sans Arabic](public/fonts/ibm-plex-sans-arabic/LICENSE.txt) and [Saudi Riyal Font](public/fonts/saudi-riyal-font/LICENSE.txt).
