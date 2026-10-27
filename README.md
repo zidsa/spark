@@ -59,13 +59,13 @@ If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.y
 
 Copy `.env.example` to `.env.local` and configure:
 
-| Variable             | Description            | Default                   |
-| -------------------- | ---------------------- | ------------------------- |
-| `VITE_ENVIRONMENT`   | Environment identifier | `dev-YOUR_NAME_ID`        |
-| `VITE_API_URL`       | Hermod API proxy URL   | `https://hermod.zid.dev/` |
-| `VITE_ASSETS_DOMAIN` | Static assets CDN      | (see .env.example)        |
-| `VITE_SENTRY_DSN`    | Sentry error tracking  | (optional)                |
-| `VITE_POSTHOG_KEY`   | PostHog analytics      | (optional)                |
+| Variable             | Description            | Required |
+| -------------------- | ---------------------- | -------- |
+| `VITE_ENVIRONMENT`   | Environment identifier | Yes      |
+| `VITE_API_URL`       | Hermod API proxy URL   | Yes      |
+| `VITE_ASSETS_DOMAIN` | Static assets CDN      | Yes      |
+| `VITE_SENTRY_DSN`    | Sentry error tracking  | No       |
+| `VITE_POSTHOG_KEY`   | PostHog analytics      | No       |
 
 ## Directory Structure
 
