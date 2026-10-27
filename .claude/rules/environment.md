@@ -15,7 +15,7 @@ Copy `.env.example` to `.env.local` for local development.
 
 - Vitest with jsdom environment
 - Setup file: `__tests__/setup.ts`
-- Testing Library (React + DOM) + MSW for API mocking
+- Testing Library (React + DOM); API tests use a local HTTP server or fetch adapter
 - Tests in `__tests__/` at project root
 
 ## PR Checks (`.github/workflows/pr-checks.yml`)
