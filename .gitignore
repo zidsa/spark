@@ -13,3 +13,7 @@ count.txt
 __unconfig*
 todos.json
 coverage
+
+# Verification runs (state is removed by cleanup; evidence is kept)
+.claude/skills/verify-spark/.state/
+.claude/skills/verify-spark/evidence/
