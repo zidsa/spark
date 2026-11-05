@@ -16,11 +16,6 @@ tasks:
     cmds:
       - bun run build {{.CLI_ARGS}}
 
-  preview:
-    desc: Preview production build
-    cmds:
-      - bun run preview {{.CLI_ARGS}}
-
   lint:
     desc: Check lint and format (no fix)
     cmds:
@@ -52,7 +47,7 @@ tasks:
     prompt: Are you sure you want to clean?
     cmds:
       - rm -rf node_modules
-      - rm -rf .output
+      - rm -rf dist
 
   doctor:
     desc: Run the strict full React Doctor gate

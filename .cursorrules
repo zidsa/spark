@@ -2,7 +2,7 @@ We use Sentry for watching for errors in our deployed application, as well as fo
 
 ## Error collection
 
-Error collection is automatic and configured in `src/router.tsx`.
+Server-side error collection is configured in `instrument.server.mjs` and runs when `VITE_SENTRY_DSN` is set.
 
 ## Instrumentation
 

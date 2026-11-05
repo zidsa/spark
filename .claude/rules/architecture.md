@@ -9,7 +9,7 @@ src/
 │   ├── index.tsx           # / → redirect to /$lang/
 │   └── $lang/              # Language-scoped routes
 ├── modules/                # Feature modules (self-contained)
-│   └── <module>/
+│   └── <module>/           # Create only the folders it needs
 │       ├── components/     # Module UI components
 │       ├── hooks/          # Module logic hooks
 │       ├── pages/          # Page components used by routes
@@ -37,7 +37,7 @@ src/
 ## Provider Stack (in `global/components/app-providers.tsx`)
 
 ```
-I18nextProvider → EmotionCacheProvider → MUI ThemeProvider → CssBaseline → PostHogProvider → QueryClientProvider
+I18nextProvider → ClientCacheProvider (Emotion cache → MUI ThemeProvider → CssBaseline) → PostHogProvider → QueryClientProvider
 ```
 
 Each router owns its cache and locale. App and tests use the same providers. Theme and Emotion cache change together when direction changes; children stay mounted.

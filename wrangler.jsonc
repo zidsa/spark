@@ -4,7 +4,7 @@
   "compatibility_date": "2026-09-05",
   "compatibility_flags": [],
   "vars": {
-    "BUN_VERSION": "1.4.1",
+    "BUN_VERSION": "1.4.4",
     "SKIP_DEPENDENCY_INSTALL": "1",
   },
 }
