@@ -59,13 +59,14 @@ project Spark.
 In the README, add one line under the title:
 `Created from [Spark](https://github.com/zidsa/spark) at the commit in .spark-base.`
 
-Delete this skill from the project (`.agents/skills/start-from-spark` and its
-`.claude/skills/start-from-spark` link). Keep `update-from-spark`: it is how the
-project takes later Spark changes.
+Delete this skill (`.claude/skills/start-from-spark`). Keep the other skills in
+`.claude/skills` as Spark wrote them: Spark owns them, and `update-from-spark`
+keeps them current.
 
-Done when `git add -A && git grep -n -i -e spark -e سبارك -- ':!bun.lock'` shows
-only the README origin lines (the new one and the Deployment note on repos created
-from Spark) and the `update-from-spark` skill.
+Done when
+`git add -A && git grep -n -i -e spark -e سبارك -- ':!bun.lock' ':!.gitignore' ':!.claude/skills'`
+shows only the README origin lines (the new one and the Deployment note on repos
+created from Spark).
 
 ## 4. Set up and verify
 

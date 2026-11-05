@@ -69,7 +69,7 @@ too:
 ```bash
 spark=$(git rev-parse FETCH_HEAD); base=<base>
 rm -f .git/spark-leftovers
-git diff --no-renames --name-only "$base" "$spark" -- . ':!.agents/skills/start-from-spark' ':!.claude/skills/start-from-spark' |
+git diff --no-renames --name-only "$base" "$spark" -- . ':!.claude/skills/start-from-spark' |
 while read -r f; do git diff "$base" "$spark" -- "$f" | git apply --3way || echo "$f" >> .git/spark-leftovers; done
 ```
 
@@ -78,7 +78,8 @@ Resolve each conflict and each file in `.git/spark-leftovers` (when it exists) b
 ownership:
 
 - **Spark owns infrastructure**: tooling config, CI, the API client, theme, i18n
-  setup, router and providers. Take Spark's change.
+  setup, router, providers and the skills in `.claude/skills`. Take Spark's
+  change.
 - **The project owns its product**: names, routes, modules, copy, env values and
   deployment names. Keep the project's version.
 - **Moved code**: when the project moved or renamed a file, find its new home by
