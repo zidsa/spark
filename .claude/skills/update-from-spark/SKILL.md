@@ -68,13 +68,15 @@ too:
 
 ```bash
 spark=$(git rev-parse FETCH_HEAD); base=<base>
-rm -f .git/spark-leftovers
+left=$(git rev-parse --git-path spark-leftovers); rm -f "$left"
 git diff --no-renames --name-only "$base" "$spark" -- . ':!.claude/skills/start-from-spark' |
-while read -r f; do git diff "$base" "$spark" -- "$f" | git apply --3way || echo "$f" >> .git/spark-leftovers; done
+while read -r f; do git diff "$base" "$spark" -- "$f" | git apply --3way || echo "$f" >> "$left"; done
 ```
 
 `git apply --3way` stages what it applies: review it with `git diff --cached`.
-Resolve each conflict and each file in `.git/spark-leftovers` (when it exists) by
+Run the block from the repository root. The leftovers file is
+`$(git rev-parse --git-path spark-leftovers)`, which works in a worktree too.
+Resolve each conflict and each file in the leftovers file (when it exists) by
 ownership:
 
 - **Spark owns infrastructure**: tooling config, CI, the API client, theme, i18n
@@ -93,7 +95,7 @@ ownership:
   `.claude/rules/environment.md` describes.
 
 Done when `git grep -n -E '^(<<<<<<<|>>>>>>>)'` is empty, `git diff HEAD --check`
-passes, and every file in `.git/spark-leftovers` is ported or recorded as skipped.
+passes, and every file in the leftovers file is ported or recorded as skipped.
 
 ## 5. Fix breaking changes
 

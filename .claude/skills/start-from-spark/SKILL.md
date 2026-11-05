@@ -63,7 +63,7 @@ Delete this skill (`.claude/skills/start-from-spark`). Keep the other skills in
 `.claude/skills` as Spark wrote them: Spark owns them, and `update-from-spark`
 keeps them current.
 
-Done when
+Done when `.claude/skills/start-from-spark` is gone and
 `git add -A && git grep -n -i -e spark -e سبارك -- ':!bun.lock' ':!.gitignore' ':!.claude/skills'`
 shows only the README origin lines (the new one and the Deployment note on repos
 created from Spark).
