@@ -7,7 +7,7 @@ Component → react-query-kit hook → API resource → mainKyClient → Hermod 
 ## API (`~/api/`)
 
 - Wraps `ky` HTTP client with Zid-specific interceptors
-- Base URL: `VITE_API_URL` (Hermod proxy, e.g., `https://hermod.zid.dev/`)
+- Base URL: `VITE_API_URL` (Hermod proxy)
 - Auth: Token injection via request interceptor
 - Error handling: Maps HTTP errors to typed `GenericError` classes
 - Retry: 1 retry with exponential backoff, 90-second timeout

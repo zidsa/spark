@@ -13,6 +13,7 @@ count.txt
 __unconfig*
 todos.json
 coverage
+graphify-out/
 
 # Verification runs (state is removed by cleanup; evidence is kept)
 .claude/skills/verify-spark/.state/

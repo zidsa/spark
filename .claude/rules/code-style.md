@@ -6,10 +6,11 @@
 - Never use relative imports (`../`, `./`)
 - Never use barrel file re-exports — import directly from the source file
 - Dynamic imports also use `~/` and source files. Adapt named exports with `.then(module => ({ default: module.Component }))` for `React.lazy`; keep the source export named.
-- Import order (enforced by ESLint):
-  1. External packages (`react`, `@mui/*`, `@tanstack/*`)
-  2. `@zidsa/*` and `@mui/*` packages
-  3. Internal absolute imports (`~/modules/*`, `~/global/*`, `~/api/*`)
+- Import order (enforced by oxfmt, blank line between groups):
+  1. External packages (`react`, `@tanstack/*`)
+  2. `@zidsa/zidmui/*`
+  3. `@mui/*`
+  4. Internal absolute imports: `~/ui/*`, then `~/api/*`, then `~/global/*`, then other `~/*`
 
 ## Naming
 
@@ -25,7 +26,7 @@
 - MUI components + `sx` prop or `styled` from `@mui/material/styles`
 - Colors only from `theme.palette.*` — never hardcode hex/rgb
 - No Tailwind CSS — not installed, must not be added
-- No custom CSS/SCSS files — use Emotion via MUI
+- No new CSS/SCSS files — use Emotion via MUI (`src/styles.css` and `src/ui/styles/fonts.css` are the only global CSS)
 - Use `Box` instead of raw `div`/`span`
 
 ## TypeScript

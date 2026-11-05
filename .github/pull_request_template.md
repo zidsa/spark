@@ -12,7 +12,7 @@
 
 ## Checklist
 
-- [ ] Code follows project conventions (ESLint, Prettier)
+- [ ] Code follows project conventions (oxlint, oxfmt, Prettier)
 - [ ] TypeScript compiles without errors
 - [ ] Tests pass
 - [ ] i18n: Arabic and English translations added

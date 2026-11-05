@@ -4,17 +4,17 @@ Zid's TanStack Start boilerplate -- a modern, production-ready foundation for bu
 
 ## Stack
 
-- **Runtime**: [Bun](https://bun.sh) 1.4.1
+- **Runtime**: [Bun](https://bun.sh) 1.4.4
 - **Framework**: [TanStack Start](https://tanstack.com/start) + [TanStack Router](https://tanstack.com/router)
 - **UI**: [MUI v7](https://mui.com) + [@zidsa/zidmui](https://www.npmjs.com/package/@zidsa/zidmui)
-- **Styling**: Emotion (CSS-in-JS) -- no Tailwind, no custom CSS
+- **Styling**: Emotion (CSS-in-JS) -- no Tailwind; plain CSS only for the global reset and fonts
 - **State**: [TanStack Query v5](https://tanstack.com/query) + [react-query-kit](https://github.com/nicktomlin/react-query-kit)
 - **Forms**: [react-hook-form](https://react-hook-form.com) + [zod v4](https://zod.dev)
 - **HTTP**: [ky](https://github.com/sindresorhus/ky) (API wrapper)
 - **i18n**: [react-i18next](https://react.i18next.com) -- Arabic-first, RTL support
 - **Testing**: [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com)
 
-MUI Material and Lab stay on their newest stable v7 releases because ZidMUI 3.3.1 requires MUI v7. All other direct dependencies use their latest published releases.
+MUI Material and Lab stay on their newest stable v7 releases because ZidMUI 3.4.2 requires MUI v7. All other direct dependencies use their latest published releases.
 
 ## Quick Start
 
@@ -59,13 +59,12 @@ If you use [Task](https://taskfile.dev), copy `taskfile.dist.yml` to `Taskfile.y
 
 Copy `.env.example` to `.env.local` and configure:
 
-| Variable             | Description            | Default                   |
-| -------------------- | ---------------------- | ------------------------- |
-| `VITE_ENVIRONMENT`   | Environment identifier | `dev-YOUR_NAME_ID`        |
-| `VITE_API_URL`       | Hermod API proxy URL   | `https://hermod.zid.dev/` |
-| `VITE_ASSETS_DOMAIN` | Static assets CDN      | (see .env.example)        |
-| `VITE_SENTRY_DSN`    | Sentry error tracking  | (optional)                |
-| `VITE_POSTHOG_KEY`   | PostHog analytics      | (optional)                |
+| Variable            | Description                                   | Required |
+| ------------------- | --------------------------------------------- | -------- |
+| `VITE_API_URL`      | Hermod API proxy URL                          | Yes      |
+| `VITE_SENTRY_DSN`   | Server-side Sentry error tracking             | No       |
+| `VITE_POSTHOG_KEY`  | PostHog analytics                             | No       |
+| `VITE_POSTHOG_HOST` | PostHog API host (default `us.i.posthog.com`) | No       |
 
 ## Directory Structure
 
@@ -81,10 +80,8 @@ src/
 ├── modules/             # Feature modules
 │   └── example/         # Example module
 │       ├── components/  # Module-specific components
-│       ├── hooks/       # Module-specific hooks
 │       ├── pages/       # Page components
-│       ├── schemas/     # Zod validation schemas
-│       └── types/       # TypeScript types
+│       └── schemas/     # Zod validation schemas
 ├── global/              # Shared utilities
 │   ├── components/      # Shared components (I18nLink, PageContainer)
 │   ├── hooks/           # Shared hooks (useI18nNavigate)
@@ -103,7 +100,7 @@ src/
 │   └── styles/          # Font declarations
 ├── libraries/           # Third-party library setup
 │   └── i18next/         # i18n configuration
-└── integrations/        # Analytics (PostHog, Sentry)
+└── integrations/        # PostHog provider, TanStack devtools
 ```
 
 ## i18n
@@ -187,7 +184,7 @@ Spark supports three rendering modes:
 ## Creating a Module
 
 1. Create module directory: `src/modules/your-module/`
-2. Add subdirectories: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
+2. Add only the subdirectories it needs: `components/`, `hooks/`, `pages/`, `schemas/`, `types/`
 3. Create route: `src/routes/$lang/your-route/index.tsx`
 4. Add translations to `src/libraries/i18next/locales.ts`
 
@@ -198,7 +195,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 
 - Use MUI components and `sx` prop or `styled` from `@mui/material/styles`
 - Colors must come from `theme.palette.*` -- never hardcode colors
-- No Tailwind CSS, no custom SCSS/CSS files
+- No Tailwind CSS and no new CSS/SCSS files (`src/styles.css` and `src/ui/styles/fonts.css` hold the global reset and fonts)
 - Use `Box` instead of raw `div`/`span` for MUI theme access
 
 ## Code Conventions
@@ -208,7 +205,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 - **Components**: PascalCase named exports. No default exports.
 - **Commits**: Conventional commits (`feat:`, `fix:`, `chore:`, etc.)
 - **Max file size**: 250 lines
-- **No console.log**: Error in ESLint
+- **No console.log**: Error in oxlint
 
 ## Deployment
 
@@ -216,7 +213,7 @@ Route UI splits automatically; defer optional heavy code and run `bun run check:
 
 [`wrangler.jsonc`](wrangler.jsonc) is the source of truth for the project name,
 output directory (`dist/client`), compatibility date/flags and build variables.
-`BUN_VERSION` pins Bun to 1.4.1; keep it aligned with `.bun-version` and `package.json`.
+`BUN_VERSION` pins Bun to 1.4.4; keep it aligned with `.bun-version` and `package.json`.
 `SKIP_DEPENDENCY_INSTALL=1` lets the build command enforce the frozen lockfile.
 
 Set the Pages **Build command** to `bun install --frozen-lockfile && bun run build`.
@@ -243,3 +240,7 @@ After migrating those branches, replace it with the build command above.
 References: [Pages configuration](https://developers.cloudflare.com/pages/functions/wrangler-configuration/),
 [build settings](https://developers.cloudflare.com/pages/configuration/build-image/),
 [SPA fallback](https://developers.cloudflare.com/pages/configuration/serving-pages/#single-page-application-spa-rendering).
+
+## License
+
+[MIT](LICENSE). Bundled fonts are under the SIL Open Font License 1.1: [IBM Plex Sans Arabic](public/fonts/ibm-plex-sans-arabic/LICENSE.txt) and [Saudi Riyal Font](public/fonts/saudi-riyal-font/LICENSE.txt).

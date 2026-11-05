@@ -97,7 +97,7 @@ When direction changes, theme and Emotion cache change in the same render withou
 
 ### Module Structure
 
-Feature code is organized into self-contained modules under `src/modules/`:
+Feature code is organized into self-contained modules under `src/modules/`. Create only the folders a module needs:
 
 - `components/` -- UI components specific to the feature
 - `hooks/` -- Custom hooks (data fetching, business logic)
@@ -113,7 +113,7 @@ Routes in `src/routes/$lang/` are thin wrappers that import page components from
 
 The MUI theme is configured in `src/ui/libraries/theme/parcel/`:
 
-- Light mode (default) and dark mode palettes
+- Light palette from `@zidsa/zidmui` (no dark mode)
 - Zid brand colors (primary `#AE72FF`, secondary `#3C1C54`)
 - IBM Plex Sans Arabic typography (imported from `@zidsa/zidmui`)
 - Component overrides from `@zidsa/zidmui`

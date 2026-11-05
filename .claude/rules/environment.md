@@ -2,13 +2,12 @@
 
 ## Environment Variables
 
-| Variable             | Required | Description                                |
-| -------------------- | -------- | ------------------------------------------ |
-| `VITE_ENVIRONMENT`   | Yes      | Environment identifier (e.g., `dev-spark`) |
-| `VITE_API_URL`       | Yes      | Hermod proxy URL                           |
-| `VITE_ASSETS_DOMAIN` | Yes      | R2 CDN for static assets                   |
-| `VITE_SENTRY_DSN`    | No       | Sentry error tracking DSN                  |
-| `VITE_POSTHOG_KEY`   | No       | PostHog analytics key                      |
+| Variable            | Required | Description                                   |
+| ------------------- | -------- | --------------------------------------------- |
+| `VITE_API_URL`      | Yes      | Hermod proxy URL                              |
+| `VITE_SENTRY_DSN`   | No       | Server-side Sentry error tracking DSN         |
+| `VITE_POSTHOG_KEY`  | No       | PostHog analytics key                         |
+| `VITE_POSTHOG_HOST` | No       | PostHog API host (default `us.i.posthog.com`) |
 
 Copy `.env.example` to `.env.local` for local development.
 
@@ -16,12 +15,13 @@ Copy `.env.example` to `.env.local` for local development.
 
 - Vitest with jsdom environment
 - Setup file: `__tests__/setup.ts`
-- Testing Library (React + DOM) + MSW for API mocking
+- Testing Library (React + DOM); API tests use a local HTTP server or fetch adapter
 - Tests in `__tests__/` at project root
 
 ## PR Checks (`.github/workflows/pr-checks.yml`)
 
-Runs on PRs to `master`/`develop`: ESLint, Prettier, TypeScript, Vitest, React Doctor.
+Runs on PRs to `master`/`develop`: oxlint, oxfmt, Prettier (JSON/CSS), TypeScript, Vitest,
+SPA/SSR/SSG builds with bundle checks, and React Doctor.
 
 Run `bun run doctor` locally for the same full-scan gate as CI: score 100,
 zero findings, and a complete report with no skipped checks. Missing or invalid
