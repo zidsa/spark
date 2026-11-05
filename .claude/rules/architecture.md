@@ -72,4 +72,4 @@ Keep app providers eager and optional SDK work asynchronous; see [code splitting
 - Children inherit parent SSR setting (can only become more restrictive)
 - Use `pendingComponent` for the server-side fallback when `ssr: false`
 
-Hermes uses React Router v7 — adapt patterns to TanStack Start when porting.
+Merchant Dashboard uses React Router v7 — adapt patterns to TanStack Start when porting.
