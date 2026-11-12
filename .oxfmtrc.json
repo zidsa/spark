@@ -4,6 +4,7 @@
   "bracketSameLine": false,
   "bracketSpacing": true,
   "ignorePatterns": [
+    ".agents",
     ".claude",
     ".github",
     ".vscode",
